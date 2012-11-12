@@ -8,7 +8,7 @@ using Microsoft.MediaCenter.UI;
 
 namespace AmazonMCEAddin
 {
-
+    //This represents a specific menu item in the overall structure, and is largely derived from amazon's category structure.
     public sealed class Category : ModelItem
     {
         private bool mSetFocus;
@@ -65,6 +65,8 @@ namespace AmazonMCEAddin
             //This may well crash.
             m_Choice.Options = List;
         }
+        //This is generally used for reading the category query that was set by Amazon
+        //but in the case of a search, we set the query here, which fires a change and the bound videogallery refreshes with the new content
         public string Query
         {
             get { return mQuery; }
@@ -74,6 +76,7 @@ namespace AmazonMCEAddin
                 FirePropertyChanged("Query");
             }
         }
+        //show this category as being the selected category
         public bool SetFocus
         {
             get { return mSetFocus; }
@@ -84,7 +87,7 @@ namespace AmazonMCEAddin
             }
         }
 
-
+        //Set this current category to be the new context
         public void GoToCategory()
         {
             switch (Name)
@@ -93,18 +96,7 @@ namespace AmazonMCEAddin
                     Application.Logout();
                     break;
                 default:
-                    //int ind = this.Index;
-                    //int currnt = Application.Current.CurrentContext.ListContent.ChosenIndex;
-                    //Application.Current.CurrentContext.ListContent.ChosenIndex = this.Index;
-                    //if(this.ListContent.Options != null) this.ListContent.ChosenIndex = 0;
-
-                    //Change the context to show the new menu etc
                     Application.Current.CurrentContext = this;
-
-                    //Now focus on this item in the menu. not working because list isn't reloaded yet.
-                    //((Category)this.Parent.ListContent.Options[this.Index]).SetFocus = true;
-
-                    //Application.Current.CurrentContext.Parent.ListContent.ChosenIndex = this.Index;
                     break;
 
             }

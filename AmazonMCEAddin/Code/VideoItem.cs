@@ -35,6 +35,7 @@ namespace AmazonMCEAddin
         public VideoItem()
         {
         }
+        //Initializes a new video item with a json node.
         public VideoItem(JObject node)
         {
             m_Command = new Command();
@@ -43,9 +44,11 @@ namespace AmazonMCEAddin
             int hdFormat = -1;
             int sdFormat = -1;
             int counter = 0;
+            //set up default sizes for images
             Size movie_size = new Size(173, 248);
             Size tv_size = new Size(294, 248);
 
+            //not all titles have HD, so we loop through available options and pick HD if we can.
             foreach (JObject format in node["formats"])
             {
                 if ((string)format["videoFormatType"] == "HD") hdFormat = counter;
@@ -88,6 +91,8 @@ namespace AmazonMCEAddin
                         m_ChildTitleQuery = AmazonVideoRequest.generateUrl("catalog/Browse") + "&" + childquery + "&version=2";
                     }
                     break;
+                    //So far, I have not yet seen Series or Episode, but I know they are options, so when we find one, we 
+                    //will need to address it.
                 case "SERIES":
                     size = tv_size;
                     m_ChildTitleQuery = (string)node["childTitles"][0]["feedUrl"];
@@ -96,12 +101,16 @@ namespace AmazonMCEAddin
                     size = tv_size;
                     break;
             }
+
             m_ASIN = (string)node["titleId"];
             string m_ImageURL = (string)node["formats"][selectedFormat]["images"][1]["uri"];
             m_Image = new Image(m_ImageURL);
             m_Price = "Free!";
 
         }
+        //When this item is a season, it will have a query property under childtitles
+        //we need to be able to bind to this in DisplaySeasons.mcml, so we expose here as a property that is not initialized
+        //at the start, but caches if it does get loaded.
         public VideoItems ChildTitles
         {
             get
@@ -123,16 +132,20 @@ namespace AmazonMCEAddin
         public String Runtime { get { return m_runtime; } }
         public String ContentType { get { return m_contentType; } }
 
+        //This is used in mcml to get back to the application from the current video item
         public Application Application
         {
             get { return Application.Current; }
         }
 
-
+        //I don't think this is used anymore, but I need to check
         public Command LaunchViewer()
         {
             return m_Command;
         }
+
+        //This navigates to the actual video viewer.
+        //TODO: Move this into Application, and place the stub here to call it from Application.
         public void LaunchVideoViewer()
         {
 
@@ -140,6 +153,9 @@ namespace AmazonMCEAddin
             string htmlexpath = Application.Current.viewerPath + "?ASIN=" + m_ASIN + flashVars;
             Application.Current.MediaCenterEnvironment.NavigateToPage(PageId.ExtensibilityUrl, htmlexpath);
         }
+
+        //This navigates to the relevant next step if this item is selected in VideoGallery.mcml
+        //It generally just goes to VideoDetails unless it is a season.
         public void ViewDetails()
         {
             switch (m_contentType)

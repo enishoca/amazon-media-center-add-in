@@ -17,6 +17,7 @@
 
     <Rules>
       <Binding Source="[searchEntry.Value]" Target="[SearchText]"/>
+      <!-- Disabled the auto search until we can get this working correctly.
       <Changed Source="[searchEntry.Value]">
         <Conditions>
           <Equality ConditionOp="GreaterThanOrEquals" Source="[searchEntry.Value.Length]" Value="4"/>
@@ -24,7 +25,8 @@
         <Actions>
           <Invoke Target="[Model.Invoke]"/>
         </Actions>
-      </Changed>
+      -->
+        </Changed>
     </Rules>
     <Content>
       <ColorFill Content="color://styles:Background"  Name="Outline" Padding="7,7,7,7" Margins="3,3,3,3" Layout="Form" MinimumSize="500,0" MaximumSize="0,70">

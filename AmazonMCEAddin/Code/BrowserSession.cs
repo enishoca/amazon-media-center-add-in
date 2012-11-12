@@ -8,6 +8,7 @@ using System.Net;
 
 namespace AmazonMCEAddin
 {
+    //This is a helper class used to mechanize the logging on and grabbing of cookies using a browser control
     public class BrowserSession
     {
         private bool _isPost;

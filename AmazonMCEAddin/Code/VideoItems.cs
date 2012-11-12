@@ -18,13 +18,14 @@ namespace AmazonMCEAddin
         public Choice ListContent { get { return m_Choice; } }
         ArrayListDataSet List;
 
+
         public VideoItems()
         {
             m_Choice = new Choice();
             List = new ArrayListDataSet();
             string junk = "test";
             //workaround to add list without crashing
-
+            //this is a known issue - if you bind an empty list to a choice, it crashes.
             List.Add(junk);
             m_Choice.Options = List;
             List.Clear();
@@ -32,6 +33,10 @@ namespace AmazonMCEAddin
 
         
         }
+
+        //The query that is passed is actually a http get query string
+        //Changing the query actually forces the query to run - this is usually bound in mcml to the current context's query
+        //so that changing the current context changes the query and re-runs the get.
         public string Query
         {
             get { return m_Query; }
@@ -41,8 +46,6 @@ namespace AmazonMCEAddin
                 if (m_Query == "")
                 {
                     m_Choice.Options.Clear();
-                    //List.Clear();
-                    //m_Choice.Options = List;
                     FirePropertyChanged("ListContent");
 
                 }
@@ -54,17 +57,11 @@ namespace AmazonMCEAddin
             }
         }
 
+        //This function actually executes the query set above, and loops through the dataset, initializing each new item
+        //with a separate json node.
         private void ExecuteQuery(string query, int maxItems = 24, int startItem = 0, bool search = false)
         {
             string data;
-            //if(search)
-            //{
-            //    data = AmazonVideoRequest.searchPrime(query, maxItems, startItem);
-            //}
-            //else
-            //{
-            //    data = AmazonVideoRequest.getVideoItemsWithQuery(query, maxItems, startItem);
-            //}
             data = AmazonVideoRequest.ExecuteQuery(query);
 
             JsonTextReader reader = new JsonTextReader(new StringReader(data));
@@ -77,10 +74,8 @@ namespace AmazonMCEAddin
 
             }
             FirePropertyChanged("ListContent");
-
-
-
         }
+        //I don't think this is used any more, but I need to check
         public VideoItems(string query, int maxItems=24, int startItem=0, bool search=false)
         {
             m_Choice = new Choice();

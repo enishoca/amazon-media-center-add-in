@@ -6,6 +6,7 @@ using System.Net;
 
 namespace AmazonMCEAddin
 {
+    //This is a simple helper class to allow us to read and write cookies when using a webrequest/response
     public class WebClientWithCookies : WebClient
     {
         public WebClientWithCookies(CookieContainer container)

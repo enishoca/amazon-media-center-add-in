@@ -11,6 +11,8 @@ namespace AmazonMCEAddin
 {
     class CategoryStructureSetup
     {
+        //This sets up an initial menu structure, and pulls the newest category information
+        //then uses recurse to go through all the sub categories
         public static Category getCategoryStructure()
         {
             Category cat_root = new Category("Home", "", null, 0);
@@ -41,6 +43,7 @@ namespace AmazonMCEAddin
             recurse(categories["message"]["body"]["categories"][3]["categories"][2], cat_tv);
             return cat_root;
         }
+
         private static void recurse(JToken category, Category parent)
         {
             string browseUrl = AmazonVideoRequest.GenerateBrowseUrlTemplate();

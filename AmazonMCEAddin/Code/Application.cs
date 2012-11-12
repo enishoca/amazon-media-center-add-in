@@ -23,7 +23,6 @@ namespace AmazonMCEAddin
         private string m_LoginProcessStatus = "";
         bool postLogonRun = false;
 
-        private int currentCategoryIndex = 0;
         public Application()
             : this(null, null)
         {
@@ -37,9 +36,37 @@ namespace AmazonMCEAddin
         }
         public void initializeApplication()
         {
-
+            viewerPath = getViewerPath();
+        }
+        //work around to get reg key from 32-bit location due to installer being 32-bit.
+        private string getViewerPath()
+        {
             string CompanyName = Resources.CompanyName;
-            viewerPath = (string)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\" + CompanyName + @"\AmazonMCEAddin", "ViewerPath", "");
+            string Path = "";
+            try{
+                Path = (string)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\" + CompanyName + @"\AmazonMCEAddin", "ViewerPath", "");
+            }
+            catch(Exception e)
+            {
+            }
+            if(Path == "")
+                try
+                {
+                    Path = (string)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\" + CompanyName + @"\AmazonMCEAddin", "ViewerPath", "");
+                }
+            catch (Exception e)
+                {
+                displayErrorMessageAndQuit("Unable to find registry entry for viewer path - please reinstall");
+
+            }
+            return Path;
+
+        }
+        private void displayErrorMessageAndQuit(string message)
+        {
+            //todo: write an error display handler
+            //PageSession.Current.Close();
+            //return;
 
         }
         public string LoginProcessStatus
@@ -54,11 +81,14 @@ namespace AmazonMCEAddin
                 FirePropertyChanged("LoginProcessStatus");
             }
         }
+        //This clears the cookie file and takes the user back to the login page.
         public void Logout()
         {
             AmazonVideoRequest.clearLoginCookie();
             GoToLoginPage();
         }
+        //This property is read by the menu.mcml file to populate the footer text - this usually displays either
+        // the video title or the category name
         public string FooterLine1
         {
             get { return m_FooterLine1; }
@@ -68,6 +98,8 @@ namespace AmazonMCEAddin
                 FirePropertyChanged("FooterLine1");
             }
         }
+        //This property is read by the menu.mcml file to populate the footer text - this usually displays either
+        // the video synopsis or the category description
         public string FooterLine2
         {
             get { return m_FooterLine2; }
@@ -77,6 +109,8 @@ namespace AmazonMCEAddin
                 FirePropertyChanged("FooterLine2");
             }
         }
+        //This function generates the query and passes it to the current content, which is expected to be "search".  This will
+        //then bind the query to the video items, which will initiate the search
         public void DoSearch(string SearchText)
         {
             if(SearchText.Length >= Convert.ToInt32(Resources.MinimumSearchTextLength))
@@ -88,6 +122,7 @@ namespace AmazonMCEAddin
                 CurrentContext.Query = "";
             }
         }
+        //This sends the username and password to amazon using the helper functions (which then create local cookies etc)
         public void DoLogin(string username, string password)
         {
             LoginProcessStatus = "Processing";
@@ -108,12 +143,18 @@ namespace AmazonMCEAddin
                 //TODO: Need to put something in here to let user know it didn't work.
             }
         }
+        //After logim go and get the category structure
+        //TODO: Change this over to use cached data, and maybe check in the background for newer data later
+        //      this could make launch faster etc.
         public void PostLogin()
         {
             
             Category rootCat = CategoryStructureSetup.getCategoryStructure();
             currentContext = (Category)rootCat.ListContent.Options[0];
         }
+        //Returns the currently selected category
+        //All the navigation is driven by this - you can access sub-categories by looking at CurrentContext.ListItems.Options
+        //and you can change the current category by simply assigning a new category here.
         public Category CurrentContext
         {
             get { return currentContext; }
@@ -126,10 +167,13 @@ namespace AmazonMCEAddin
 
             }
         }
+        //checks to see if there is a cookie
+        //NOTE: This doesn't check to see if the login is actually valid.
         private bool LoggedIn()
         {
             return AmazonVideoRequest.checkIfHaveLoginCookie();
         }
+
         public static Application Current
         {
             get
@@ -137,6 +181,7 @@ namespace AmazonMCEAddin
                 return singleApplicationInstance;
             }
         }
+
         public MediaCenterEnvironment MediaCenterEnvironment
         {
             get
@@ -145,17 +190,11 @@ namespace AmazonMCEAddin
                 return host.MediaCenterEnvironment;
             }
         }
-        public int currentCategory
-        {
-            get {return currentCategoryIndex;}
-            set {
-                currentCategoryIndex = value;
-            }
-        }
-        void command_Invoked(object sender, EventArgs e)
-        {
 
-        }
+
+        #region Page Navigation
+
+        //Show the user the login page
         public void GoToLoginPage()
         {
             Dictionary<string, object> properties = new Dictionary<string, object>();
@@ -171,6 +210,7 @@ namespace AmazonMCEAddin
                 Debug.WriteLine("GoToLoginPage");
             }
         }
+        //Show the user the search page
         public void GoToSearchPage()
         {
             Dictionary<string, object> properties = new Dictionary<string, object>();
@@ -185,6 +225,7 @@ namespace AmazonMCEAddin
                 Debug.WriteLine("GoToSearchPage");
             }
         }
+        //Go to the main screen.
         public void GoToMainMenu()
         {
             if (!postLogonRun)
@@ -205,6 +246,40 @@ namespace AmazonMCEAddin
                 Debug.WriteLine("GoToMainMenu");
             }
         }
+        //Shows the details page, from where you can start watching a video
+        public void GoToVideoDetails(VideoItem videoItem)
+        {
+            Dictionary<string, object> properties = new Dictionary<string, object>();
+            properties["Application"] = this;
+            properties["VideoItem"] = videoItem;
+
+            if (session != null)
+            {
+                session.GoToPage("resx://AmazonMCEAddin/AmazonMCEAddin.Resources/VideoDetails", properties);
+            }
+            else
+            {
+                Debug.WriteLine("GoToVideoDetails");
+            }
+        }
+        //Shows a page with a listing of the episodes in a season.
+        public void GoToSeasonDetails(VideoItem videoItem)
+        {
+            Dictionary<string, object> properties = new Dictionary<string, object>();
+            properties["Application"] = this;
+            properties["VideoItem"] = videoItem;
+
+            if (session != null)
+            {
+                session.GoToPage("resx://AmazonMCEAddin/AmazonMCEAddin.Resources/SeasonDetails", properties);
+            }
+            else
+            {
+                Debug.WriteLine("GoToSeasonDetails");
+            }
+        }
+
+        //Step back up the category hierarchy - if at the top node, exit the application
         public void MoveBack()
         {
             if (!LoggedIn())
@@ -224,6 +299,8 @@ namespace AmazonMCEAddin
                 return;
             }
         }
+        #endregion
+
         public void StartAmazonMCEAddin()
         {
             //This is presumably the place to load up initial content.
@@ -245,36 +322,6 @@ namespace AmazonMCEAddin
             else
             {
                 Debug.WriteLine("StartAmazonMCEAddin");
-            }
-        }
-        public void GoToVideoDetails(VideoItem videoItem)
-        {
-            Dictionary<string, object> properties = new Dictionary<string, object>();
-            properties["Application"] = this;
-            properties["VideoItem"] = videoItem;
-
-            if (session != null)
-            {
-                session.GoToPage("resx://AmazonMCEAddin/AmazonMCEAddin.Resources/VideoDetails", properties);
-            }
-            else
-            {
-                Debug.WriteLine("GoToVideoDetails");
-            }
-        }
-        public void GoToSeasonDetails(VideoItem videoItem)
-        {
-            Dictionary<string, object> properties = new Dictionary<string, object>();
-            properties["Application"] = this;
-            properties["VideoItem"] = videoItem;
-
-            if (session != null)
-            {
-                session.GoToPage("resx://AmazonMCEAddin/AmazonMCEAddin.Resources/SeasonDetails", properties);
-            }
-            else
-            {
-                Debug.WriteLine("GoToSeasonDetails");
             }
         }
     }

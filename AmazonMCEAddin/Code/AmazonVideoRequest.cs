@@ -12,11 +12,14 @@ using Newtonsoft.Json.Linq;
 using System.Linq;
 using System.Web;
 
+//This needs some cleanup
 
 namespace AmazonMCEAddin
 {
     class AmazonVideoRequest
     {
+
+        //requests data optionally using the amazon cookies
         public static string getURL(string url, bool useCookie = false)
         {
             WebClientWithCookies client;
@@ -37,7 +40,7 @@ namespace AmazonMCEAddin
             //generate a signature for this URL
             string sig = generate_signature(url);
 
-            //add this as a header
+            //add this signature as a header
             client.Headers.Add("x-android-sign", sig);
 
             //get the data
@@ -45,6 +48,33 @@ namespace AmazonMCEAddin
             StreamReader reader = new StreamReader(data);
             return reader.ReadToEnd();
         }
+        //Generates a url with the base parameters populated.
+        /*legal modes are :
+        'catalog/GetCategoryList'
+        'catalog/Browse'
+        'catalog/Search'
+        'catalog/GetSearchSuggestions'
+        'catalog/GetASINDetails'
+        'catalog/GetSimilarities'
+
+        'catalog/GetStreamingUrls'
+        'catalog/GetStreamingTrailerUrls'
+        'catalog/GetContentUrls'
+
+        'library/GetLibrary'
+        'library/Purchase'
+        'library/GetRecentPurchases'
+
+        'link/LinkDevice'
+        'link/UnlinkDevice'
+        'link/RegisterClient'
+        'licensing/Release'
+
+        'usage/UpdateStream'
+        'usage/ReportLogEvent'
+        'usage/ReportEvent'
+        'usage/GetServerConfig'
+         * */
         public static string generateUrl(string mode)
         {
             string deviceID = Resources.DeviceID;
@@ -55,6 +85,7 @@ namespace AmazonMCEAddin
             return "https://atv-ext.amazon.com/cdp/" + mode + parameters;
 
         }
+        //Deletes the amazon cookie
         public static void clearLoginCookie()
         {
             File.Delete(cookiePath());
@@ -65,6 +96,8 @@ namespace AmazonMCEAddin
             string parameters = "&searchString=" + encodedKeywords + "&OfferGroups=B0043YVHMY&Detailed=T&IncludeAll=T&SuppressBlackedoutEST=T&version=2&HideNum=F&NumberOfResults=" + maxItemCount + "&StartIndex=" + startItem;
             return generateUrl("catalog/Search") + parameters;
         }
+        
+        //I don't think this is used any more, but I need to check
         public static string searchPrime(string keywords, int maxItemCount = 24, int startItem = 0)
         {
             return getURL(generateSearchUrl(keywords, maxItemCount, startItem), true);
@@ -99,6 +132,8 @@ namespace AmazonMCEAddin
             string url = generateUrl("catalog/GetCategoryList") + browse_parms;
             return getURL(url);
         }
+
+        //I don't think this is used any more, but I need to check
         public static List<Category> getPrimeCategories()
         {
             List<Category> cats= new List<Category>();
@@ -121,6 +156,7 @@ namespace AmazonMCEAddin
             return cats;
 
         }
+        //This is passed to the viewer to use the correct session and remote ip address etc taht amazon are expecting
         public static string getFlashVars(string ASIN)
         {
             string baseurl = "http://www.amazon.com/gp/product/";
