@@ -1,0 +1,98 @@
+<Mcml xmlns="http://schemas.microsoft.com/2008/mcml"
+     xmlns:cor="assembly://MSCorLib/System"
+     xmlns:styles="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/Styles"
+     xmlns:a="assembly://AmazonMCEAddin/AmazonMCEAddin">
+
+  <UI Name="MenuItem">
+
+    <Properties>
+      <a:Category Name="Category" a:Category="$Required"/>
+    </Properties>
+    <Locals>
+      <ClickHandler Name="ClickHandler"/>
+    </Locals>
+    <Rules>
+      <Default Target="[Input.KeyFocusOnMouseEnter]" Value="false"/>
+      <Default Target="[Input.KeyInteractive]" Value="true"/>
+      <!--Set for Active-->
+      <Rule>
+        <Conditions>
+          <Equality Source="[Category.Application.CurrentContext.Name]" ConditionOp="Equals" Value="[Category.Name]"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[Background.Content]" Value="color://styles:MenuItem.Background.Active"/>
+          <Set Target="[TextLabel.Color]" Value="color://styles:MenuItem.Text.Active"/>
+          <Invoke Target="[Background.NavigateInto]"/>
+        </Actions>
+      </Rule>
+      <!--Set for Mouse hover-->
+      <Rule ConditionLogicalOp="And">
+        <Conditions>
+          <Equality Source="[Input.MouseFocus]" ConditionOp="Equals" Value="true"/>
+          <Equality Source="[Category.Application.CurrentContext.Name]" ConditionOp="NotEquals" Value="[Category.Name]"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[Background.Content]" Value="color://styles:MenuItem.Background.Highlight"/>
+          <Set Target="[TextLabel.Color]" Value="color://styles:MenuItem.Text.Highlight"/>
+        </Actions>
+      </Rule>
+      <!--Set for Mouse hover for signout-->
+      <Rule ConditionLogicalOp="And">
+        <Conditions>
+          <Equality Source="[Input.KeyFocus]" ConditionOp="Equals" Value="true"/>
+          <Equality Source="[Category.Application.CurrentContext.Name]" ConditionOp="NotEquals" Value="[Category.Name]"/>
+          <Equality Source="[Category.Name]" ConditionOp="Equals" Value="Sign-out"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[Background.Content]" Value="color://styles:MenuItem.Background.Highlight"/>
+          <Set Target="[TextLabel.Color]" Value="color://styles:MenuItem.Text.Highlight"/>
+        </Actions>
+      </Rule>
+      <!--Set for Keyboard select-->
+      <Rule ConditionLogicalOp="And">
+        <Conditions>
+          <Equality Source="[Input.KeyFocus]" ConditionOp="Equals" Value="true"/>
+          <Equality Source="[Category.Application.CurrentContext.Name]" ConditionOp="NotEquals" Value="[Category.Name]"/>
+          <Equality Source="[Category.Name]" ConditionOp="NotEquals" Value="Sign-out"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[Category.GoToCategory]"/>
+        </Actions>
+      </Rule>
+      <!--Set for mouse click-->
+      <Changed Source="[ClickHandler.Invoked]">
+        <Actions>
+          <Invoke Target="[Category.GoToCategory]"/>
+        </Actions>
+      </Changed>
+
+      <!--Set for Mouse Hover-->
+      <!--
+      <Rule>
+        <Conditions>
+          <Equality Source="[Input.MouseFocus]" ConditionOp="Equals" Value="true"/>
+          <Equality Source="[Category.Application.CurrentContext.Name]" ConditionOp="NotEquals" Value="[Category.Name]"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[Background.Content]" Value="color://styles:MenuItem.Background.Highlight"/>
+          <Set Target="[TextLabel.Color]" Value="color://styles:MenuItem.Text.Highlight"/>
+        </Actions>
+      </Rule>
+
+      <Changed Source="[ClickHandler.Invoked]">
+        <Actions>
+          <Invoke Target="[Category.GoToCategory]"/>
+        </Actions>
+      </Changed>
+      -->
+
+    </Rules>
+    <Content>
+      <ColorFill Name="Background" Content="color://styles:MenuItem.Background" MinimumSize="75,0" Padding="10,0,10,0">
+        <Children>
+          <Text Name="TextLabel" Content="[Category.Name]" Color="color://styles:MenuItem.Text" Font="font://styles:MenuItem" HorizontalAlignment="Center"/>
+        </Children>
+      </ColorFill>
+    </Content>
+  </UI>
+</Mcml>

@@ -1,0 +1,179 @@
+<Mcml xmlns="http://schemas.microsoft.com/2008/mcml"
+      xmlns:cor="assembly://MSCorLib/System"
+      xmlns:a="assembly://AmazonMCEAddin/AmazonMCEAddin"
+      xmlns:styles="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/Styles"
+      xmlns:c="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/Controls">
+
+  <UI Name="Menu">
+    <Properties>
+      <a:Application Name="Application" Application="$Required"/>
+    </Properties>
+    <Locals>
+      <cor:String Name="Title" cor:String="[Application.CurrentContext.Name]"/>
+      <ScrollingHandler Name="MIScrollingHandler" HandlerStage="Bubbled"/>
+      <ScrollingData Name="MIScrollingData" BeginPadding="0" EndPadding="0" />
+      <Command Name="Logout"/>
+      <Command Name="Search"/>
+      <ShortcutHandler Name="MoveBackRemoteHandler" Shortcut="Back" Handle="true" HandlerStage="Routed"/>
+    </Locals>
+    <Rules>
+      <Default Target="[MIScrollingHandler.ScrollingData]" Value="[MIScrollingData]"/>
+      <Default Target="[MIScrollingData.Repeater]" Value="[CategoryRepeater]"/>
+      <Default Target="[BodyVideoGallery.Visible]" Value="true">
+        <Conditions>
+          <Equality Source="[Application.CurrentContext.hasChildren]" ConditionOp="Equals" Value="false"/>
+        </Conditions>
+      </Default>
+      <Default Target="[BodyCategoryGallery.Visible]" Value="true">
+        <Conditions>
+          <Equality Source="[Application.CurrentContext.hasChildren]" ConditionOp="Equals" Value="true"/>
+        </Conditions>
+      </Default>
+      <Changed Source="[MoveBackRemoteHandler.Invoked]">
+        <Actions>
+          <Invoke Target="[Application.MoveBack]"/>
+        </Actions>
+      </Changed>
+      <!--I think we can remove this-->
+      <Changed Source="[Logout.Invoked]">
+        <Actions>
+          <Invoke Target="[Application.Logout]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[Search.Invoked]">
+        <Actions>
+          <Invoke Target="[Application.DoSearch]" SearchText="[SearchBox.SearchText]"/>
+        </Actions>
+      </Changed>
+      <!--up to here-->
+
+      <Changed Source="[Application.CurrentContext]">
+        <Conditions>
+          <Equality Source="[Application.CurrentContext.hasChildren]" ConditionOp="Equals" Value="true"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[BodyCategoryGallery.Visible]" Value="true"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[Application.CurrentContext]">
+        <Conditions>
+          <Equality Source="[Application.CurrentContext.hasChildren]" ConditionOp="Equals" Value="false"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[BodyVideoGallery.Visible]" Value="true"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[Application.CurrentContext]">
+        <Conditions>
+          <Equality Source="[Application.CurrentContext.Name]" ConditionOp="Equals" Value="Search"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[BodyCategoryGallery.Visible]" Value="false"/>
+          <Set Target="[BodyVideoGallery.Visible]" Value="true"/>
+          <Set Target="[BodySearch.Visible]" Value="true"/>
+        </Actions>
+      </Changed>
+      <Binding Source="[Application.FooterLine1]" Target="[FooterTextLine1.Content]"/>
+      <Binding Source="[Application.FooterLine2]" Target="[FooterTextLine2.Content]"/>
+      <Binding Source="[Application.CurrentContext]" Target="[CategoryGallery.CurrentContext]"/>
+      <Binding Source="[Application.CurrentContext.Parent.ContextTitle]" Target="[MenuTitle.Content]"/>
+      <Binding Source="[Application.CurrentContext.Query]" Target="[VideoGallery.Query]"/>
+      <Binding Source="[Application.CurrentContext.Parent.ListContent.Options]" Target="[CategoryRepeater.Source]"/>
+    </Rules>
+    
+    <Content>
+      <ColorFill Name="Window" Layout="Form" Content="color://styles:Background" Padding="10,0,10,10" >
+        <Children>
+          <Panel Layout="Form" Name="Header" MinimumSize="0,120" MaximumSize="0,120">
+            <LayoutInput>
+              <FormLayoutInput Left="Parent,0" Top="Parent,0" Right="Parent,1"/>
+            </LayoutInput>
+            <Children>
+              <Panel Name="TitleSection" Layout="Form" MinimumSize="0,120" MaximumSize="0,120" Padding="0,20,0,0">
+                <LayoutInput>
+                  <FormLayoutInput Horizontal="Near" Top="Parent,0" Bottom="Parent,1" Right="Parent,1"/>
+                </LayoutInput>
+                <Children>
+                  <Text Name="MenuTitle" Color="White" Font="font://styles:MenuTitle">
+                    <LayoutInput>
+                      <FormLayoutInput Horizontal="Near" Top="Parent,0" Left="Parent,0"/>
+                    </LayoutInput>
+                  </Text>
+                  <Scroller Navigation="Row, RememberFocus" Orientation="Horizontal" FadeSize="1" ScrollingData="[MIScrollingData]" Padding="0,0,0,0">
+                    <LayoutInput>
+                      <FormLayoutInput Horizontal="Near" Bottom="Parent,1" Left="Parent,0"/>
+                    </LayoutInput>
+                    <Children>
+                      <Repeater Name="CategoryRepeater" Layout="HorizontalFlow" >
+                        <Content>
+                          <c:MenuItem Category="[RepeatedItem!a:Category]"/>
+                        </Content>
+                      </Repeater>
+                    </Children>
+                  </Scroller>
+                </Children>
+              </Panel>
+              <Panel Name="Logo" Layout="Form" MinimumSize="300,100" MaximumSize="300,100">
+                <LayoutInput>
+                  <FormLayoutInput Horizontal="Far" Vertical="Near" Top="Parent,0"/>
+                </LayoutInput>
+                <Children>
+                  <Graphic MaintainAspectRatio="True" MaximumSize="222,75" MinimumSize="222,75" Content="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/imgaiv"/>
+                </Children>
+              </Panel>
+            </Children>
+          </Panel>
+          <ColorFill Content="color://styles:Panel.Background" Name="Body" Padding="4,4,4,4" Layout="VerticalFlow">
+            <LayoutInput>
+              <FormLayoutInput Left="Parent,0" Top="Header,1" Right="Parent,1" Bottom="Footer,0"/>
+            </LayoutInput>
+            <Children>
+              <Panel Visible="false" Name="BodySearch">
+                <Children>
+                  <c:SearchBox Name="SearchBox" Model="[Search]">
+                    <LayoutInput>
+                      <FormLayoutInput Left="Parent,0" Top="Parent,0" Right="Parent,1"/>
+                    </LayoutInput>
+                  </c:SearchBox>
+                </Children>
+              </Panel>
+              <Panel Visible="true" Name="BodyVideoGallery">
+                <Children>
+                  <c:VideoGallery Name="VideoGallery"/>
+                </Children>
+              </Panel>
+              <Panel Visible="false" Name="BodyCategoryGallery">
+                <Children>
+                  <c:CategoryGallery Name="CategoryGallery" CurrentContext="[Application.CurrentContext]"/>
+                </Children>
+              </Panel>
+            </Children>
+          </ColorFill>
+          <Panel Name="Footer" MinimumSize="0,100" MaximumSize="0,00">
+            <LayoutInput>
+              <FormLayoutInput Left="Parent,0" Right="Parent,1" Bottom="Parent,1"/>
+            </LayoutInput>
+            <Children>
+              <Panel Layout="VerticalFlow" Padding="0,6,0,0">
+                <Children>
+                  <Text Name="FooterTextLine1" Color="White" Font="font://styles:Text.Footer.Line1"/>
+                  <Text Name="FooterTextLine2" Color="White" Font="font://styles:Text.Footer.Line2"/>
+                </Children>
+              </Panel>
+            </Children>
+          </Panel>
+          <Panel Name="VersionInfo" Padding="0,10,0,20">
+            <LayoutInput>
+              <FormLayoutInput Horizontal="Far" Top="Footer,0" Bottom="Footer,1" Right="Footer,1"/>
+            </LayoutInput>
+            <Children>
+              <Text Color="Red" Content="Alpha Version" />
+            </Children>
+          </Panel>
+
+        </Children>
+      </ColorFill>
+    </Content>
+  </UI>
+
+</Mcml>

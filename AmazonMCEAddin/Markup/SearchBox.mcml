@@ -1,0 +1,59 @@
+<Mcml xmlns="http://schemas.microsoft.com/2008/mcml"
+      xmlns:e="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/SimpleEditBox"
+      xmlns:a="assembly://AmazonMCEAddin/AmazonMCEAddin"
+      xmlns:b="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/Button"
+      xmlns:styles="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/Styles"
+      xmlns:cor="assembly://MSCorLib/System">
+
+  <UI Name="SearchBox">
+
+    <Properties>
+      <ICommand Name="Model" ICommand="$Required"/>
+      <cor:String Name="SearchText" cor:String=""/>
+    </Properties>
+    <Locals>
+      <KeyHandler Name="EnterHandler" Key="Enter" HandlerStage="Bubbled" Handle="true" Command="[Model]"/>
+    </Locals>
+
+    <Rules>
+      <Binding Source="[searchEntry.Value]" Target="[SearchText]"/>
+      <Changed Source="[searchEntry.Value]">
+        <Conditions>
+          <Equality ConditionOp="GreaterThanOrEquals" Source="[searchEntry.Value.Length]" Value="4"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[Model.Invoke]"/>
+        </Actions>
+      </Changed>
+    </Rules>
+    <Content>
+      <ColorFill Content="color://styles:Background"  Name="Outline" Padding="7,7,7,7" Margins="3,3,3,3" Layout="Form" MinimumSize="500,0" MaximumSize="0,70">
+        <LayoutInput>
+          <FormLayoutInput Left="Parent,0" Top="Parent,0" Right="Parent,1"/>
+        </LayoutInput>
+        <Children>
+          <ColorFill Name="Main" Content="color://styles:Panel.Background" Padding="2,2,2,2" Layout="Form" >
+            <LayoutInput>
+              <FormLayoutInput Left="Parent,0" Top="Parent,0" Right="Parent,1"/>
+            </LayoutInput>
+            <Children>
+              <e:SimpleEditBox Name="searchEntry" Margins="2,2,2,2">
+                <LayoutInput>
+                  <FormLayoutInput Left="Parent,0" Top="Parent,0" Bottom="Parent,1" Right="Button,0"/>
+                </LayoutInput>
+                <EditableText>
+                  <EditableText Value=""/>
+                </EditableText>
+              </e:SimpleEditBox>
+              <b:Button Name="Button" Text="Search" Model="[Model]" Margins="2,2,2,2" ButtonMinimumSize="150,0" ButtonMaximumSize="150,0">
+                <LayoutInput>
+                  <FormLayoutInput Top="Parent,0" Bottom="Parent,1" Right="Parent,1"/>
+                </LayoutInput>
+              </b:Button>
+            </Children> 
+          </ColorFill>
+        </Children>
+      </ColorFill>
+    </Content>
+  </UI>
+</Mcml>

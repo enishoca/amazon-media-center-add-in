@@ -1,0 +1,51 @@
+<Mcml xmlns="http://schemas.microsoft.com/2008/mcml"
+      xmlns:cor="assembly://MSCorLib/System"
+      xmlns:styles="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/Styles"
+      xmlns:a="assembly://AmazonMCEAddin/AmazonMCEAddin" >
+
+  <UI Name="CategoryBox">
+
+    <Properties>
+      <a:Category Name="Category" a:Category="$Required"/>
+      <Size Name="UnitSize" Size="250,250"/>
+    </Properties>
+    <Locals>
+      <ClickHandler Name="ClickHandler"/>
+    </Locals>
+    <Content>
+      <ColorFill Name="CategoryBorder" Content="color://styles:CategoryBox.Border" Padding="3,3,3,3" MinimumSize="[UnitSize]" MaximumSize="[UnitSize]" >
+        <Children>
+          <ColorFill Name="CategoryPanel" Content="color://styles:CategoryBox.Background" Padding="20,20,20,20" Layout="Dock">
+            <Children>
+              <Text Name="TextTitle" HorizontalAlignment="Far" Content="[Category.Name]" Color="color://styles:CategoryBox.Text" WordWrap="true" Font="font://styles:CategoryBox.Font" >
+                <LayoutInput>
+                  <DockLayoutInput Position="Bottom"/>
+                </LayoutInput>
+              </Text>
+            </Children>
+          </ColorFill>
+        </Children>
+      </ColorFill>
+    </Content>
+    <Rules>
+      <Default Target="[Input.KeyInteractive]" Value="true"/>
+      <Condition Source="[Input.KeyFocus]" SourceValue="true">
+        <Actions>
+          <Set Target="[CategoryBorder.Content]" Value="color://styles:CategoryBox.Border.Highlight"/>
+          <Set Target="[CategoryPanel.Content]" Value="color://styles:CategoryBox.Background.Highlight"/>
+          <Set Target="[TextTitle.Color]" Value="color://styles:CategoryBox.Text.Highlight"/>
+          <Set Target="[Category.Application.FooterLine1]" Value="[Category.Name]"/>
+          <Set Target="[Category.Application.FooterLine2]" Value="[Category.CatDescription]"/>
+          <Set Target="[Category.Application.CurrentContext.ListContent.ChosenIndex]" Value="[Category.Index]"/>
+        </Actions>
+      </Condition>
+      <Changed Source="[ClickHandler.Invoked]">
+        <Actions>
+          <Invoke Target="[Category.GoToCategory]"/>
+        </Actions>
+      </Changed>
+    </Rules>
+
+  </UI>
+
+</Mcml>

@@ -1,0 +1,49 @@
+<Mcml xmlns="http://schemas.microsoft.com/2008/mcml"
+      xmlns:cor="assembly://MSCorLib/System"
+      xmlns:styles="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/Styles"
+      xmlns:a="assembly://AmazonMCEAddin/AmazonMCEAddin" >
+
+  <UI Name="VideoTitle">
+
+    <Properties>
+      <a:VideoItem Name="VideoItem" VideoItem="$Required"/>
+    </Properties>
+    <Locals>
+      <ClickHandler Name="ClickHandler"/>
+    </Locals>
+
+    <Content>
+      <Panel MinimumSize="[VideoItem.size]" MaximumSize="[VideoItem.size]" >
+        <Children>
+          <ColorFill Name="VideoPanel" Content="color://styles:Panel.Background" Layout="Dock" Margins="0,0,0,0" Padding="4,4,4,4">
+            <Children>
+              <Graphic Name="VideoImage" Content="[VideoItem.Image]" CenterPointPercent=".5,.5,0" Scale="1,1,1" HorizontalAlignment="Center"  SizingPolicy="SizeToConstraint">
+                <LayoutInput>
+                  <DockLayoutInput Position="Top"/>
+                </LayoutInput>
+              </Graphic>
+            </Children>
+          </ColorFill>
+        </Children>
+
+      </Panel>
+    </Content>
+    <Rules>
+      <Default Target="[Input.KeyInteractive]" Value="true"/>
+      <Condition Source="[Input.KeyFocus]" SourceValue="true">
+        <Actions>
+          <Set Target="[VideoPanel.Content]" Value="color://styles:Highlight"/>
+          <Set Target="[VideoItem.Application.FooterLine1]" Value="[VideoItem.Title]"/>
+          <Set Target="[VideoItem.Application.FooterLine2]" Value="[VideoItem.Synopsis]"/>
+        </Actions>
+      </Condition>
+      <Changed Source="[ClickHandler.Invoked]">
+        <Actions>
+          <Invoke Target="[VideoItem.ViewDetails]"/>
+        </Actions>
+      </Changed>
+    </Rules>
+
+  </UI>
+
+</Mcml>

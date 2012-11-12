@@ -1,0 +1,47 @@
+<Mcml xmlns="http://schemas.microsoft.com/2008/mcml"
+      xmlns:cor="assembly://MSCorLib/System"
+      xmlns:styles="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/Styles"
+      xmlns:a="assembly://AmazonMCEAddin/AmazonMCEAddin" >
+
+  <UI Name="ChildTitle">
+
+    <Properties>
+      <a:VideoItem Name="VideoItem" VideoItem="$Required"/>
+    </Properties>
+    <Locals>
+      <ClickHandler Name="ClickHandler"/>
+    </Locals>
+    <Rules>
+      <Default Target="[Input.KeyInteractive]" Value="true"/>
+      <Condition Source="[Input.KeyFocus]" SourceValue="true">
+        <Actions>
+          <Set Target="[Border.Content]" Value="color://styles:Highlight"/>
+          <Set Target="[Title.Color]" Value="color://styles:Highlight"/>
+        </Actions>
+      </Condition>
+      <Changed Source="[ClickHandler.Invoked]">
+        <Actions>
+          <Invoke Target="[VideoItem.ViewDetails]"/>
+        </Actions>
+      </Changed>
+    </Rules>
+
+    <Content>
+      <ColorFill Name="Border" Content="color://styles:CategoryBox.Border" Padding="3,3,3,3">
+        <Layout>
+          <FlowLayout FillStrip="true" />
+        </Layout>
+        <Children>
+          <ColorFill Name="Panel" Content="color://styles:CategoryBox.Background" Layout="HorizontalFlow" Margins="0,0,0,0" Padding="10,4,10,4">
+            <Layout>
+              <FlowLayout FillStrip="true" />
+            </Layout>
+            <Children>
+              <Text Name="Title" WordWrap="true" Color="White" Content="[VideoItem.Title]" Font="font://styles:ChildTitle.Font"/>
+            </Children>
+          </ColorFill>
+        </Children>
+      </ColorFill>
+    </Content>
+  </UI>
+</Mcml>

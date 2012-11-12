@@ -1,0 +1,104 @@
+<Mcml xmlns="http://schemas.microsoft.com/2008/mcml"
+      xmlns:cor="assembly://MSCorLib/System"
+      xmlns:a="assembly://AmazonMCEAddin/AmazonMCEAddin"
+      xmlns:styles="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/Styles"
+      xmlns:c="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/Controls">
+
+  <UI Name="Test">
+    <Properties>
+      <a:Application Name="Application" Application="$Required"/>
+    </Properties>
+    <Locals>
+      <cor:String Name="Title" cor:String="Main Menu"/>
+      <ScrollingHandler Name="MIScrollingHandler" HandlerStage="Bubbled"/>
+      <ScrollingData Name="MIScrollingData" BeginPadding="0" EndPadding="0" />
+      <Command Name="Logout"/>
+      <Command Name="Search"/>
+      <ArrayListDataSet Name="Menu
+                        ">
+        <Source>
+          <cor:String cor:String="Hello World"/>
+          <cor:String cor:String="Hello World2"/>
+          <cor:String cor:String="Hello World3"/>
+        </Source>
+      </ArrayListDataSet>
+
+    </Locals>
+    <Rules>
+      <Changed Source="[Logout.Invoked]">
+        <Actions>
+          <Invoke Target="[Application.Logout]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[Search.Invoked]">
+        <Actions>
+          <Invoke Target="[Application.GoToSearchPage]"/>
+        </Actions>
+      </Changed>
+
+    </Rules>
+    <Content>
+      <ColorFill Name="Window" Layout="Form" Content="color://styles:Background" Padding="5,0,5,5" >
+        <Children>
+          <Panel Layout="Form" Name="Header" MinimumSize="0,120" MaximumSize="0,120">
+            <LayoutInput>
+              <FormLayoutInput Left="Parent,0" Top="Parent,0" Right="Parent,1"/>
+            </LayoutInput>
+            <Children>
+              <Panel Name="TitleSection" Layout="Form" MinimumSize="0,120" MaximumSize="0,120" Padding="0,20,0,0">
+                <LayoutInput>
+                  <FormLayoutInput Horizontal="Near" Top="Parent,0" Bottom="Parent,1" Right="Parent,1"/>
+                </LayoutInput>
+                <Children>
+                  <Text Color="White" Content="[Title]" Font="font://styles:MenuTitle">
+                    <LayoutInput>
+                      <FormLayoutInput Horizontal="Near" Top="Parent,0" Left="Parent,0"/>
+                    </LayoutInput>
+                  </Text>
+                  <Scroller Orientation="Horizontal" FadeSize="15" ScrollingData="[MIScrollingData]" Padding="0,0,0,0">
+                    <LayoutInput>
+                      <FormLayoutInput Horizontal="Near" Bottom="Parent,1" Left="Parent,0"/>
+                    </LayoutInput>
+                  </Scroller>
+                </Children>
+              </Panel>
+              <Panel Name="Logo" Layout="Form" MinimumSize="300,100" MaximumSize="300,100">
+                <LayoutInput>
+                  <FormLayoutInput Horizontal="Far" Vertical="Near" Top="Parent,0"/>
+                </LayoutInput>
+                <Children>
+                  <Graphic MaintainAspectRatio="True" MaximumSize="222,75" MinimumSize="222,75" Content="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/imgaiv"/>
+                </Children>
+              </Panel>
+            </Children>
+          </Panel>
+          <Panel Name="Body" Layout="Form">
+            <LayoutInput>
+              <FormLayoutInput Left="Parent,0" Top="Header,1" Right="Parent,1" Bottom="Footer,0"/>
+            </LayoutInput>
+            <Children>
+              <c:SimpleEditBox Name="searchEntry" Margins="2,2,2,2" MaximumSize="0,100">
+                <LayoutInput>
+                  <FormLayoutInput Left="Parent,0" Top="Parent,0" Right="Parent,1"/>
+                </LayoutInput>
+                <EditableText>
+                  <EditableText Value=""/>
+                </EditableText>
+              </c:SimpleEditBox>
+
+            </Children>
+          </Panel>
+          <Panel Name="Footer" MinimumSize="0,100" MaximumSize="0,00">
+            <LayoutInput>
+              <FormLayoutInput Left="Parent,0" Right="Parent,1" Bottom="Parent,1"/>
+            </LayoutInput>
+            <Children>
+              <Text Name="MovieTitle" Color="White" Font="font://styles:Text.Footer.Line1"/>
+            </Children>
+          </Panel>
+        </Children>
+      </ColorFill>
+    </Content>
+  </UI>
+
+</Mcml>

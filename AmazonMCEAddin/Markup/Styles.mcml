@@ -1,0 +1,47 @@
+<Mcml xmlns="http://schemas.microsoft.com/2008/mcml"
+      xmlns:cor="assembly://MSCorLib/System">
+
+  
+  
+  <Color Name="Panel.Background" Color="75,75,75"/>
+
+  <Color Name="Button.Background" Color="61,59,62"/>
+  <Color Name="Input.Background" Color="DarkGray"/>
+  <Color Name="Button.Text" Color="White"/>
+
+  <Color Name="MenuItem.Background" Color="58,58,58"/>
+  <Color Name="MenuItem.Background.Highlight" Color="58,58,58"/>
+  <Color Name="MenuItem.Background.Active" Color="247,167,0"/>
+  <Color Name="MenuItem.Text" Color="White"/>
+  <Color Name="MenuItem.Text.Highlight" Color="247,167,0"/>
+  <Color Name="MenuItem.Text.Active" Color="58,58,58"/>
+
+  <Color Name="Background" Color="58,58,58"/>
+  
+  <Color Name="CategoryBox.Background" Color="58,58,58"/>
+  <Color Name="CategoryBox.Background.Highlight" Color="58,58,58"/>
+  <Color Name="CategoryBox.Border" Color="75,75,75"/>
+  <Color Name="CategoryBox.Border.Highlight" Color="247,167,0"/>
+  <Color Name="CategoryBox.Text" Color="White"/>
+  <Color Name="CategoryBox.Text.Highlight" Color="247,167,0"/>
+
+
+  <Color Name="Text.Active"   Color="255,255,255,255"/>
+
+  <Color Name="Highlight" Color="247,167,0"/>
+
+  <!-- Fonts -->
+  <Font Name="Button.Text" Font="Calibri,20"/>
+  <Font Name="Text.Footer.Line1" Font="Calibri Bold,20"/>
+  <Font Name="Text.Footer.Line2" Font="Calibri Bold,16"/>
+
+  <Font Name="MenuTitle" Font="Calibri Bold,36"/>
+  <Font Name="SubTitle" Font="Calibri Bold,24"/>
+  <Font Name="MenuItem" Font="Calibri Bold,20"/>
+  <Font Name="MenuItem.Active" Font="Calibri Bold,22"/>
+  <Font Name="MenuItem.Highlight" Font="Calibri Bold,20"/>
+  <Font Name="CategoryBox.Font" Font="Calibri Bold,20"/>
+  <Font Name="ChildTitle.Font" Font="Calibri Bold,24"/>
+  <Font Name="FormText" Font="Calibri Bold,16"/>
+
+</Mcml>

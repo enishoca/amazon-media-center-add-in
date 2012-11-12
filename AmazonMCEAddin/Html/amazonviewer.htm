@@ -1,0 +1,113 @@
+﻿<html>
+<head>
+    <link rel="STYLESHEET" type="text/css" href="Main.css">
+    <script language='Javascript' type="text/javascript" src="BasicFunctions.js"></script>
+    <script language='Javascript' type="text/javascript" src="MoveFocus.js"></script>
+    <script type="text/javascript">
+        function onRemoteEvent(keyID) {
+            switch (keyID) {
+                case 250:
+                    //play
+                    play();
+                    break;
+                case 19:
+                    //pause
+                    pause();
+                    break;
+                case 176:
+                    //skip
+                    break;
+                case 177:
+                    //back up
+                    break;
+                case 178:
+                    //stop
+                    stop();
+                    break;
+                case 8:
+                case 166:
+                    //go back to main app
+                    stop();
+                    break;
+                case -102:
+                    //fast forward
+                    break;
+                case -104:
+                    //rewind
+                    break;
+                case 33:
+                    //volume up
+                    //alert("Volume Up");
+                    //window.external.MediaCenter.AudioMixer.VolumeUp();
+                    break;
+                case 34:
+                    //volume down;
+                    //alert("Volume Down");
+                    //window.external.MediaCenter.AudioMixer.VolumeDown();
+                    break;
+                default:
+                    //alert("key pressed: " + keyID);
+
+            }
+
+        }
+        function getflashvars() {
+            var flashvars = '&customer=' + getParameterByName("customer") + '&token=' + getParameterByName("token") + '&startState=1&pageType=tv&forceAP=false&UBID=' + getParameterByName("UBID") + '&sessionID=' + getParameterByName("sessionID") + '&userAgent=Internet Explorer 9.0 AVOD_FLASHACCESS_6825&ip=' + getParameterByName("ip") + '&initTime=' + new Date().getTime() + '&ASIN=' + target_asin + '&bs1=12&connectionTimeout=60';
+            flashvars+= '&setTimeCode=0'; //note: this is to force a playback from the start
+            return flashvars;
+
+        }
+        function pageLoadFunctions() {
+            setBGColor("#666666");
+            checkSVP();
+            setArray();
+            startFocus();
+            //var test = window.external.MediaCenter.MediaContext.Parameters();
+            //alert(test);
+            //autoPlay('B0021NMEJY');
+            autoPlay(getParameterByName("ASIN"));
+            //var test = 1 / 0;
+            //return true;
+        }
+
+        function doSelect() {
+            var url = ""
+            switch (oCurFocus.id) {
+                case "btnAmazon": url = "amazonviewer.htm"; break;
+
+            }
+            if (url != "") window.navigate(url);
+        }
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+            var regexS = "[\\?&]" + name + "=([^&#]*)";
+            var regex = new RegExp(regexS);
+            var results = regex.exec(window.location.search);
+            if (results == null)
+                return "";
+            else
+                return decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+
+        var customerID = getParameterByName("customer");
+        var target_asin = getParameterByName("ASIN");
+        var tokenID = getParameterByName("token");
+        var player_url = "http://ecx.images-amazon.com/images/G/01/digital/video/streaming/36.0-0/UnboxScreeningRoomClient._V388934788_.swf";
+        var sessionID = getParameterByName("sessionID");
+        var externalIP = getParameterByName("ip");
+
+    </script>
+    <script language='Javascript' type="text/javascript" src="amazonjq.js"></script>
+    <script language='Javascript' type="text/javascript" src="amazonvod.js"></script>
+
+    <title>Generic Amazon Video Viewer</title>
+</head>
+<body id="body" style="margin: 0px; padding: 0px; overflow: hidden"  MCFocusStart="" onload="pageLoadFunctions()" onkeydown="onRemoteEvent(window.event.keyCode)">
+    <span>
+    <div style="width: 100%; margin-top: 0px; position: relative;" id="streamBoxTable">
+        <div id="streaming_container">
+        </div>
+    </div>
+        </span>
+</body>
+</html>

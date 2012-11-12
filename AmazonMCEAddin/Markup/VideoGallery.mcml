@@ -1,0 +1,60 @@
+<Mcml xmlns="http://schemas.microsoft.com/2008/mcml"
+      xmlns:cor="assembly://MsCorLib/System"
+      xmlns:me="Me"
+      xmlns:a="assembly://AmazonMCEAddin/AmazonMCEAddin"
+      xmlns:styles="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/Styles"
+      xmlns:v="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/VideoTitle">
+
+  <UI Name="VideoGallery">
+    <Properties>
+      <cor:String Name="Query" cor:String=""/>
+    </Properties>
+    <Locals>
+      <a:VideoItems Name="VideoItems" />
+      <ScrollingHandler Name="ScrollingHandler" HandlerStage="Bubbled"/>
+      <ScrollingData Name="ScrollingData" BeginPadding="0" EndPadding="0" />
+    </Locals>
+    <Rules>
+      <Default Target="[ScrollingHandler.ScrollingData]" Value="[ScrollingData]"/>
+      <Default Target="[ScrollingData.Repeater]" Value="[VideoItemRepeater]"/>
+      <Changed Source="[VideoItems.ListContent]">
+        <Actions>
+          <Set Target="[ScrollingHandler.ScrollingData]" Value="[ScrollingData]"/>
+          <Set Target="[ScrollingData.Repeater]" Value="[VideoItemRepeater]"/>
+        </Actions>
+      </Changed>
+
+
+      <!--
+      <Binding Target="[ScrollingHandler.ScrollingData]" Source="[ScrollingData]"/>
+      <Binding Target="[ScrollingData.Repeater]" Source="[VideoItemRepeater]"/>
+-->
+
+      <Binding Source="[Query]" Target="[VideoItems.Query]"/>
+      <Binding Source="[VideoItems.ListContent.Options]" Target="[VideoItemRepeater.Source]"/>
+    </Rules>
+    <Content>
+      <Scroller Orientation="Vertical" FadeSize="15" ScrollingData="[ScrollingData]">
+        <Children>
+          <Repeater Name="VideoItemRepeater" Layout="Grid" >
+            <Layout>
+              <GridLayout AllowWrap="true" Spacing="0,0" MajorAlignment="Center" MinorAlignment="Center"/>
+            </Layout>
+            <Content>
+              <v:VideoTitle VideoItem="[RepeatedItem!a:VideoItem]"/>
+            </Content>
+          </Repeater>
+        </Children>
+      </Scroller>
+
+    </Content>
+  </UI>
+  <!-- Animation so we scroll smoothly. -->
+  <Animation Name="MoveAnimation" Type="Move">
+    <Keyframes>
+      <PositionKeyframe Time="0.0" Value="0,0,0" RelativeTo="Current"/>
+      <PositionKeyframe Time="0.2" Value="0,0,0"/>
+    </Keyframes>
+  </Animation>
+
+</Mcml>

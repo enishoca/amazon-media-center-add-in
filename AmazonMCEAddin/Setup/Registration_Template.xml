@@ -1,0 +1,9 @@
+﻿<application title="AmazonMCEAddin" id="{9547e03d-ccfc-4564-a097-856b99e42afa}">
+	<entrypoint id="{615620d8-161b-4f48-8dd2-8354ae4da51d}"
+				addin="AmazonMCEAddin.MyAddIn, AmazonMCEAddin,Culture=Neutral,Version=XXVERSIONXX,PublicKeyToken=9aa0ea7cc2684194"
+				title="Amazon Video-On-Demand"
+				description="Watch Movies and TV shows streamed from Amazon.com"
+				ImageUrl=".\Application.png">
+		<category category="More Programs"/>
+	</entrypoint>
+</application>

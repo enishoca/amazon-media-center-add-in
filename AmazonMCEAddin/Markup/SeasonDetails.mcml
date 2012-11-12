@@ -1,0 +1,84 @@
+<Mcml xmlns="http://schemas.microsoft.com/2008/mcml"
+      xmlns:cor="assembly://MSCorLib/System"
+      xmlns:a="assembly://AmazonMCEAddin/AmazonMCEAddin"
+      xmlns:styles="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/Styles"
+      xmlns:c="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/Controls"
+      >
+
+  <UI Name="SeasonDetails">
+
+    <Properties>
+      <a:VideoItem Name="VideoItem" VideoItem="$Required"/>
+    </Properties>
+    <Locals>
+      <Command Name="ViewVideo"/>
+      <ScrollingHandler Name="ChildTitleScrollingHandler" HandlerStage="Bubbled"/>
+      <ScrollingData Name="ChildTitleScrollingData" BeginPadding="0" EndPadding="0" />
+    </Locals>
+    <Rules>
+      <Default Target="[ChildTitleScrollingHandler.ScrollingData]" Value="[ChildTitleScrollingData]"/>
+      <Default Target="[ChildTitleScrollingData.Repeater]" Value="[ChildTitleRepeater]"/>
+      <Binding Source="[VideoItem.ChildTitles.ListContent.Options]" Target="[ChildTitleRepeater.Source]"/>
+    </Rules>
+
+    <Content>
+      <ColorFill Content="color://styles:Background" Layout="Form">
+        <LayoutInput>
+          <FormLayoutInput Left="Parent,0" Top="Parent,0" Right="Parent,1" Bottom="Parent,1"/>
+        </LayoutInput>
+        <Children>
+          <Panel Name="TopSection" Layout="Form" Padding="10,10,10,10" MinimumSize="0,280" MaximumSize="0,280">
+            <LayoutInput>
+              <FormLayoutInput Left="Parent,0" Top="Parent,0" Right="Parent,1"/>
+            </LayoutInput>
+          </Panel>
+          <Panel Name="VideoImagePanel" Padding="10,10,10,10" MaximumSize="0,300" Layout="HorizontalFlow">
+            <LayoutInput>
+              <FormLayoutInput Left="TopSection,0" Top="TopSection,0"/>
+            </LayoutInput>
+            <Children>
+              <Panel MaximumSize="[VideoItem.size]">
+                <Children>
+                  <Graphic Name="VideoImage" CenterPointPercent=".5,.5,0" Content="[VideoItem.Image]" Scale="1,1,1" HorizontalAlignment="Center"  SizingPolicy="SizeToConstraint"/>
+                </Children>
+              </Panel>
+            </Children>
+          </Panel>
+          <Panel Name="TopContentPanel" Layout="VerticalFlow" Padding="30,0,30,0">
+            <LayoutInput>
+              <FormLayoutInput Left="VideoImagePanel,1" Top="TopSection,0" Right="TopSection,1" Bottom="TopSection, 1"/>
+            </LayoutInput>
+            <Children>
+              <Text WordWrap="true" Content="[VideoItem.Title]" Color="White"/>
+              <Text WordWrap="true" Content="[VideoItem.RegulatoryRating]" Color="White"/>
+              <Text WordWrap="true" Content="[VideoItem.Runtime]" Color="White"/>
+            </Children>
+          </Panel>
+          <Panel Name="BottomSection" Layout="VerticalFlow" Padding="10,10,10,10">
+            <LayoutInput>
+              <FormLayoutInput Left="Parent,0" Top="TopSection,1" Right="Parent,1" Bottom="Parent,1"/>
+            </LayoutInput>
+            <Children>
+              <ColorFill Content="color://styles:CategoryBox.Border" Padding="5,5,5,5">
+                <Children>
+                  <Scroller Orientation="Vertical" FadeSize="5" ScrollingData="[ChildTitleScrollingData]" Padding="0,0,0,0">
+                    <LayoutInput>
+                      <FormLayoutInput Bottom="Parent,1" Left="Parent,0" Right="Parent,1" Top="Parent,0"/>
+                    </LayoutInput>
+                    <Children>
+                      <Repeater Name="ChildTitleRepeater" Layout="VerticalFlow" >
+                        <Content>
+                          <c:ChildTitle VideoItem="[RepeatedItem!a:VideoItem]"/>
+                        </Content>
+                      </Repeater>
+                    </Children>
+                  </Scroller>
+                </Children>
+              </ColorFill>
+            </Children>
+          </Panel>
+        </Children>
+      </ColorFill>
+    </Content>
+  </UI>
+</Mcml>

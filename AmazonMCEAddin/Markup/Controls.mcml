@@ -1,0 +1,10 @@
+<Mcml xmlns="http://schemas.microsoft.com/2008/mcml">
+  <Aggregate Source="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/VideoGallery"/>
+  <Aggregate Source="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/VideoTitle"/>
+  <Aggregate Source="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/Button"/>
+  <Aggregate Source="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/MenuItem"/>
+  <Aggregate Source="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/ChildTitle"/>
+  <Aggregate Source="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/SimpleEditBox"/>
+  <Aggregate Source="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/SearchBox"/>
+  <Aggregate Source="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/CategoryGallery"/>
+</Mcml>

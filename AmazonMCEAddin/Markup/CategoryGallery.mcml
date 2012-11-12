@@ -1,0 +1,45 @@
+<Mcml xmlns="http://schemas.microsoft.com/2008/mcml"
+      xmlns:cor="assembly://MsCorLib/System"
+      xmlns:me="Me"
+      xmlns:a="assembly://AmazonMCEAddin/AmazonMCEAddin"
+      xmlns:styles="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/Styles"
+      xmlns:c="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/CategoryBox">
+
+  <UI Name="CategoryGallery">
+    <Properties>
+      <a:Category Name="CurrentContext" a:Category="$Required"/>
+      <Size Name="UnitSize" Size="250,250"/>
+    </Properties>
+    <Locals>
+      <ScrollingHandler Name="ScrollingHandler" HandlerStage="Bubbled"/>
+      <ScrollingData Name="ScrollingData" BeginPadding="0" EndPadding="0" />
+    </Locals>
+    <Rules>
+      <Binding Source="[CurrentContext.ListContent.Options]" Target="[CategoryRepeater.Source]"/>
+      <Default Target="[ScrollingHandler.ScrollingData]" Value="[ScrollingData]"/>
+      <Default Target="[ScrollingData.Repeater]" Value="[CategoryRepeater]"/>
+    </Rules>
+    <Content>
+      <Scroller Orientation="Vertical" FadeSize="1" ScrollingData="[ScrollingData]">
+        <Children>
+          <Repeater Name="CategoryRepeater" Layout="Grid" >
+            <Layout>
+              <GridLayout ReferenceSize="[UnitSize]" AllowWrap="true" Spacing="2,2" />
+            </Layout>
+            <Content>
+              <c:CategoryBox UnitSize="[UnitSize]" Category="[RepeatedItem!a:Category]"/>
+            </Content>
+          </Repeater>
+        </Children>
+      </Scroller>
+    </Content>
+  </UI>
+  <!-- Animation so we scroll smoothly. -->
+  <Animation Name="MoveAnimation" Type="Move">
+    <Keyframes>
+      <PositionKeyframe Time="0.0" Value="0,0,0" RelativeTo="Current"/>
+      <PositionKeyframe Time="0.2" Value="0,0,0"/>
+    </Keyframes>
+  </Animation>
+
+</Mcml>
