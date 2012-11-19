@@ -1,8 +1,6 @@
 <Mcml xmlns="http://schemas.microsoft.com/2008/mcml"
       xmlns:cor="assembly://MSCorLib/System">
-
-  
-  
+    
   <Color Name="Panel.Background" Color="75,75,75"/>
 
   <Color Name="Button.Background" Color="61,59,62"/>
@@ -25,7 +23,6 @@
   <Color Name="CategoryBox.Text" Color="White"/>
   <Color Name="CategoryBox.Text.Highlight" Color="247,167,0"/>
 
-
   <Color Name="Text.Active"   Color="255,255,255,255"/>
 
   <Color Name="Highlight" Color="247,167,0"/>
@@ -43,5 +40,10 @@
   <Font Name="CategoryBox.Font" Font="Calibri Bold,20"/>
   <Font Name="ChildTitle.Font" Font="Calibri Bold,24"/>
   <Font Name="FormText" Font="Calibri Bold,16"/>
+
+  <Font Name="RegulatoryRating.Font" Font="Calibri,16"/>
+  <Font Name="Synopsis.Font" Font="Calibri,16"/>
+  <Font Name="Runtime.Font" Font="Calibri Bold,16"/>
+  <Font Name="Runtime.Value.Font" Font="Calibri,16"/>
 
 </Mcml>
