@@ -10,9 +10,11 @@
     <Properties>
       <a:VideoItem Name="VideoItem" VideoItem="$Required"/>
     </Properties>
+    
     <Locals>
       <Command Name="ViewVideo"/>
     </Locals>
+    
     <Rules>
       <Rule ConditionLogicalOp="Or">
         <Conditions>
@@ -24,7 +26,6 @@
         </Conditions>
         <Actions>
           <Set Target="[PlayButton.Visible]" Value="false"/>
-          <Set Target="[WarningText.Visible]" Value="true"/>
         </Actions>
       </Rule>
       <Changed Source="[ViewVideo.Invoked]">
@@ -35,59 +36,92 @@
     </Rules>
 
     <Content>
-      <ColorFill Content="color://styles:Background">
+      <ColorFill Content="color://styles:Background" Layout="Dock">
         <Children>
-          <Panel Layout="Dock" Padding="10,10,10,10">
+          <!-- Title bar: includes the movie title and AIV logo -->
+          <!-- TODO: ideally, menu.mcml should be reused somehow -->
+          <ColorFill Content="color://styles:Background" Padding="15,10,50,10">
+            <LayoutInput>
+              <DockLayoutInput Position="Top"/>
+            </LayoutInput>
+            <Layout>
+              <DockLayout SizeToChildren="true"/>
+            </Layout>
             <Children>
-
-              <Panel>
+              <Text Content="[VideoItem.Title]" Color="White" Font="font://styles:MenuTitle">
                 <LayoutInput>
-                  <DockLayoutInput Position="Top"/>
+                  <DockLayoutInput Alignment="Near" Position="Left"/>
+                </LayoutInput>
+              </Text>
+              <Graphic MaintainAspectRatio="True" MaximumSize="222,75" MinimumSize="222,75" Content="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/imgaiv">
+                <LayoutInput>
+                  <DockLayoutInput Alignment="Near" Position="Right"/>
+                </LayoutInput>
+              </Graphic>
+            </Children>
+          </ColorFill>
+
+          <!-- Menu bar: -->
+          <!-- TODO: ideally, menu.mcml and menuitem.mcml should be reused here somehow -->
+          <!--
+          <ColorFill Content="82,82,82" MaximumSize="0,2" MinimumSize="0,2">
+            <LayoutInput>
+              <DockLayoutInput Position="Top"/>
+            </LayoutInput>
+          </ColorFill>
+          <me:MenuBar>
+            <LayoutInput>
+              <DockLayoutInput Position="Top"/>
+            </LayoutInput>
+          </me:MenuBar>
+          <ColorFill Content="20,20,20" MaximumSize="0,2" MinimumSize="0,2">
+            <LayoutInput>
+              <DockLayoutInput Position="Top"/>
+            </LayoutInput>
+          </ColorFill>
+          -->
+
+          <!-- Body of video details: display movie cover image, metadata, and play button -->
+          <ColorFill Content="color://styles:Background" Padding="15,15,15,15">
+            <LayoutInput>
+              <DockLayoutInput Position="Top" Alignment="Near"/>
+            </LayoutInput>
+            <Layout>
+              <AnchorLayout SizeToHorizontalChildren="true"/>
+            </Layout>
+            <Children>
+              <!-- TODO: The max size should not be hardcoded-->
+              <Graphic Name="VideoImage" MaximumSize="0,415" MaintainAspectRatio="true" CenterPointPercent=".5,.5,0" Content="[VideoItem.Image]" Scale="1,1,1" HorizontalAlignment="Center" SizingPolicy="SizeToConstraint">
+                <LayoutInput>
+                  <AnchorLayoutInput Horizontal="Near" Vertical="Near"/>
+                </LayoutInput>
+              </Graphic>
+
+              <Panel Layout="VerticalFlow" Padding="30,0,30,0">
+                <LayoutInput>
+                  <AnchorLayoutInput Horizontal="Far" Vertical="Near" Left="VideoImage,1" Right="VideoImage,3"/>
                 </LayoutInput>
                 <Children>
+                  <Text Content="[VideoItem.RegulatoryRating]" Color="White" Font="font://styles:RegulatoryRating.Font"/>
+                  <Text Content="[VideoItem.Synopsis]" Color="White" WordWrap="true" Font="font://styles:Synopsis.Font"/>
                   <Panel Layout="HorizontalFlow">
                     <Children>
-                      <Panel MaximumSize="[VideoItem.size]">
-                        <Children>
-                          <Graphic Name="VideoImage" CenterPointPercent=".5,.5,0" Content="[VideoItem.Image]" Scale="1,1,1" HorizontalAlignment="Center"  SizingPolicy="SizeToConstraint"/>
-                        </Children>
-                      </Panel>
-                      <Panel>
-                        <Children>
-                          <Panel Layout="VerticalFlow" Padding="30,0,30,0">
-                            <Children>
-                              <Text Content="[VideoItem.Title]" Color="White"/>
-                              <Text Content="[VideoItem.RegulatoryRating]" Color="White"/>
-                              <Text Content="[VideoItem.Runtime]" Color="White"/>
-                              <c:Button Visible="true" Name="PlayButton" Text="Play" Model="[ViewVideo]"/>
-                              <ColorFill Content="White" Name="WarningText" Visible="false">
-                                <Children>
-                                  <Text Color="Red" WordWrap="true" Content="Series, Episodes and Seasons are not yet supported"/>
-                                </Children>
-                              </ColorFill>
-
-
-                            </Children>
-                          </Panel>
-                        </Children>
-                      </Panel>
+                      <Text Content="Runtime: " Color="White" Font="font://styles:Runtime.Font"/>
+                      <Text Content="[VideoItem.Runtime]" Color="White" Font="font://styles:Runtime.Value.Font"/>
                     </Children>
                   </Panel>
                 </Children>
               </Panel>
-              <Panel Layout="Dock" Padding="10,10,10,10">
+
+              <c:Button Visible="true" Name="PlayButton" Text="Play" Model="[ViewVideo]">
                 <LayoutInput>
-                  <DockLayoutInput Position="Bottom"/>
+                  <AnchorLayoutInput Horizontal="Far" Vertical="Near"/>
                 </LayoutInput>
-                <Children>
-                  <Text Content="[VideoItem.Synopsis]" Color="White" WordWrap="true"/>
-                </Children>
-              </Panel>
+              </c:Button>
 
             </Children>
-          </Panel>
+          </ColorFill>
         </Children>
-
       </ColorFill>
     </Content>
   </UI>
