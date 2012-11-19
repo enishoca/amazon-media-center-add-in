@@ -5,7 +5,6 @@ using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.IO;
-using System.Linq;
 
 namespace AmazonMCEAddin
 {
