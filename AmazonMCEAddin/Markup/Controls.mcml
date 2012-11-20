@@ -7,4 +7,5 @@
   <Aggregate Source="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/SimpleEditBox"/>
   <Aggregate Source="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/SearchBox"/>
   <Aggregate Source="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/CategoryGallery"/>
+  <Aggregate Source="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/VideoRating"/>
 </Mcml>

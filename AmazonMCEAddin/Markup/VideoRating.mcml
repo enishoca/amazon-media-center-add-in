@@ -1,0 +1,79 @@
+<Mcml xmlns="http://schemas.microsoft.com/2008/mcml"
+      xmlns:cor="assembly://MsCorLib/System">
+
+  <UI Name="VideoRating">
+
+    <!-- UI Value property. -->
+    <Properties>
+      <cor:String Name="Value" String="Unknown"/>
+    </Properties>
+
+    <Rules>
+      <!-- MPAA ratings -->
+      <!-- Not rated -->
+      <Condition Source="[Value]" SourceValue="UNRATED"
+                 Target="[RatingIcon.Content]" Value="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/unrated"/>
+      
+      <!-- Not rated -->
+      <Condition Source="[Value]" SourceValue="NR"
+                 Target="[RatingIcon.Content]" Value="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/rated_nr"/>
+
+      <!-- Rated NC-17 -->
+      <Condition Source="[Value]" SourceValue="NC-17"
+                 Target="[RatingIcon.Content]" Value="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/rated_nc17"/>
+
+      <!-- Rated R -->
+      <Condition Source="[Value]" SourceValue="R"
+                 Target="[RatingIcon.Content]" Value="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/rated_r"/>
+      
+      <!-- Rated PG-13 -->
+      <Condition Source="[Value]" SourceValue="PG-13"
+                 Target="[RatingIcon.Content]" Value="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/rated_pg13"/>
+      
+      <!-- Rated PG -->
+      <Condition Source="[Value]" SourceValue="PG"
+                 Target="[RatingIcon.Content]" Value="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/rated_pg"/>
+      
+      <!-- Rated G -->
+      <Condition Source="[Value]" SourceValue="G"
+                 Target="[RatingIcon.Content]" Value="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/rated_g"/>
+
+      <!-- TV ratings -->
+      <!-- TV-Y -->
+      <Condition Source="[Value]" SourceValue="TV-Y"
+                 Target="[RatingIcon.Content]" Value="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/tv_y"/>
+      
+      <!-- TV-Y7 -->
+      <Condition Source="[Value]" SourceValue="TV-Y7"
+                 Target="[RatingIcon.Content]" Value="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/tv_y7"/>
+      
+      <!-- TV-Y7FV -->
+      <Condition Source="[Value]" SourceValue="TV-Y7FV"
+                 Target="[RatingIcon.Content]" Value="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/tv_y7fv"/>
+      
+      <!-- TV-G -->
+      <Condition Source="[Value]" SourceValue="TV-G"
+                 Target="[RatingIcon.Content]" Value="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/tv_g"/>
+
+      <!-- TV-PG -->
+      <Condition Source="[Value]" SourceValue="TV-PG"
+                 Target="[RatingIcon.Content]" Value="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/tv_pg"/>
+
+      <!-- TV-14 -->
+      <Condition Source="[Value]" SourceValue="TV-14"
+                 Target="[RatingIcon.Content]" Value="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/tv_14"/>
+
+      <!-- TV-MA -->
+      <Condition Source="[Value]" SourceValue="TV-MA"
+                 Target="[RatingIcon.Content]" Value="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/tv_ma"/>
+    </Rules>
+
+    <Content>
+      <ColorFill Content="Black">
+        <Children>
+          <Graphic Name="RatingIcon" MaintainAspectRatio="true" MinimumSize="0,20" MaximumSize="0,20"/>
+        </Children>
+      </ColorFill>
+    </Content>
+  </UI>
+</Mcml>

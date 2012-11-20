@@ -41,7 +41,6 @@
   <Font Name="ChildTitle.Font" Font="Calibri Bold,24"/>
   <Font Name="FormText" Font="Calibri Bold,16"/>
 
-  <Font Name="RegulatoryRating.Font" Font="Calibri,16"/>
   <Font Name="Synopsis.Font" Font="Calibri,16"/>
   <Font Name="Runtime.Font" Font="Calibri Bold,16"/>
   <Font Name="Runtime.Value.Font" Font="Calibri,16"/>
