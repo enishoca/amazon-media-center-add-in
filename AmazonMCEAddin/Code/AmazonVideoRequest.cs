@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Linq;
 using System.Web;
+using System.Diagnostics;
 
 //This needs some cleanup
 
@@ -18,8 +19,14 @@ namespace AmazonMCEAddin
 {
     class AmazonVideoRequest
     {
-
-        //requests data optionally using the amazon cookies
+        
+        
+        /// <summary>
+        /// requests data optionally using the amazon cookies
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="useCookie"></param>
+        /// <returns></returns>
         public static string getURL(string url, bool useCookie = false)
         {
             WebClientWithCookies client;
@@ -85,7 +92,9 @@ namespace AmazonMCEAddin
             return "https://atv-ext.amazon.com/cdp/" + mode + parameters;
 
         }
-        //Deletes the amazon cookie
+        /// <summary>
+        ///Deletes the amazon cookie
+        /// </summary>
         public static void clearLoginCookie()
         {
             File.Delete(cookiePath());
@@ -96,7 +105,19 @@ namespace AmazonMCEAddin
             string parameters = "&searchString=" + encodedKeywords + "&OfferGroups=B0043YVHMY&Detailed=T&IncludeAll=T&SuppressBlackedoutEST=T&version=2&HideNum=F&NumberOfResults=" + maxItemCount + "&StartIndex=" + startItem;
             return generateUrl("catalog/Search") + parameters;
         }
-        
+        /// <summary>
+        /// Get the full details on a specific video
+        /// </summary>
+        /// <param name="asin">amazon product id</param>
+        /// <returns>string of the video details</returns>
+        public static string getVideoDetails(string asin)
+        {
+            string parameters = "&asinList=" + asin + "&NumberOfResults=1&IncludeAll=T&playbackInformationRequired=true&version=2";
+            string url = generateUrl("catalog/GetASINDetails") + parameters;
+            return getURL(url, true);
+        }
+
+
         //I don't think this is used any more, but I need to check
         public static string searchPrime(string keywords, int maxItemCount = 24, int startItem = 0)
         {
@@ -115,6 +136,12 @@ namespace AmazonMCEAddin
             string url = generateUrl("catalog/Browse") + "&version=2&HideNum=F&NumberOfResults=" + maxItems + "&StartIndex=" + startItem + "&" + query;
             return getURL(url, true);
         }
+
+        public static string GenerateVirtualBrowseUrlTemplate()
+        {
+            return generateUrl("catalog/Browse") + "&version=2&HideNum=F&NumberOfResults=1";
+        }
+        //legacy
         public static string GenerateBrowseUrlTemplate(int maxItems = 24, int startItem = 0)
         {
             return generateUrl("catalog/Browse") + "&version=2&HideNum=F&NumberOfResults=" + maxItems + "&StartIndex=" + startItem + "&";
@@ -237,4 +264,74 @@ namespace AmazonMCEAddin
         #endregion
 
     }
+
+    //this is a test to see if the static nature of the above calls is interfering with getting multiple requests etc.
+    class AmazonRequester
+    {
+        
+        public AmazonRequester()
+        {
+        }
+        public string ExecuteQuery(string url, bool useCookie = true)
+        {
+            WebClientWithCookies client;
+            if (useCookie)
+            {
+                var formatter = new BinaryFormatter();
+                CookieContainer cc = null;
+                using (Stream s = File.OpenRead(AmazonVideoRequest.cookiePath()))
+                    cc = (CookieContainer)formatter.Deserialize(s);
+
+                client = new WebClientWithCookies(cc);
+            }
+            else
+            {
+                client = new WebClientWithCookies(new CookieContainer());
+            }
+
+            //generate a signature for this URL
+            string sig = generate_signature(url);
+
+            //add this signature as a header
+            client.Headers.Add("x-android-sign", sig);
+
+            //get the data
+            Stream data = client.OpenRead(url);
+            StreamReader reader = new StreamReader(data);
+            string tmp = reader.ReadToEnd();
+            Trace.WriteLine("********Query: " + url + "\r\n***********" + tmp);
+            return tmp;
+        }
+
+        #region "helper functions"
+
+        private static string generate_signature(string url)
+        {
+            string result = "";
+            System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
+
+            string HexKey = Resources.AndroidSignatureHexKey;
+            byte[] keyBytes = StringToByteArray(HexKey);
+
+            HMACSHA1 hmacsha1 = new HMACSHA1(keyBytes);
+            byte[] messageBytes = encoding.GetBytes(url);
+            byte[] hashmessage = hmacsha1.ComputeHash(messageBytes);
+
+            result = Convert.ToBase64String(hashmessage);
+            return result;
+
+        }
+        private static byte[] StringToByteArray(String hex)
+        {
+            int NumberChars = hex.Length;
+            byte[] bytes = new byte[NumberChars / 2];
+            for (int i = 0; i < NumberChars; i += 2)
+                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+            return bytes;
+        }
+
+        #endregion
+
+
+     }
 }

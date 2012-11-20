@@ -139,7 +139,7 @@
               </Panel>
               <Panel Visible="true" Name="BodyVideoGallery">
                 <Children>
-                  <c:VideoGallery Name="VideoGallery"/>
+                  <c:VideoGallery Name="VideoGallery" CurrentContext="[Application.CurrentContext]"/>
                 </Children>
               </Panel>
               <Panel Visible="false" Name="BodyCategoryGallery">

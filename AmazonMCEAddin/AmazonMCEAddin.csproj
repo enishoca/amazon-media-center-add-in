@@ -84,6 +84,7 @@
     <Compile Include="Code\BrowserSession.cs" />
     <Compile Include="Code\Category.cs" />
     <Compile Include="Code\CategoryStructureSetup.cs" />
+    <Compile Include="Code\VideoItemsVirtualList.cs" />
     <Compile Include="Code\FormElementCollection.cs" />
     <Compile Include="Code\VideoItems.cs" />
     <Compile Include="Code\Launch.cs" />

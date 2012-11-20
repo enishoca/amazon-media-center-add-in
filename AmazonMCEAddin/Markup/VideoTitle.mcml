@@ -11,24 +11,10 @@
     <Locals>
       <ClickHandler Name="ClickHandler"/>
     </Locals>
-
-    <Content>
-      <Panel MinimumSize="[VideoItem.size]" MaximumSize="[VideoItem.size]" >
-        <Children>
-          <ColorFill Name="VideoPanel" Content="color://styles:Panel.Background" Layout="Dock" Margins="0,0,0,0" Padding="4,4,4,4">
-            <Children>
-              <Graphic Name="VideoImage" Content="[VideoItem.Image]" CenterPointPercent=".5,.5,0" Scale="1,1,1" HorizontalAlignment="Center"  SizingPolicy="SizeToConstraint">
-                <LayoutInput>
-                  <DockLayoutInput Position="Top"/>
-                </LayoutInput>
-              </Graphic>
-            </Children>
-          </ColorFill>
-        </Children>
-
-      </Panel>
-    </Content>
     <Rules>
+      <Binding Source="[VideoItem.size]" Target="[MasterPanel.MinimumSize]"/>
+      <Binding Source="[VideoItem.size]" Target="[MasterPanel.MaximumSize]"/>
+      <Binding Source="[VideoItem.Image]" Target="[VideoImage.Content]"/>
       <Default Target="[Input.KeyInteractive]" Value="true"/>
       <Condition Source="[Input.KeyFocus]" SourceValue="true">
         <Actions>
@@ -44,6 +30,26 @@
       </Changed>
     </Rules>
 
-  </UI>
 
+    <Content>
+      <Panel Name="MasterPanel" MinimumSize="[VideoItem.size]" MaximumSize="[VideoItem.size]" >
+        <Children>
+          <ColorFill Name="VideoPanel" Content="color://styles:Panel.Background" Layout="Dock" Margins="0,0,0,0" Padding="4,4,4,4">
+            <Children>
+              <ColorFill Name="Background" Content="color://styles:Background" Layout="Dock" Margins="0,0,0,0">
+                <Children>
+                  <Graphic Name="VideoImage" Content="[VideoItem.Image]" CenterPointPercent=".5,.5,0" Scale="1,1,1" HorizontalAlignment="Center"  SizingPolicy="SizeToConstraint">
+                    <LayoutInput>
+                      <DockLayoutInput Position="Top"/>
+                    </LayoutInput>
+                  </Graphic>
+                </Children>
+              </ColorFill>
+            </Children>
+          </ColorFill>
+        </Children>
+
+      </Panel>
+    </Content>
+  </UI>
 </Mcml>

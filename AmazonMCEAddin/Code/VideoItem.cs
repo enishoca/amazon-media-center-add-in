@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.MediaCenter;
 using Microsoft.MediaCenter.Hosting;
 using Microsoft.MediaCenter.UI;
+using System.IO;    
 using System.Xml;
 using System.Xml.XPath;
 using HtmlAgilityPack;
@@ -27,16 +28,66 @@ namespace AmazonMCEAddin
         private string m_ChildTitleQuery;
         private VideoItems m_ChildTitleItems;
 
+        private string m_ItemQuery;
+        private int m_ItemIndex;
+        
         public Size size { set; get; }
         private static string NAMESPACE_PREFIX = "x";
         private static string CONTENT_SEASON = "SEASON";
         private static string CONTENT_MOVIE = "MOVIE";
 
+        /// <summary>
+        /// New constructor for virtual list.
+        /// </summary>
+        /// <param name="vlist"></param>
+        /// <param name="Index"></param>
+        public VideoItem(IModelItemOwner owner, int Index, string query)
+            :
+            base(owner)
+        {
+            m_ItemIndex = Index;
+            m_ItemQuery = query;
+            //GetItemByIndex(query, Index);
+        }
+
+        
         public VideoItem()
         {
         }
+        //This is junk - needed to move out of the view item into a separate process.
+        public void GetItemByIndex()
+        {
+            if (m_ItemQuery == "")
+            {
+                return;
+            }
+            m_ItemQuery += "&NumberOfResults=1&StartIndex=" + m_ItemIndex.ToString();
+            string data = AmazonVideoRequest.ExecuteQuery(m_ItemQuery);
+
+            JsonTextReader reader = new JsonTextReader(new StringReader(data));
+
+            JObject results = JObject.Parse(data);
+            //need to check that we got a valid result
+            JObject node = (JObject)results["message"]["body"]["titles"][0];
+            processNodeData(node);
+        }
+
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            if (m_Image != null)
+            {
+                m_Image.Dispose();
+            }
+        }
+
         //Initializes a new video item with a json node.
         public VideoItem(JObject node)
+        {
+            processNodeData(node);
+        }
+        public void processNodeData(JObject node)
         {
             m_Command = new Command();
             //try to use HD unless no HD available.
@@ -48,6 +99,7 @@ namespace AmazonMCEAddin
             Size movie_size = new Size(173, 248);
             Size tv_size = new Size(294, 248);
 
+            
             //not all titles have HD, so we loop through available options and pick HD if we can.
             foreach (JObject format in node["formats"])
             {
@@ -58,7 +110,10 @@ namespace AmazonMCEAddin
             selectedFormat = (hdFormat != -1) ? hdFormat : sdFormat;
 
             string test = node.ToString();
-            m_Title = (string)node["title"];
+            //TODO: REmove this test
+            m_Title = m_ItemIndex.ToString() + ". " + (string)node["title"];
+
+            //m_Title = (string)node["title"];
             m_Synopsis = (string)node["synopsis"];
             m_RegulatoryRating = (string)node["regulatoryRating"];
             m_contentType = (string)node["contentType"];
@@ -103,10 +158,23 @@ namespace AmazonMCEAddin
             }
 
             m_ASIN = (string)node["titleId"];
-            string m_ImageURL = (string)node["formats"][selectedFormat]["images"][1]["uri"];
-            m_Image = new Image(m_ImageURL);
+            //string m_ImageURL = (string)node["formats"][selectedFormat]["images"][1]["uri"];
+            //m_Image = new Image(m_ImageURL);
             m_Price = "Free!";
-
+            FirePropertyChanged("size");
+            FirePropertyChanged("Title");
+            FirePropertyChanged("Synopsis"); 
+        }
+        public string Query
+        {
+            get
+            {
+                return m_ItemQuery;
+            }
+            set
+            {
+                m_ItemQuery = value;
+            }
         }
         //When this item is a season, it will have a query property under childtitles
         //we need to be able to bind to this in DisplaySeasons.mcml, so we expose here as a property that is not initialized
@@ -124,7 +192,7 @@ namespace AmazonMCEAddin
             }
         }
         public String Title { get { return m_Title; } }
-        public Image Image { get { return m_Image; } }
+        public Image Image { get { return m_Image; } set { m_Image = value; FirePropertyChanged("Image"); } }
         public String Price { get { return m_Price; } }
         public String Synopsis { get { return m_Synopsis; } }
         public String ASIN { get { return m_ASIN; } }

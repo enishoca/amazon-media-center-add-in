@@ -46,7 +46,7 @@ namespace AmazonMCEAddin
 
         private static void recurse(JToken category, Category parent)
         {
-            string browseUrl = AmazonVideoRequest.GenerateBrowseUrlTemplate();
+            string browseUrl = AmazonVideoRequest.GenerateVirtualBrowseUrlTemplate() + "&";
             int index = 0;
             parent.hasChildren = (category["categories"] != null);
             if (parent.hasChildren)
