@@ -116,9 +116,14 @@
     <Content Include="Html\BasicFunctions.js" />
     <Content Include="Html\amazonviewer.htm" />
     <None Include="Markup\ChildTitle.mcml" />
+    <None Include="Markup\VideoRating.mcml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Markup\SeasonDetails.mcml" />
     <None Include="Setup\createregfile.ps1" />
-    <None Include="Setup\Registration.xml" />
+    <None Include="Setup\Registration.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Setup\Registration_Template.xml" />
     <None Include="DevInstall.cmd" />
     <None Include="gb-key.pfx" />
@@ -134,7 +139,9 @@
     <None Include="Markup\Styles.mcml">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Markup\VideoDetails.mcml" />
+    <None Include="Markup\VideoDetails.mcml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Markup\VideoGallery.mcml" />
     <None Include="Markup\VideoTitle.mcml" />
     <None Include="packages.config" />
@@ -151,9 +158,25 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Html\MoveFocus.js" />
+    <Content Include="Images\RATED_G.png" />
+    <Content Include="Images\RATED_NR.png" />
+    <Content Include="Images\RATED_R.png" />
+    <Content Include="Images\RATED_PG.png" />
+    <Content Include="Images\RATED_NC-17.png" />
+    <Content Include="Images\RATED_PG-13.png" />
     <Content Include="Images\amazon-instant-video.png" />
+    <Content Include="Images\TV_14.png" />
+    <Content Include="Images\TV_G.png" />
+    <Content Include="Images\TV_MA.png" />
+    <Content Include="Images\TV_PG.png" />
+    <Content Include="Images\TV_Y.png" />
+    <Content Include="Images\TV_Y7.png" />
+    <Content Include="Images\TV_Y7FV.png" />
+    <Content Include="Images\UNRATED.png" />
     <Content Include="JavaScript1.js" />
-    <Content Include="Markup\Controls.mcml" />
+    <Content Include="Markup\Controls.mcml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Markup\Menu.mcml">
       <SubType>Designer</SubType>
     </Content>
