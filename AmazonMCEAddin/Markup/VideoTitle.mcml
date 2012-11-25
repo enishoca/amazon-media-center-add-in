@@ -17,7 +17,7 @@
         <Children>
           <ColorFill Name="VideoPanel" Content="color://styles:Panel.Background" Layout="Dock" Margins="0,0,0,0" Padding="4,4,4,4">
             <Children>
-              <Graphic Name="VideoImage" Content="[VideoItem.Image]" CenterPointPercent=".5,.5,0" Scale="1,1,1" HorizontalAlignment="Center"  SizingPolicy="SizeToConstraint">
+              <Graphic Name="VideoImage" Content="[VideoItem.Format.CoverArtLarge]" CenterPointPercent=".5,.5,0" Scale="1,1,1" HorizontalAlignment="Center"  SizingPolicy="SizeToConstraint">
                 <LayoutInput>
                   <DockLayoutInput Position="Top"/>
                 </LayoutInput>

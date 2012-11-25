@@ -13,37 +13,41 @@ using Newtonsoft.Json.Linq;
 
 namespace AmazonMCEAddin
 {
+    public struct AmazonRating
+    {
+        public int Count { get; set; }
+
+        public float Rating { get; set; }
+    }
+
     public class VideoItem : ModelItem
     {
         private Command m_Command;
         private string m_Title;
         private string m_Synopsis;
-        private Image m_Image;
-        private string m_Price;
         private string m_ASIN;
+        private AmazonRating amazonRating;
         private string m_RegulatoryRating;
         private string m_runtime;
+        private Format selectedFormat;
+        private string m_firstAiringDate;
         private string m_contentType;
         private string m_ChildTitleQuery;
         private VideoItems m_ChildTitleItems;
 
         public Size size { set; get; }
-        private static string NAMESPACE_PREFIX = "x";
-        private static string CONTENT_SEASON = "SEASON";
-        private static string CONTENT_MOVIE = "MOVIE";
 
         public VideoItem()
         {
         }
+
         //Initializes a new video item with a json node.
         public VideoItem(JObject node)
         {
             m_Command = new Command();
             //try to use HD unless no HD available.
-            int selectedFormat = 0;
-            int hdFormat = -1;
-            int sdFormat = -1;
-            int counter = 0;
+            Format sdFormat = null;
+            Format hdFormat = null;
             //set up default sizes for images
             Size movie_size = new Size(173, 248);
             Size tv_size = new Size(294, 248);
@@ -51,24 +55,41 @@ namespace AmazonMCEAddin
             //not all titles have HD, so we loop through available options and pick HD if we can.
             foreach (JObject format in node["formats"])
             {
-                if ((string)format["videoFormatType"] == "HD") hdFormat = counter;
-                if ((string)format["videoFormatType"] == "SD") sdFormat = counter;
-                counter++;
+                switch ((string)format["videoFormatType"])
+                {
+                    case "HD":
+                        hdFormat = new Format(format);
+                        break;
+                    case "SD":
+                        sdFormat = new Format(format);
+                        break;
+                }
             }
-            selectedFormat = (hdFormat != -1) ? hdFormat : sdFormat;
+            selectedFormat = (hdFormat != null) ? hdFormat : sdFormat;
 
-            string test = node.ToString();
             m_Title = (string)node["title"];
             m_Synopsis = (string)node["synopsis"];
+            amazonRating = new AmazonRating();
+            amazonRating.Count = (int)node["amazonRating"]["count"];
+            amazonRating.Rating = (float)node["amazonRating"]["rating"];
             m_RegulatoryRating = (string)node["regulatoryRating"];
             m_contentType = (string)node["contentType"];
             JObject runtime = (JObject)node["runtime"];
             m_runtime = "";
             if (runtime != null)
             {
-                if(runtime["valueFormatted"] != null)
+                if (runtime["valueFormatted"] != null)
                 {
-                m_runtime = (string)node["runtime"]["valueFormatted"];
+                    m_runtime = (string)node["runtime"]["valueFormatted"];
+                }
+            }
+            JObject releaseOrFirstAiringDate = (JObject)node["releaseOrFirstAiringDate"];
+            m_firstAiringDate = "";
+            if (releaseOrFirstAiringDate != null)
+            {
+                if (releaseOrFirstAiringDate["valueFormatted"] != null)
+                {
+                    m_firstAiringDate = ((DateTime)node["releaseOrFirstAiringDate"]["valueFormatted"]).ToString("MMMM d, yyyy");
                 }
             }
             switch (m_contentType)
@@ -103,11 +124,8 @@ namespace AmazonMCEAddin
             }
 
             m_ASIN = (string)node["titleId"];
-            string m_ImageURL = (string)node["formats"][selectedFormat]["images"][1]["uri"];
-            m_Image = new Image(m_ImageURL);
-            m_Price = "Free!";
-
         }
+
         //When this item is a season, it will have a query property under childtitles
         //we need to be able to bind to this in DisplaySeasons.mcml, so we expose here as a property that is not initialized
         //at the start, but caches if it does get loaded.
@@ -124,12 +142,21 @@ namespace AmazonMCEAddin
             }
         }
         public String Title { get { return m_Title; } }
-        public Image Image { get { return m_Image; } }
-        public String Price { get { return m_Price; } }
+
+        public Format Format { get { return selectedFormat; } }
+
         public String Synopsis { get { return m_Synopsis; } }
+
         public String ASIN { get { return m_ASIN; } }
+
+        public AmazonRating AmazonRating { get { return amazonRating; } }
+
         public String RegulatoryRating { get { return m_RegulatoryRating; } }
+
         public String Runtime { get { return m_runtime; } }
+
+        public String FirstAiringDate { get { return m_firstAiringDate; } }
+
         public String ContentType { get { return m_contentType; } }
 
         //This is used in mcml to get back to the application from the current video item
@@ -148,7 +175,6 @@ namespace AmazonMCEAddin
         //TODO: Move this into Application, and place the stub here to call it from Application.
         public void LaunchVideoViewer()
         {
-
             string flashVars = AmazonVideoRequest.getFlashVars(m_ASIN);
             string htmlexpath = Application.Current.viewerPath + "?ASIN=" + m_ASIN + flashVars;
             Application.Current.MediaCenterEnvironment.NavigateToPage(PageId.ExtensibilityUrl, htmlexpath);
@@ -174,7 +200,5 @@ namespace AmazonMCEAddin
                     break;
             }
         }
-
-
     }
 }

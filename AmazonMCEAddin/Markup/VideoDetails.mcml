@@ -91,7 +91,7 @@
             </Layout>
             <Children>
               <!-- TODO: The max size should not be hardcoded-->
-              <Graphic Name="VideoImage" MaximumSize="0,415" MaintainAspectRatio="true" CenterPointPercent=".5,.5,0" Content="[VideoItem.Image]" Scale="1,1,1" HorizontalAlignment="Center" SizingPolicy="SizeToConstraint">
+              <Graphic Name="VideoImage" MaximumSize="0,415" MaintainAspectRatio="true" CenterPointPercent=".5,.5,0" Content="[VideoItem.Format.CoverArtLarge]" Scale="1,1,1" HorizontalAlignment="Center" SizingPolicy="SizeToConstraint">
                 <LayoutInput>
                   <AnchorLayoutInput Horizontal="Near" Vertical="Near"/>
                 </LayoutInput>
@@ -99,15 +99,29 @@
 
               <Panel Layout="VerticalFlow" Padding="30,0,30,0">
                 <LayoutInput>
-                  <AnchorLayoutInput Horizontal="Far" Vertical="Near" Left="VideoImage,1" Right="VideoImage,3"/>
+                  <AnchorLayoutInput Horizontal="Far" Vertical="Near" Left="VideoImage,1" Right="PlayButton,0"/>
                 </LayoutInput>
                 <Children>
+                  <Panel Layout="HorizontalFlow">
+                    <Children>
+                      <Text Content="[VideoItem.AmazonRating.Rating.ToString]" Color="White" Font="font://styles:Synopsis.Font"/>
+                      <Text Content=" (" Color="White" Font="font://styles:Synopsis.Font"/>
+                      <Text Content="[VideoItem.AmazonRating.Count.ToString]" Color="White" Font="font://styles:Synopsis.Font"/>
+                      <Text Content=")" Color="White" Font="font://styles:Synopsis.Font"/>
+                    </Children>
+                  </Panel>
                   <c:VideoRating Value="[VideoItem.RegulatoryRating]"/>
                   <Text Content="[VideoItem.Synopsis]" Color="White" WordWrap="true" Font="font://styles:Synopsis.Font"/>
                   <Panel Layout="HorizontalFlow">
                     <Children>
                       <Text Content="Runtime: " Color="White" Font="font://styles:Runtime.Font"/>
                       <Text Content="[VideoItem.Runtime]" Color="White" Font="font://styles:Runtime.Value.Font"/>
+                    </Children>
+                  </Panel>
+                  <Panel Layout="HorizontalFlow">
+                    <Children>
+                      <Text Content="Original air date: " Color="White" Font="font://styles:Runtime.Font"/>
+                      <Text Content="[VideoItem.FirstAiringDate]" Color="White" Font="font://styles:Runtime.Value.Font"/>
                     </Children>
                   </Panel>
                 </Children>
