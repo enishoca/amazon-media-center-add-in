@@ -84,7 +84,12 @@
     <Compile Include="Code\BrowserSession.cs" />
     <Compile Include="Code\Category.cs" />
     <Compile Include="Code\CategoryStructureSetup.cs" />
+    <Compile Include="Code\Format.cs" />
     <Compile Include="Code\FormElementCollection.cs" />
+    <Compile Include="Code\IOffer.cs" />
+    <Compile Include="Code\PurchaseOffer.cs" />
+    <Compile Include="Code\RentalOffer.cs" />
+    <Compile Include="Code\SubscriptionOffer.cs" />
     <Compile Include="Code\VideoItems.cs" />
     <Compile Include="Code\Launch.cs" />
     <Compile Include="Code\VideoItem.cs" />
