@@ -8,7 +8,8 @@ namespace AmazonMCEAddin
         SeasonPurchase, 
         Purchase, 
         SeasonRental, 
-        Rental
+        Rental,
+        TvPass
     }
 
     public interface IOffer

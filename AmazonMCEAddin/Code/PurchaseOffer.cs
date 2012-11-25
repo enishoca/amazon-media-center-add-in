@@ -17,10 +17,13 @@ namespace AmazonMCEAddin
         public PurchaseOffer(JObject node)
             : base(node)
         {
-            price = new Price();
-            price.valueLong = (float)node["price"]["valueLong"];
-            price.valueFormatted = (string)node["price"]["valueFormatted"];
-            purchaseButtonText = (string)node["price"]["purchaseButtonText"];
+            if (node["price"] != null)
+            {
+                price = new Price();
+                price.valueLong = (float)node["price"]["valueLong"];
+                price.valueFormatted = (string)node["price"]["valueFormatted"];
+            }
+            purchaseButtonText = (string)node["purchaseButtonText"];
         }
 
         public Price Price { get { return price; } }

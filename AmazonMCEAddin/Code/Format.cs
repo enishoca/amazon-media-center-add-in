@@ -25,6 +25,9 @@ namespace AmazonMCEAddin
         private SubscriptionOffer subscriptionOffer;
         private PurchaseOffer purchaseOffer;
         private RentalOffer rentalOffer;
+        private SeasonPurchaseOffer seasonPurchaseOffer;
+        private SeasonRentalOffer seasonRentalOffer;
+        private TvPassOffer tvPassOffer;
         private float videoAspectRatio;
         private AudioFormatType audioFormatType;
         private bool hasEncode;
@@ -54,12 +57,19 @@ namespace AmazonMCEAddin
                         subscriptionOffer = new SubscriptionOffer(offer);
                         break;
                     case "PURCHASE":
-                    case "SEASON_PURCHASE":
                         purchaseOffer = new PurchaseOffer(offer);
                         break;
                     case "RENTAL":
-                    case "SEASON_RENTAL":
                         rentalOffer = new RentalOffer(offer);
+                        break;
+                    case "SEASON_PURCHASE":
+                        seasonPurchaseOffer = new SeasonPurchaseOffer(offer);
+                        break;
+                    case "SEASON_RENTAL":
+                        seasonRentalOffer = new SeasonRentalOffer(offer);
+                        break;
+                    case "TV_PASS":
+                        tvPassOffer = new TvPassOffer(offer);
                         break;
                 }
             }
@@ -106,6 +116,12 @@ namespace AmazonMCEAddin
         public PurchaseOffer PurchaseOffer { get { return purchaseOffer; } }
 
         public RentalOffer RentalOffer { get { return rentalOffer; } }
+
+        public SeasonPurchaseOffer SeasonPurchaseOffer { get { return seasonPurchaseOffer; } }
+
+        public SeasonRentalOffer SeasonRentalOffer { get { return seasonRentalOffer; } }
+
+        public TvPassOffer TvPassOffer { get { return tvPassOffer; } }
 
         public float VideoAspectRatio { get { return videoAspectRatio; } }
 
