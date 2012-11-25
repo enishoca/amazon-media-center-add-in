@@ -31,6 +31,9 @@ namespace AmazonMCEAddin
                 case "SEASON_RENTAL":
                     offerType = OfferType.SeasonRental;
                     break;
+                case "TV_PASS":
+                    offerType = OfferType.TvPass;
+                    break;
             }
         }
 
