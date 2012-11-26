@@ -85,6 +85,7 @@
     <Compile Include="Code\Category.cs" />
     <Compile Include="Code\CategoryStructureSetup.cs" />
     <Compile Include="Code\Format.cs" />
+    <Compile Include="Code\VideoItemsVirtualList.cs" />
     <Compile Include="Code\FormElementCollection.cs" />
     <Compile Include="Code\IOffer.cs" />
     <Compile Include="Code\PurchaseOffer.cs" />
@@ -201,7 +202,7 @@
   <PropertyGroup>
     <PostBuildEvent>%25windir%25\eHome\McmlVerifier.exe -verbose -assemblyredirect:"$(FullyQualifiedOutputPath)" -directory:"$(ProjectDir)Markup"
 powershell -NoProfile "&amp; '$(ProjectDir)Setup\createregfile.ps1' '$(ProjectDir)Setup\Registration_Template.xml' '$(ProjectDir)Setup\Registration.xml' '$(TargetPath)'
-"$(ProjectDir)Setup\Build.cmd" $(ConfigurationName)</PostBuildEvent>
+rem "$(ProjectDir)Setup\Build.cmd" $(ConfigurationName)</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

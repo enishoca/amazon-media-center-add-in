@@ -166,7 +166,7 @@ namespace AmazonMCEAddin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 000000000000.
+        ///   Looks up a localized string similar to 132000000001.
         /// </summary>
         internal static string DeviceID {
             get {

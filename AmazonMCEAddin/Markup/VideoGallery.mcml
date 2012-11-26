@@ -8,16 +8,23 @@
   <UI Name="VideoGallery">
     <Properties>
       <cor:String Name="Query" cor:String=""/>
+      <a:Category Name="CurrentContext" a:Category="$Required"/>
     </Properties>
     <Locals>
-      <a:VideoItems Name="VideoItems" />
+      <a:VideoItemsVirtualList Name="VideoItems" />
       <ScrollingHandler Name="ScrollingHandler" HandlerStage="Bubbled"/>
       <ScrollingData Name="ScrollingData" BeginPadding="0" EndPadding="0" />
     </Locals>
     <Rules>
+      <Default Target="[VideoItems]" Value="[CurrentContext.Application.getVideoItemsVirtualList]"/>
       <Default Target="[ScrollingHandler.ScrollingData]" Value="[ScrollingData]"/>
       <Default Target="[ScrollingData.Repeater]" Value="[VideoItemRepeater]"/>
-      <Changed Source="[VideoItems.ListContent]">
+      <Changed Source="[Query]">
+        <Actions>
+          <Set Target="[VideoItems]" Value="[CurrentContext.Application.getVideoItemsVirtualList]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[VideoItems]">
         <Actions>
           <Set Target="[ScrollingHandler.ScrollingData]" Value="[ScrollingData]"/>
           <Set Target="[ScrollingData.Repeater]" Value="[VideoItemRepeater]"/>
@@ -29,9 +36,7 @@
       <Binding Target="[ScrollingHandler.ScrollingData]" Source="[ScrollingData]"/>
       <Binding Target="[ScrollingData.Repeater]" Source="[VideoItemRepeater]"/>
 -->
-
-      <Binding Source="[Query]" Target="[VideoItems.Query]"/>
-      <Binding Source="[VideoItems.ListContent.Options]" Target="[VideoItemRepeater.Source]"/>
+      <Binding Source="[VideoItems]" Target="[VideoItemRepeater.Source]"/>
     </Rules>
     <Content>
       <Scroller Orientation="Vertical" FadeSize="15" ScrollingData="[ScrollingData]">

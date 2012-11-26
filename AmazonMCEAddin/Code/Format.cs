@@ -111,6 +111,15 @@ namespace AmazonMCEAddin
             }
         }
 
+        //temp workaround for code merge - this is needed to allow delayed web request for image from virtual list
+        public string CoverArtLargeUri
+        {
+            get
+            {
+                return coverArtLargeUri;
+            }
+        }
+
         public SubscriptionOffer SubscriptionOffer { get { return subscriptionOffer; } }
 
         public PurchaseOffer PurchaseOffer { get { return purchaseOffer; } }

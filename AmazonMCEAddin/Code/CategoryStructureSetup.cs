@@ -32,7 +32,7 @@ namespace AmazonMCEAddin
             JsonTextReader reader = new JsonTextReader(new StringReader(categoryData));
 
             JObject categories = JObject.Parse(categoryData);
-            int catID = 0;
+            //int catID = 0;
 
             //We will only focus on movies at the moment.
             //This is amazon prime movies
@@ -45,7 +45,7 @@ namespace AmazonMCEAddin
 
         private static void recurse(JToken category, Category parent)
         {
-            string browseUrl = AmazonVideoRequest.GenerateBrowseUrlTemplate();
+            string browseUrl = AmazonVideoRequest.GenerateVirtualBrowseUrlTemplate() + "&";
             int index = 0;
             parent.hasChildren = (category["categories"] != null);
             if (parent.hasChildren)

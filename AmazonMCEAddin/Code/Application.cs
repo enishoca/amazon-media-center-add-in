@@ -62,6 +62,17 @@ namespace AmazonMCEAddin
             return Path;
 
         }
+        public VideoItemsVirtualList getVideoItemsVirtualList
+        {
+            get
+            {
+
+                VideoItemsVirtualList vlist = new VideoItemsVirtualList();
+                vlist.Query = Current.CurrentContext.Query;
+                return vlist;
+            }
+        }
+
         private void displayErrorMessageAndQuit(string message)
         {
             //todo: write an error display handler
