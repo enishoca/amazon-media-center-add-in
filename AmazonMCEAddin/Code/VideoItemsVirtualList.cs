@@ -17,7 +17,8 @@ namespace AmazonMCEAddin
     public class VideoItemsVirtualList : VirtualList
     {
         private string m_Query;
-        private int batchSize = 10;
+        
+        private int batchSize = 30;
         private Dictionary<int, object> _pendingItemRequest = new Dictionary<int, object>();
         private Dictionary<int, object> _retrievedItem = new Dictionary<int, object>();
         private const string TempPictureFileExtension = "amzv";
@@ -114,7 +115,7 @@ namespace AmazonMCEAddin
             slowData.Index = index;
 
             //Read the path of the image url from the relevant video item.
-            slowData.PicturePath = ((VideoItem)this[slowData.Index]).ImageUrl;
+            slowData.PicturePath = ((VideoItem)this[slowData.Index]).Format.CoverArtLargeUri;
 
             //schedule this process to run on a worker thread
             Microsoft.MediaCenter.UI.Application.DeferredInvokeOnWorkerThread(GetVideoImage, ProcessSlowData, slowData);
