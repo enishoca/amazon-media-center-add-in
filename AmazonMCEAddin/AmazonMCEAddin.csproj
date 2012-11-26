@@ -202,7 +202,7 @@
   <PropertyGroup>
     <PostBuildEvent>%25windir%25\eHome\McmlVerifier.exe -verbose -assemblyredirect:"$(FullyQualifiedOutputPath)" -directory:"$(ProjectDir)Markup"
 powershell -NoProfile "&amp; '$(ProjectDir)Setup\createregfile.ps1' '$(ProjectDir)Setup\Registration_Template.xml' '$(ProjectDir)Setup\Registration.xml' '$(TargetPath)'
-rem "$(ProjectDir)Setup\Build.cmd" $(ConfigurationName)</PostBuildEvent>
+"$(ProjectDir)Setup\Build.cmd" $(ConfigurationName)</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

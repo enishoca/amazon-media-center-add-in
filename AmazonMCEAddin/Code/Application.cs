@@ -49,7 +49,7 @@ namespace AmazonMCEAddin
             catch(Exception e)
             {
             }
-            if(Path == "")
+            if(Path == null)
                 try
                 {
                     Path = (string)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\" + CompanyName + @"\AmazonMCEAddin", "ViewerPath", "");
