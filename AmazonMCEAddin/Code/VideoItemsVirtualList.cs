@@ -17,32 +17,18 @@ namespace AmazonMCEAddin
     public class VideoItemsVirtualList : VirtualList
     {
         private string m_Query;
+        private int batchSize = 10;
         private Dictionary<int, object> _pendingItemRequest = new Dictionary<int, object>();
+        private Dictionary<int, object> _retrievedItem = new Dictionary<int, object>();
         private const string TempPictureFileExtension = "amzv";
 
         public VideoItemsVirtualList()
         {
+            //this is arbitrary, but the list prevents you from going beyond the end anyway.
             Count = 100000;
             VisualReleaseBehavior = ReleaseBehavior.Dispose;
             EnableSlowDataRequests = true;
         }
-        /// <summary>
-        /// Create a new video item and pass it the relevant info to get the data
-        /// </summary>
-        /// <param name="index">the index of the item being requested</param>
-        /// <param name="callback"></param>
-        protected override void OnRequestItem(int index, ItemRequestCallback callback)
-        {
-            Trace.WriteLine("Making new request for index: " + index.ToString());
-            //Set the query to the right index to start
-            string query = Query + "&StartIndex=" + index.ToString();
-            //When an item is requested, create a placehlder for it.
-            VideoItem v = new VideoItem(this, index, query);
-            //now let the list know
-            callback(this, index, v);
-        }
-
- 
         //The query that is passed is actually a http get query string
         //Changing the query actually forces the query to run - this is usually bound in mcml to the current context's query
         //so that changing the current context changes the query and re-runs the get.
@@ -56,74 +42,144 @@ namespace AmazonMCEAddin
             }
         }
 
+        
         /// <summary>
-        /// 
+        /// Create a new video item and pass it the relevant info to get the data
+        /// </summary>
+        /// <param name="index">the index of the item being requested</param>
+        /// <param name="callback"></param>
+        protected override void OnRequestItem(int index, ItemRequestCallback callback)
+        {
+            //if there is no query, then this is pointless anyway
+            if (Query == "")
+            { return; }
+            
+            //since we are batching up requests, see if this batch has already been requested.
+            //If it hasn't been requested, we need to request the data.
+
+            //if we can't find this item in the retrieved items list, 
+            if(!_retrievedItem.ContainsKey(index))
+            {
+                //figure out the correct batch request and make it
+                int startIndex = (int)Math.Floor((decimal)(index / batchSize)) * batchSize;
+                GetVideoData(Query, startIndex, batchSize);
+            }
+
+            //in theory, we cannot be here without having got data first
+            //so if the 
+            if (_retrievedItem.ContainsKey(index))
+            {
+                //create a new video item
+                VideoItem v = new VideoItem(this, index);
+
+                //get the data from the retrieval and parse
+                v.processNodeData((JObject)_retrievedItem[index]);
+
+                //now free up the memory by removing the retrieved info
+                _retrievedItem.Remove(index);
+
+                //now let the list know
+                callback(this, index, v);
+            }
+        }
+
+ 
+
+        /// <summary>
+        /// This function sets up the background request for the image
         /// </summary>
         /// <param name="index"></param>
         protected override void OnRequestSlowData(int index)
         {
-            Trace.WriteLine("Request for index: " + index.ToString());
+            //if this request has already been made once
             if (_pendingItemRequest.ContainsKey(index))
             {
-                Trace.WriteLine("duplicate request for index: " + index.ToString());
+                //cancel the request
                 return; 
 
             }
+            //If this virtual list does not have a proper query
             if (Query == "")
             {
-                Trace.WriteLine("no query specified");
+                //don't try to get an image
                 return;
             }
+            //add this index to the pendingItemRequest list so that we know this has already been requested
             _pendingItemRequest[index] = index;
+
+            //create a new slowdata Request item.
             SlowDataItem slowData = new SlowDataItem();
+
+            //set the slowdata index to match index requested
             slowData.Index = index;
-            slowData.Query = ((VideoItem)this[slowData.Index]).Query;
-            Microsoft.MediaCenter.UI.Application.DeferredInvokeOnWorkerThread(GetVideoInformation, ProcessSlowData, slowData);
+
+            //Read the path of the image url from the relevant video item.
+            slowData.PicturePath = ((VideoItem)this[slowData.Index]).ImageUrl;
+
+            //schedule this process to run on a worker thread
+            Microsoft.MediaCenter.UI.Application.DeferredInvokeOnWorkerThread(GetVideoImage, ProcessSlowData, slowData);
         }
 
 
-        private static void GetVideoInformation(object args)
+        /// <summary>
+        /// This function makes a web request for the data, and stores it in the requestedItem dictionary, 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="startIndex"></param>
+        /// <param name="batchSize"></param>
+        private void GetVideoData(string query, int startIndex, int batchSize)
         {
-            //
-            // Heavy operation: Build our randomly-generated snow flake image.
-            //
+            //need to batch up the data requests and get e.g. 10 at a time
+            
 
+            //First go get the actual data
+            AmazonRequester req = new AmazonRequester();
+            //string query = Query + "&StartIndex=" + index.ToString();
+            string currentQuery = Query.Replace("HideNum=T", "HideNum=F");
+            currentQuery += "&NumberOfResults=" + batchSize + "&StartIndex=" + startIndex;
+            string data = req.ExecuteQuery(currentQuery);
+
+            //now create a json parser and read in the data
+            JsonTextReader reader = new JsonTextReader(new StringReader(data));
+            JObject results = JObject.Parse(data);
+
+            //set a counter
+            int currentIndex = startIndex;
+
+            //loop through the titles, and pass the content to relevant video item
+            foreach (JObject node in results["message"]["body"]["titles"])
+            {
+                //store the relevant data as a node in retrieved items - they will then be pulled
+                //by the next OnRequestItem and removed from _retrievedItem
+                _retrievedItem[currentIndex] = node;
+                currentIndex++;
+            }
+        }
+        /// <summary>
+        /// This function goes and gets the image
+        /// </summary>
+        /// <param name="args"></param>
+        private static void GetVideoImage(object args)
+        {
+            // Heavy operation: get video information from amazon.
             ThreadPriority priority = Thread.CurrentThread.Priority;
             try
             {
                 Thread.CurrentThread.Priority = ThreadPriority.Lowest;
 
                 SlowDataItem slowData = (SlowDataItem)args;
-
-                if (slowData.Query == "")
-                {
-                    Trace.WriteLine("We should never get here");
-                    return;
-                }
-                Trace.WriteLine("Getting video information for index: " + slowData.Index.ToString());
-
-                //string data = AmazonVideoRequest.ExecuteQuery(slowData.Query);
-                AmazonRequester req = new AmazonRequester();
-                string data = req.ExecuteQuery(slowData.Query);
-                //req.dispose();
-
-                JsonTextReader reader = new JsonTextReader(new StringReader(data));
-
-                JObject results = JObject.Parse(data);
-                //need to check that we got a valid result
+                if (slowData.PicturePath == "")
+                { return; }
                 try
                 {
-
-                    slowData.Node = (JObject)results["message"]["body"]["titles"][0];
-                    slowData.PicturePath = (string)slowData.Node["formats"][0]["images"][1]["uri"];
+                    
+                    //actually go and get the image.
                     slowData.TitleImage = new Image(slowData.PicturePath);
                 }
                 catch (Exception e)
                 {
                     //not sure what we can do in this case
                 }
-                //get image
-
             }
             finally
             {
@@ -131,47 +187,24 @@ namespace AmazonMCEAddin
             }
         }
 
+        /// <summary>
+        /// This function updates the relevant video item with the retrieved image.
+        /// </summary>
+        /// <param name="args"></param>
         private void ProcessSlowData(object args)
         {
             SlowDataItem slowData = (SlowDataItem)args;
 
-            //
-            // Remove tracking for pending picture acquires.
-            //
 
             _pendingItemRequest.Remove(slowData.Index);
 
-
-            //
-            // If the VirtualList has been disposed before this callback is received,
-            // or if the data item specified by the index has been thrown away, then
-            // clean up the picture file.
-            //
-            // Note that we need to check IsItemAvailable() instead of just calling
-            // the indexer and checking for null.  This is because doing that query 
-            // can cause the item to be faulted in after it'd already been thrown 
-            // away due to going offscreen.
-            //
-
             if (IsDisposed || !IsItemAvailable(slowData.Index))
             {
-                //if (result.PicturePath != null)
-                //{
-                //    File.Delete(result.PicturePath);
-                //}
-
                 return;
             }
-
-            if (slowData.Query == "")
-            {
-                Trace.WriteLine("We should also never get here");
-                return;
-            }
+            //go and get the relevant video item
             VideoItem v = (VideoItem)this[slowData.Index];
-            Trace.WriteLine("About to write data for video item - current title: " + v.Title);
-            v.processNodeData(slowData.Node);
-            Trace.WriteLine("Processing returned data for index: " + slowData.Index.ToString() + ", Title: " + v.Title);
+            //set the image to be the retrieved image
             v.Image = slowData.TitleImage;
         }
         
@@ -182,8 +215,6 @@ namespace AmazonMCEAddin
         private class SlowDataItem
         {
             public int Index;
-            public string Query = "";
-            public JObject Node;
             public Image TitleImage;
             public string PicturePath = "";
         }

@@ -5,7 +5,6 @@ using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.IO;
-using System.Linq;
 
 namespace AmazonMCEAddin
 {
@@ -33,7 +32,7 @@ namespace AmazonMCEAddin
             JsonTextReader reader = new JsonTextReader(new StringReader(categoryData));
 
             JObject categories = JObject.Parse(categoryData);
-            int catID = 0;
+            //int catID = 0;
 
             //We will only focus on movies at the moment.
             //This is amazon prime movies

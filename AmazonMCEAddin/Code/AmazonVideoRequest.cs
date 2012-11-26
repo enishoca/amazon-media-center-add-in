@@ -299,7 +299,7 @@ namespace AmazonMCEAddin
             Stream data = client.OpenRead(url);
             StreamReader reader = new StreamReader(data);
             string tmp = reader.ReadToEnd();
-            Trace.WriteLine("********Query: " + url + "\r\n***********" + tmp);
+            //Trace.WriteLine("********Query: " + url + "\r\n***********" + tmp);
             return tmp;
         }
 
