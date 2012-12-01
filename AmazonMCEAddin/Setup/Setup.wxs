@@ -10,7 +10,6 @@
 
 <!-- These variables define the Windows Installer product version, product code and upgrade code. They   -->
 <!-- will be used later on in this file.                                                                 -->
-<?define Property_ProductVersion = "1.0.0.0" ?>
 <?define Property_ProductCode = "588fcf00-cb07-47f3-ad5a-3a33235a1efd" ?>
 <?define Property_UpgradeCode = "195f9245-a9f2-42f6-b649-a3b04610ef8f" ?>
 
@@ -19,7 +18,7 @@
            UpgradeCode="$(var.Property_UpgradeCode)"
            Name="!(loc.Property_ProductName)"
            Language="!(loc.Property_ProductLanguage)"
-           Version="$(var.Property_ProductVersion)"
+           Version="!(bind.FileVersion.AmazonMCEAddin.dll)"
            Manufacturer="!(loc.Property_CompanyName)">
 
     <Package Description="!(loc.Package_Description)"
@@ -32,12 +31,12 @@
     <!-- the scenes. See the following topic in the MSDN Library for additional information:             -->
     <!-- http://msdn.microsoft.com/library/default.asp?url=/library/en-us/msi/setup/major_upgrades.asp   -->
     <Upgrade Id="$(var.Property_UpgradeCode)">
-      <UpgradeVersion Minimum="$(var.Property_ProductVersion)"
+      <UpgradeVersion Minimum="!(bind.FileVersion.AmazonMCEAddin.dll)"
                       OnlyDetect="yes"
                       Property="NEWERVERSIONDETECTED" />
       <UpgradeVersion Minimum="0.0.0.0"
                       IncludeMinimum="yes"
-                      Maximum="$(var.Property_ProductVersion)"
+                      Maximum="!(bind.FileVersion.AmazonMCEAddin.dll)"
                       IncludeMaximum="no"
                       Property="OLDERVERSIONBEINGUPGRADED" />
     </Upgrade>
