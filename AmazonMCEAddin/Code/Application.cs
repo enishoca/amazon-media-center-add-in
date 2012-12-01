@@ -36,6 +36,7 @@ namespace AmazonMCEAddin
         }
         public void initializeApplication()
         {
+            //store the path to the viewer in the global variable
             viewerPath = getViewerPath();
         }
         //work around to get reg key from 32-bit location due to installer being 32-bit.

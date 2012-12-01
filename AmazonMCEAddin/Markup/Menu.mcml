@@ -10,6 +10,7 @@
     </Properties>
     <Locals>
       <cor:String Name="Title" cor:String="[Application.CurrentContext.Name]"/>
+      <cor:Boolean Name="Initialized" Boolean="false"/>
       <ScrollingHandler Name="MIScrollingHandler" HandlerStage="Bubbled"/>
       <ScrollingData Name="MIScrollingData" BeginPadding="0" EndPadding="0" />
       <Command Name="Logout"/>
@@ -17,6 +18,20 @@
       <ShortcutHandler Name="MoveBackRemoteHandler" Shortcut="Back" Handle="true" HandlerStage="Routed"/>
     </Locals>
     <Rules>
+      <Rule>
+        <Conditions>
+          <Equality Source="[Initialized]"
+                    Value="false"/>
+          <IsValid Source="[Application.MediaCenterEnvironment.MediaExperience.Transport.PlayRate]"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[Application.MediaCenterEnvironment.MediaExperience.Transport.PlayRate]"
+               Value="0"/>
+          <Set Target="[Initialized]"
+               Value="true"/>
+        </Actions>
+      </Rule>
+
       <Default Target="[MIScrollingHandler.ScrollingData]" Value="[MIScrollingData]"/>
       <Default Target="[MIScrollingData.Repeater]" Value="[CategoryRepeater]"/>
       <Default Target="[BodyVideoGallery.Visible]" Value="true">
