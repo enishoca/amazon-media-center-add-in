@@ -114,6 +114,18 @@
                   <Text Content="[VideoItem.Synopsis]" Color="White" WordWrap="true" Font="font://styles:Synopsis.Font"/>
                   <Panel Layout="HorizontalFlow">
                     <Children>
+                      <Text Content="Starring: " Color="White" Font="font://styles:Runtime.Font"/>
+                      <Text Content="[VideoItem.StarringCast]" Color="White" Font="font://styles:Runtime.Value.Font"/>
+                    </Children>
+                  </Panel>
+                  <Panel Layout="HorizontalFlow">
+                    <Children>
+                      <Text Content="Directed by: " Color="White" Font="font://styles:Runtime.Font"/>
+                      <Text Content="[VideoItem.Director]" Color="White" Font="font://styles:Runtime.Value.Font"/>
+                    </Children>
+                  </Panel>
+                  <Panel Layout="HorizontalFlow">
+                    <Children>
                       <Text Content="Runtime: " Color="White" Font="font://styles:Runtime.Font"/>
                       <Text Content="[VideoItem.Runtime]" Color="White" Font="font://styles:Runtime.Value.Font"/>
                     </Children>
@@ -122,6 +134,12 @@
                     <Children>
                       <Text Content="Original air date: " Color="White" Font="font://styles:Runtime.Font"/>
                       <Text Content="[VideoItem.FirstAiringDate]" Color="White" Font="font://styles:Runtime.Value.Font"/>
+                    </Children>
+                  </Panel>
+                  <Panel Layout="HorizontalFlow">
+                    <Children>
+                      <Text Content="Studio: " Color="White" Font="font://styles:Runtime.Font"/>
+                      <Text Content="[VideoItem.StudioOrNetwork]" Color="White" Font="font://styles:Runtime.Value.Font"/>
                     </Children>
                   </Panel>
                 </Children>
