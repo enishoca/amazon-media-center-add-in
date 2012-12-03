@@ -99,7 +99,7 @@
 
               <Panel Layout="VerticalFlow" Padding="30,0,30,0">
                 <LayoutInput>
-                  <AnchorLayoutInput Horizontal="Far" Vertical="Near" Left="VideoImage,1" Right="PlayButton,0"/>
+                  <AnchorLayoutInput Horizontal="Near" Vertical="Near" Left="VideoImage,1" Right="PlayButton,0"/>
                 </LayoutInput>
                 <Children>
                   <Panel Layout="HorizontalFlow">
