@@ -110,8 +110,18 @@
                       <Text Content=")" Color="White" Font="font://styles:Synopsis.Font"/>
                     </Children>
                   </Panel>
-                  <c:VideoRating Value="[VideoItem.RegulatoryRating]"/>
-                  <Text Content="[VideoItem.Synopsis]" Color="White" WordWrap="true" Font="font://styles:Synopsis.Font"/>
+                  <Panel Padding="0,0,0,5">
+                    <Layout>
+                      <FlowLayout Orientation="Horizontal" ItemAlignment="Center"/>
+                    </Layout>                    
+                    <Children>
+                      <c:VideoRating Value="[VideoItem.RegulatoryRating]" Padding="0,0,10,0"/>
+                      <Text Content="[VideoItem.FirstAiringYear]" Color="White" WordWrap="true" Font="font://styles:Synopsis.Font"/>
+                      <Text Content="|" Color="White" WordWrap="true" Font="font://styles:Synopsis.Font"/>
+                      <Text Content="[VideoItem.Genres]" Color="White" WordWrap="true" Font="font://styles:Synopsis.Font"/>
+                    </Children>
+                  </Panel>                  
+                  <Text Content="[VideoItem.Synopsis]" Color="White" WordWrap="true" Font="font://styles:Synopsis.Font" Padding="0,0,0,5"/>
                   <Panel Layout="HorizontalFlow">
                     <Children>
                       <Text Content="Starring: " Color="White" Font="font://styles:Runtime.Font"/>
