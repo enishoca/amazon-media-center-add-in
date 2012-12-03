@@ -32,13 +32,14 @@ namespace AmazonMCEAddin
         private string m_Price;
         private string m_ASIN;
         private AmazonRating amazonRating;
+        private string m_Genres;
         private string m_RegulatoryRating;
         private string m_Director;
         private string m_StarringCast;
         private string m_StudioOrNetwork;
         private string m_runtime;
         private Format selectedFormat;
-        private string m_firstAiringDate;
+        private DateTime m_firstAiringDate;
         private string m_contentType;
         private string m_ChildTitleQuery;
         private VideoItems m_ChildTitleItems;
@@ -121,12 +122,11 @@ namespace AmazonMCEAddin
                 }
             }
             JObject releaseOrFirstAiringDate = (JObject)node["releaseOrFirstAiringDate"];
-            m_firstAiringDate = "";
             if (releaseOrFirstAiringDate != null)
             {
                 if (releaseOrFirstAiringDate["valueFormatted"] != null)
                 {
-                    m_firstAiringDate = ((DateTime)node["releaseOrFirstAiringDate"]["valueFormatted"]).ToString("MMMM d, yyyy");
+                    m_firstAiringDate = (DateTime)node["releaseOrFirstAiringDate"]["valueFormatted"];
                 }
             }
             switch (m_contentType)
@@ -173,6 +173,16 @@ namespace AmazonMCEAddin
 
         public void processDetailData(JObject node)
         {
+            Debug.Print(node.ToString());
+            m_Genres = "";
+            foreach (JValue genre in node["genres"])
+            {
+                if (m_Genres.Length > 0)
+                {
+                    m_Genres += ", ";
+                }
+                m_Genres += (string)genre;
+            }
             m_Director = node["director"] != null ? (string)node["director"] : "";
             m_StarringCast = node["starringCast"] != null ? (string)node["starringCast"] : "";
             m_StudioOrNetwork = node["studioOrNetwork"] != null ? (string)node["studioOrNetwork"] : "";
@@ -222,6 +232,8 @@ namespace AmazonMCEAddin
 
         public AmazonRating AmazonRating { get { return amazonRating; } }
 
+        public String Genres { get { return m_Genres; } }
+
         public String RegulatoryRating { get { return m_RegulatoryRating; } }
 
         public String Director { get { return m_Director; } }
@@ -232,7 +244,9 @@ namespace AmazonMCEAddin
 
         public String Runtime { get { return m_runtime; } }
 
-        public String FirstAiringDate { get { return m_firstAiringDate; } }
+        public String FirstAiringYear { get { return m_firstAiringDate.ToString("yyyy"); } }
+
+        public String FirstAiringDate { get { return m_firstAiringDate.ToString("MMMM d, yyyy"); } }
 
         public String ContentType { get { return m_contentType; } }
 
