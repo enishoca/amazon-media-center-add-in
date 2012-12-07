@@ -39,7 +39,7 @@
             <Children>
               <Panel MaximumSize="[VideoItem.size]">
                 <Children>
-                  <Graphic Name="VideoImage" CenterPointPercent=".5,.5,0" Content="[VideoItem.Format.CoverArtLarge]" Scale="1,1,1" HorizontalAlignment="Center"  SizingPolicy="SizeToConstraint"/>
+                  <Graphic Name="VideoImage" CenterPointPercent=".5,.5,0" Content="[VideoItem.Format.CoverArtLarge]" Scale="1,1,1" MaintainAspectRatio="true" SizingPolicy="SizeToConstraint"/>
                 </Children>
               </Panel>
             </Children>

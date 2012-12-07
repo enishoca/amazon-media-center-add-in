@@ -87,8 +87,8 @@ namespace AmazonMCEAddin
             Format sdFormat = null;
             Format hdFormat = null;
             //set up default sizes for images
-            Size movie_size = new Size(173, 248);
-            Size tv_size = new Size(294, 248);
+            Size movie_size = new Size(188, 250);
+            Size tv_size = new Size(334, 250);
             
             //not all titles have HD, so we loop through available options and pick HD if we can.
             foreach (JObject format in node["formats"])
