@@ -91,7 +91,7 @@
             </Layout>
             <Children>
               <!-- TODO: The max size should not be hardcoded-->
-              <Graphic Name="VideoImage" MaximumSize="0,415" MaintainAspectRatio="true" CenterPointPercent=".5,.5,0" Content="[VideoItem.Format.CoverArtLarge]" Scale="1,1,1" HorizontalAlignment="Center" SizingPolicy="SizeToConstraint">
+              <Graphic Name="VideoImage" MaintainAspectRatio="true" Scale=".75,.75,0" Content="[VideoItem.Format.CoverArtLarge]" SizingPolicy="SizeToContent" HorizontalAlignment="Center">
                 <LayoutInput>
                   <AnchorLayoutInput Horizontal="Near" Vertical="Near"/>
                 </LayoutInput>
@@ -99,7 +99,7 @@
 
               <Panel Layout="VerticalFlow" Padding="30,0,30,0">
                 <LayoutInput>
-                  <AnchorLayoutInput Horizontal="Near" Vertical="Near" Left="VideoImage,1" Right="PlayButton,0"/>
+                  <AnchorLayoutInput Horizontal="Near" Vertical="Near" Left="VideoImage,.75" Right="PlayButton,0"/>
                 </LayoutInput>
                 <Children>
                   <Panel Layout="HorizontalFlow">
