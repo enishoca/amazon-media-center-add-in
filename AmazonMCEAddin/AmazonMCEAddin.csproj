@@ -151,8 +151,12 @@
     <None Include="Markup\VideoDetails.mcml">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Markup\VideoGallery.mcml" />
-    <None Include="Markup\VideoTitle.mcml" />
+    <None Include="Markup\VideoGallery.mcml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Markup\VideoTitle.mcml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Setup\Build.cmd" />
     <None Include="Setup\License.rtf" />
@@ -174,6 +178,8 @@
     <Content Include="Images\RATED_NC-17.png" />
     <Content Include="Images\RATED_PG-13.png" />
     <Content Include="Images\amazon-instant-video.png" />
+    <Content Include="Images\stars-full.png" />
+    <Content Include="Images\stars-half.png" />
     <Content Include="Images\TV_14.png" />
     <Content Include="Images\TV_G.png" />
     <Content Include="Images\TV_MA.png" />

@@ -32,6 +32,9 @@ namespace AmazonMCEAddin
         private string m_Price;
         private string m_ASIN;
         private AmazonRating amazonRating;
+        private Image starsRatingImage;
+        private static Image starsFullImage = new Image("resx://AmazonMCEAddin/AmazonMCEAddin.Resources/stars_full");
+        private static Image starsHalfImage = new Image("resx://AmazonMCEAddin/AmazonMCEAddin.Resources/stars_half");
         private string m_Genres;
         private string m_RegulatoryRating;
         private string m_Director;
@@ -110,6 +113,7 @@ namespace AmazonMCEAddin
             amazonRating = new AmazonRating();
             amazonRating.Count = (int)node["amazonRating"]["count"];
             amazonRating.Rating = (float)node["amazonRating"]["rating"];
+            starsRatingImage = (amazonRating.Rating % 1 == 0) ? starsFullImage : starsHalfImage;
             m_RegulatoryRating = (string)node["regulatoryRating"];
             m_contentType = (string)node["contentType"];
             JObject runtime = (JObject)node["runtime"];
@@ -231,6 +235,14 @@ namespace AmazonMCEAddin
         public String ASIN { get { return m_ASIN; } }
 
         public AmazonRating AmazonRating { get { return amazonRating; } }
+
+        public Image StarsRatingImage { get { return starsRatingImage; } }
+
+        public float StarsRatingImageStartOffset { get { return (5 - (float)Math.Ceiling(amazonRating.Rating)) * 26; } }
+
+        public float StarsRatingImageEndOffset { get { return -(float)Math.Ceiling(amazonRating.Rating) * 26; } }
+
+        public Inset StarsRatingImageMargin { get { return new Inset(-(int)((5 - (float)Math.Ceiling(amazonRating.Rating)) * 26), 0, -(int)Math.Ceiling(amazonRating.Rating) * 26, 0); } }
 
         public String Genres { get { return m_Genres; } }
 
