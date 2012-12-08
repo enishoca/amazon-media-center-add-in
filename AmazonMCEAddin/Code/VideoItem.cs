@@ -256,9 +256,9 @@ namespace AmazonMCEAddin
 
         public String Runtime { get { return m_runtime; } }
 
-        public String FirstAiringYear { get { return m_firstAiringDate.ToString("yyyy"); } }
+        public String FirstAiringYear { get { return (m_firstAiringDate.Equals(DateTime.MinValue)) ? "" : m_firstAiringDate.ToString("yyyy"); } }
 
-        public String FirstAiringDate { get { return m_firstAiringDate.ToString("MMMM d, yyyy"); } }
+        public String FirstAiringDate { get { return (m_firstAiringDate.Equals(DateTime.MinValue)) ? "" : m_firstAiringDate.ToString("MMMM d, yyyy"); } }
 
         public String ContentType { get { return m_contentType; } }
 
