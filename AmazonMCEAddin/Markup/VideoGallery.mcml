@@ -28,6 +28,7 @@
         <Actions>
           <Set Target="[ScrollingHandler.ScrollingData]" Value="[ScrollingData]"/>
           <Set Target="[ScrollingData.Repeater]" Value="[VideoItemRepeater]"/>
+          <Invoke Target="[ScrollingData.Home]"/>
         </Actions>
       </Changed>
 
