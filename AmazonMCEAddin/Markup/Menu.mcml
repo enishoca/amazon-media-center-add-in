@@ -18,6 +18,7 @@
       <ShortcutHandler Name="MoveBackRemoteHandler" Shortcut="Back" Handle="true" HandlerStage="Routed"/>
     </Locals>
     <Rules>
+      <!--Stop video playback if there is something currently playing-->
       <Rule>
         <Conditions>
           <Equality Source="[Initialized]"
@@ -31,9 +32,11 @@
                Value="true"/>
         </Actions>
       </Rule>
-
+      <!--link up the repeater and scrolling data-->
       <Default Target="[MIScrollingHandler.ScrollingData]" Value="[MIScrollingData]"/>
       <Default Target="[MIScrollingData.Repeater]" Value="[CategoryRepeater]"/>
+      
+      <!--Set up the intial view.  This is also useful for when returning to a page from a subpage-->
       <Default Target="[BodyVideoGallery.Visible]" Value="true">
         <Conditions>
           <Equality Source="[Application.CurrentContext.hasChildren]" ConditionOp="Equals" Value="false"/>
@@ -42,6 +45,11 @@
       <Default Target="[BodyCategoryGallery.Visible]" Value="true">
         <Conditions>
           <Equality Source="[Application.CurrentContext.hasChildren]" ConditionOp="Equals" Value="true"/>
+        </Conditions>
+      </Default>
+      <Default Target="[BodySearch.Visible]" Value="true">
+        <Conditions>
+          <Equality Source="[Application.CurrentContext.Name]" ConditionOp="Equals" Value="Search"/>
         </Conditions>
       </Default>
       <Changed Source="[MoveBackRemoteHandler.Invoked]">
@@ -86,8 +94,10 @@
           <Set Target="[BodyCategoryGallery.Visible]" Value="false"/>
           <Set Target="[BodyVideoGallery.Visible]" Value="true"/>
           <Set Target="[BodySearch.Visible]" Value="true"/>
+          <Set Target="[SearchBox.SearchText]" Value="[Application.GlobalSearchString]"/>
         </Actions>
       </Changed>
+      <Binding Source="[SearchBox.SearchText]" Target="[Application.GlobalSearchString]"/>
       <Binding Source="[Application.FooterLine1]" Target="[FooterTextLine1.Content]"/>
       <Binding Source="[Application.FooterLine2]" Target="[FooterTextLine2.Content]"/>
       <Binding Source="[Application.CurrentContext]" Target="[CategoryGallery.CurrentContext]"/>
@@ -145,7 +155,7 @@
             <Children>
               <Panel Visible="false" Name="BodySearch">
                 <Children>
-                  <c:SearchBox Name="SearchBox" Model="[Search]">
+                  <c:SearchBox Name="SearchBox" Model="[Search]" SearchText="[Application.GlobalSearchString]">
                     <LayoutInput>
                       <FormLayoutInput Left="Parent,0" Top="Parent,0" Right="Parent,1"/>
                     </LayoutInput>

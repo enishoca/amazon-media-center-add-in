@@ -16,6 +16,10 @@ namespace AmazonMCEAddin
         private AddInHost host;
         private HistoryOrientedPageSession session;
         private Category currentContext;
+
+        //Added global search string to allow us to come back from video detail to same search as before.
+        public string GlobalSearchString { get; set; }
+
         public int MinimumSearchTextLength { get; set; }
         public string viewerPath;
         public string m_FooterLine1;
@@ -27,6 +31,8 @@ namespace AmazonMCEAddin
             : this(null, null)
         {
         }
+
+ 
 
         public Application(HistoryOrientedPageSession session, AddInHost host)
         {

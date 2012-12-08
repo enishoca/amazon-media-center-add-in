@@ -25,6 +25,7 @@
       <TypingHandler Name="TypingHandler" EditableText="[EditableText]" PasswordMasked="[PasswordMasked]" MaxLength="300" TypingPolicy="Default"/>
       <addin:AddInHost Name="AddInHost"/>
       <ClickHandler Name="Clicker" HandleEnterSpaceKeys="true" HandlePrimaryMouseButton="true"/>
+      <ShortcutHandler Name="MoveBackRemoteHandler" Shortcut="Back" Handle="true" HandlerStage="Routed"/>
     </Locals>
 
     <Rules>
