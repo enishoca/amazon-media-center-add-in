@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using Microsoft.MediaCenter;
 using Microsoft.MediaCenter.Hosting;
@@ -31,10 +32,14 @@ namespace AmazonMCEAddin
         private string m_Price;
         private string m_ASIN;
         private AmazonRating amazonRating;
+        private string m_Genres;
         private string m_RegulatoryRating;
+        private string m_Director;
+        private string m_StarringCast;
+        private string m_StudioOrNetwork;
         private string m_runtime;
         private Format selectedFormat;
-        private string m_firstAiringDate;
+        private DateTime m_firstAiringDate;
         private string m_contentType;
         private string m_ChildTitleQuery;
         private VideoItems m_ChildTitleItems;
@@ -49,8 +54,7 @@ namespace AmazonMCEAddin
         /// <param name="vlist"></param>
         /// <param name="Index"></param>
         public VideoItem(IModelItemOwner owner, int Index)
-            :
-            base(owner)
+            : base(owner)        
         {
             m_ItemIndex = Index;
         }
@@ -73,16 +77,18 @@ namespace AmazonMCEAddin
         {
             processNodeData(node);
         }
+
         public void processNodeData(JObject node)
-        {
+        {            
+            //Debug.Print(node.ToString());
+
             m_Command = new Command();
             //try to use HD unless no HD available.
             Format sdFormat = null;
             Format hdFormat = null;
             //set up default sizes for images
-            Size movie_size = new Size(173, 248);
-            Size tv_size = new Size(294, 248);
-
+            Size movie_size = new Size(188, 250);
+            Size tv_size = new Size(334, 250);
             
             //not all titles have HD, so we loop through available options and pick HD if we can.
             foreach (JObject format in node["formats"])
@@ -99,10 +105,7 @@ namespace AmazonMCEAddin
             }
             selectedFormat = (hdFormat != null) ? hdFormat : sdFormat;
 
-
             m_Title = (string)node["title"];
-
-            //m_Title = (string)node["title"];
             m_Synopsis = (string)node["synopsis"];
             amazonRating = new AmazonRating();
             amazonRating.Count = (int)node["amazonRating"]["count"];
@@ -119,12 +122,11 @@ namespace AmazonMCEAddin
                 }
             }
             JObject releaseOrFirstAiringDate = (JObject)node["releaseOrFirstAiringDate"];
-            m_firstAiringDate = "";
             if (releaseOrFirstAiringDate != null)
             {
                 if (releaseOrFirstAiringDate["valueFormatted"] != null)
                 {
-                    m_firstAiringDate = ((DateTime)node["releaseOrFirstAiringDate"]["valueFormatted"]).ToString("MMMM d, yyyy");
+                    m_firstAiringDate = (DateTime)node["releaseOrFirstAiringDate"]["valueFormatted"];
                 }
             }
             switch (m_contentType)
@@ -166,8 +168,26 @@ namespace AmazonMCEAddin
             m_Price = "Free!";
             FirePropertyChanged("size");
             FirePropertyChanged("Title");
-            FirePropertyChanged("Synopsis"); 
+            FirePropertyChanged("Synopsis");
         }
+
+        public void processDetailData(JObject node)
+        {
+            Debug.Print(node.ToString());
+            m_Genres = "";
+            foreach (JValue genre in node["genres"])
+            {
+                if (m_Genres.Length > 0)
+                {
+                    m_Genres += ", ";
+                }
+                m_Genres += (string)genre;
+            }
+            m_Director = node["director"] != null ? (string)node["director"] : "";
+            m_StarringCast = node["starringCast"] != null ? (string)node["starringCast"] : "";
+            m_StudioOrNetwork = node["studioOrNetwork"] != null ? (string)node["studioOrNetwork"] : "";
+        }
+
         public string Query
         {
             get
@@ -195,22 +215,38 @@ namespace AmazonMCEAddin
                 return m_ChildTitleItems;
             }
         }
+
         public String Title { get { return m_Title; } }
+
         public Format Format { get { return selectedFormat; } }
+
         public Image Image { get { return m_Image; } set { m_Image = value; FirePropertyChanged("Image"); } }
+
         //public string ImageUrl { get { return m_ImageUrl; } }
+
         public String Price { get { return m_Price; } }
+
         public String Synopsis { get { return m_Synopsis; } }
 
         public String ASIN { get { return m_ASIN; } }
 
         public AmazonRating AmazonRating { get { return amazonRating; } }
 
+        public String Genres { get { return m_Genres; } }
+
         public String RegulatoryRating { get { return m_RegulatoryRating; } }
+
+        public String Director { get { return m_Director; } }
+
+        public String StarringCast { get { return m_StarringCast; } }
+
+        public String StudioOrNetwork { get { return m_StudioOrNetwork; } }
 
         public String Runtime { get { return m_runtime; } }
 
-        public String FirstAiringDate { get { return m_firstAiringDate; } }
+        public String FirstAiringYear { get { return m_firstAiringDate.ToString("yyyy"); } }
+
+        public String FirstAiringDate { get { return m_firstAiringDate.ToString("MMMM d, yyyy"); } }
 
         public String ContentType { get { return m_contentType; } }
 
@@ -239,6 +275,11 @@ namespace AmazonMCEAddin
         //It generally just goes to VideoDetails unless it is a season.
         public void ViewDetails()
         {
+            // Request additional metadata and process
+            string detailData = AmazonVideoRequest.getVideoDetails(m_ASIN);
+            JObject detailResults = JObject.Parse(detailData);
+            processDetailData((JObject)detailResults["message"]["body"]["titles"][0]);
+
             switch (m_contentType)
             {
                 case "MOVIE":
