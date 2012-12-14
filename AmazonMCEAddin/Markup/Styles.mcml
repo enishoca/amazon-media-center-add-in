@@ -1,6 +1,11 @@
 <Mcml xmlns="http://schemas.microsoft.com/2008/mcml"
       xmlns:cor="assembly://MSCorLib/System">
-    
+
+  <!-- Images -->
+  <Image Name="Background" Source="http://g-ecx.images-amazon.com/images/G/01/AIV/ps3/v1.2.1-1mtsp/assets/bg.jpg"/>
+  <Image Name="Tile.1x1" Source="http://g-ecx.images-amazon.com/images/G/01/AIV/ps3/v1.2.1-1mtsp/assets/home/tile-1x1.png"/>
+  
+  <!-- Colors -->
   <Color Name="Panel.Background" Color="75,75,75"/>
 
   <Color Name="Button.Background" Color="61,59,62"/>
