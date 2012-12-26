@@ -6,7 +6,7 @@
   <UI Name="CategoryBox">
     <Properties>
       <a:Category Name="Category" a:Category="$Required"/>
-      <Size Name="UnitSize" Size="250,250"/>
+      <Size Name="UnitSize" Size="230,230"/>
     </Properties>
     
     <Locals>
@@ -18,7 +18,6 @@
       <Condition Source="[Input.KeyFocus]" SourceValue="true">
         <Actions>
           <Set Target="[CategoryBorder.Content]" Value="color://styles:CategoryBox.Border.Highlight"/>
-          <Set Target="[TextTitle.Color]" Value="color://styles:CategoryBox.Text.Highlight"/>
           <Set Target="[Category.Application.FooterLine1]" Value="[Category.Name]"/>
           <Set Target="[Category.Application.FooterLine2]" Value="[Category.CatDescription]"/>
           <Set Target="[Category.Application.CurrentContext.ListContent.ChosenIndex]" Value="[Category.Index]"/>
@@ -32,15 +31,19 @@
     </Rules>
 
     <Content>
-      <ColorFill Name="CategoryBorder" Content="color://styles:CategoryBox.Border" Padding="3,3,3,3" MinimumSize="[UnitSize]" MaximumSize="[UnitSize]" >
+      <ColorFill Name="CategoryBorder" Content="Transparent" MinimumSize="[UnitSize]" MaximumSize="[UnitSize]">
         <Children>
-          <Graphic Name="CategoryPanel" Content="image://styles:Tile.1x1" Padding="20,20,20,20" Layout="Dock">
+          <Graphic Name="CategoryPanel" Content="image://styles:Tile.1x1">
             <Children>
-              <Text Name="TextTitle" HorizontalAlignment="Far" Content="[Category.Name]" Color="color://styles:CategoryBox.Text" WordWrap="true" Font="font://styles:CategoryBox.Font" >
-                <LayoutInput>
-                  <DockLayoutInput Position="Bottom"/>
-                </LayoutInput>
-              </Text>
+              <Graphic Content="[Category.Image]" Margins="6,4,6,8" Layout="Dock">
+                <Children>
+                  <Text Name="TextTitle" HorizontalAlignment="Near" Content="[Category.Name]" Color="color://styles:CategoryBox.Text" WordWrap="true" Font="font://styles:CategoryBox.Font" Margins="10,10,10,10">
+                    <LayoutInput>
+                      <DockLayoutInput Position="Bottom"/>
+                    </LayoutInput>
+                  </Text>
+                </Children>
+              </Graphic>
             </Children>
           </Graphic>
         </Children>
