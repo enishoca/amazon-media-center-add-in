@@ -10,14 +10,6 @@
 
     <Rules>
       <!-- MPAA ratings -->
-      <!-- Not rated -->
-      <Condition Source="[Value]" SourceValue="UNRATED"
-                 Target="[RatingIcon.Content]" Value="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/unrated"/>
-      
-      <!-- Not rated -->
-      <Condition Source="[Value]" SourceValue="NR"
-                 Target="[RatingIcon.Content]" Value="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/rated_nr"/>
-
       <!-- Rated NC-17 -->
       <Condition Source="[Value]" SourceValue="NC-17"
                  Target="[RatingIcon.Content]" Value="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/rated_nc17"/>
@@ -69,11 +61,7 @@
     </Rules>
 
     <Content>
-      <ColorFill Content="Black">
-        <Children>
-          <Graphic Name="RatingIcon" MaintainAspectRatio="true" MinimumSize="0,20" MaximumSize="0,20"/>
-        </Children>
-      </ColorFill>
+      <Graphic Name="RatingIcon" MaintainAspectRatio="true" MinimumSize="0,28" MaximumSize="0,28"/>
     </Content>
   </UI>
 </Mcml>
