@@ -33,14 +33,19 @@
           <Invoke Target="[VideoItem.LaunchVideoViewer]"/>
         </Actions>
       </Changed>
+      <Binding Source="[VideoItem.AmazonRating.Count]" Target="[ReviewCount.Content]">
+        <Transformer>
+          <FormatTransformer Format=" ({0})"/>
+        </Transformer>
+      </Binding>
     </Rules>
 
     <Content>
-      <ColorFill Content="color://styles:Background" Layout="Dock">
+      <Graphic Content="image://styles:Background" Layout="Dock">
         <Children>
           <!-- Title bar: includes the movie title and AIV logo -->
           <!-- TODO: ideally, menu.mcml should be reused somehow -->
-          <ColorFill Content="color://styles:Background" Padding="15,10,50,10">
+          <Panel Padding="15,10,50,10">
             <LayoutInput>
               <DockLayoutInput Position="Top"/>
             </LayoutInput>
@@ -53,13 +58,13 @@
                   <DockLayoutInput Alignment="Near" Position="Left"/>
                 </LayoutInput>
               </Text>
-              <Graphic MaintainAspectRatio="True" MaximumSize="222,75" MinimumSize="222,75" Content="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/imgaiv">
+              <Graphic MaintainAspectRatio="True" MaximumSize="245,47" MinimumSize="245,47" Content="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/imgaiv">
                 <LayoutInput>
                   <DockLayoutInput Alignment="Near" Position="Right"/>
                 </LayoutInput>
               </Graphic>
             </Children>
-          </ColorFill>
+          </Panel>
 
           <!-- Menu bar: -->
           <!-- TODO: ideally, menu.mcml and menuitem.mcml should be reused here somehow -->
@@ -82,7 +87,7 @@
           -->
 
           <!-- Body of video details: display movie cover image, metadata, and play button -->
-          <ColorFill Content="color://styles:Background" Padding="15,15,15,15">
+          <Panel Padding="15,15,15,15">
             <LayoutInput>
               <DockLayoutInput Position="Top" Alignment="Near"/>
             </LayoutInput>
@@ -110,9 +115,7 @@
                           <Graphic Content="[VideoItem.StarsRatingImage]" HorizontalAlignment="Near" MaintainAspectRatio="true"/>
                         </Children>
                       </Clip>
-                      <Text Content=" (" Color="White" Font="font://styles:Synopsis.Font"/>
-                      <Text Content="[VideoItem.AmazonRating.Count.ToString]" Color="White" Font="font://styles:Synopsis.Font"/>
-                      <Text Content=")" Color="White" Font="font://styles:Synopsis.Font"/>
+                      <Text Name="ReviewCount" Color="White" Font="font://styles:Synopsis.Font"/>
                     </Children>
                   </Panel>
 
@@ -182,9 +185,9 @@
               </c:Button>
 
             </Children>
-          </ColorFill>
+          </Panel>
         </Children>
-      </ColorFill>
+      </Graphic>
     </Content>
   </UI>
 
