@@ -36,7 +36,7 @@ namespace AmazonMCEAddin
         {
             get
             {
-                if (Parent != null)
+                if ((Parent != null) && (!Parent.ContextTitle.Equals("")))
                 {
                     return Parent.ContextTitle + " > " + Name;
                 }
@@ -112,12 +112,21 @@ namespace AmazonMCEAddin
             {
                 // FIXME: Ugly amount of hard-coding here.
 
-                //http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/movies_top_prime.jpg
-                //http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/prime_popular.jpg
-                //http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_romance.jpg
-
                 switch (Parent.Name)
                 {
+                    case "Prime Instant Video":
+                        switch (Name)
+                        {
+                            case "Popular Movies":
+                                return new Image("http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/movies_top_prime.jpg");
+                            case "Popular TV Shows":
+                                return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/prime_popular.jpg");
+                            case "Movie Genres":
+                                return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres.jpg");
+                            case "TV Genres":
+                                return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres.jpg");
+                        }
+                        break;
                     case "Movies":
                         switch (Name)
                         {
@@ -131,7 +140,7 @@ namespace AmazonMCEAddin
                                 return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_kids.jpg");
                         }
                         break;
-                    case "TV":
+                    case "TV Shows":
                         switch (Name)
                         {
                             case "Popular TV Shows":
@@ -145,6 +154,40 @@ namespace AmazonMCEAddin
                             case "TV Channels":
                                 //return new Image("http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels.jpg");
                                 return new Image("http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/prime_tvchannels.jpg");
+                        }
+                        break;
+                    case "Movie Genres":
+                        switch (Name)
+                        {
+                            case "Drama":
+                                return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_drama.jpg");
+                            case "Horror":
+                                return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_horror.jpg");
+                            case "International":
+                                return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_international.jpg");
+                            case "Kids & Family":
+                                return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_kids.jpg");
+                            case "Romance":
+                                return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_romance.jpg");
+                            case "Sci-Fi & Fantasy":
+                                return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_scifi.jpg");
+                        }
+                        break;
+                    case "TV Genres":
+                        switch (Name)
+                        {
+                            case "Action & Adventure":
+                                return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_action.jpg");
+                            case "Animation":
+                                return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_animation.jpg");
+                            case "Comedy":
+                                return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_comedy.jpg");
+                            case "Drama":
+                                return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_drama.jpg");
+                            case "Kids & Family":
+                                return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_kids.jpg");
+                            case "Sci-Fi & Fantasy":
+                                return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_scifi.jpg");
                         }
                         break;
                     case "Editor's Picks":

@@ -4,7 +4,9 @@
   <!-- Images -->
   <Image Name="Background" Source="http://g-ecx.images-amazon.com/images/G/01/AIV/ps3/v1.2.1-1mtsp/assets/bg.jpg"/>
   <Image Name="Tile.1x1" Source="http://g-ecx.images-amazon.com/images/G/01/AIV/ps3/v1.2.1-1mtsp/assets/home/tile-1x1.png"/>
-  
+  <Image Name="Movie.Shadow" Source="http://g-ecx.images-amazon.com/images/G/01/AIV/ps3/v1.2.1-1mtsp/assets/home/movie-shadow.png"/>
+  <Image Name="TV.Shadow" Source="http://g-ecx.images-amazon.com/images/G/01/AIV/ps3/v1.2.1-1mtsp/assets/home/tv-shadow.png"/>
+
   <!-- Colors -->
   <Color Name="Panel.Background" Color="75,75,75"/>
 
