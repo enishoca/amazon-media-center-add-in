@@ -177,7 +177,24 @@ namespace AmazonMCEAddin
 
         public void processDetailData(JObject node)
         {
-            Debug.Print(node.ToString());
+            //Debug.Print(node.ToString());
+
+            Format sdFormat = null;
+            Format hdFormat = null;
+            foreach (JObject format in node["formats"])
+            {
+                switch ((string)format["videoFormatType"])
+                {
+                    case "HD":
+                        hdFormat = new Format(format);
+                        break;
+                    case "SD":
+                        sdFormat = new Format(format);
+                        break;
+                }
+            }
+            selectedFormat = (hdFormat != null) ? hdFormat : sdFormat;
+
             m_Genres = "";
             foreach (JValue genre in node["genres"])
             {

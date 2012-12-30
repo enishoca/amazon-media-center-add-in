@@ -61,6 +61,16 @@ namespace AmazonMCEAddin {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ac3_icon {
+            get {
+                object obj = ResourceManager.GetObject("ac3-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to f5b0a28b415e443810130a4bcb86e50d800508cc.
         /// </summary>
         internal static string AndroidSignatureHexKey {
@@ -104,6 +114,26 @@ namespace AmazonMCEAddin {
             get {
                 object obj = ResourceManager.GetObject("Button", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap button_gray {
+            get {
+                object obj = ResourceManager.GetObject("button-gray", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap button_highlighted {
+            get {
+                object obj = ResourceManager.GetObject("button-highlighted", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -256,6 +286,26 @@ namespace AmazonMCEAddin {
         internal static string MinimumSearchTextLength {
             get {
                 return ResourceManager.GetString("MinimumSearchTextLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap play_gray {
+            get {
+                object obj = ResourceManager.GetObject("play-gray", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap play_highlighted {
+            get {
+                object obj = ResourceManager.GetObject("play-highlighted", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

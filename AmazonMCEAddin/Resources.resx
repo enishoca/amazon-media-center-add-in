@@ -253,4 +253,19 @@
   <data name="stars_half" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>images\stars-half.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="button-gray" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>images\button-gray.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="button-highlighted" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>images\button-highlighted.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="play-gray" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>images\play-gray.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="play-highlighted" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>images\play-highlighted.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ac3-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>images\ac3-icon.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

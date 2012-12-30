@@ -38,6 +38,9 @@
           <FormatTransformer Format=" ({0})"/>
         </Transformer>
       </Binding>
+      <Condition Source="[VideoItem.Format.AudioFormatType.ToString]" SourceValue="AC3"
+                 Target="[AudioIcon.Content]" Value="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/ac3-icon"/>
+
     </Rules>
 
     <Content>
@@ -87,7 +90,7 @@
           -->
 
           <!-- Body of video details: display movie cover image, metadata, and play button -->
-          <Panel Padding="15,15,15,15">
+          <Panel Padding="15,70,15,15">
             <LayoutInput>
               <DockLayoutInput Position="Top" Alignment="Near"/>
             </LayoutInput>
@@ -119,13 +122,14 @@
                     </Children>
                   </Panel>
 
-                  <!-- Regulatory rating icon, year, and genres -->
+                  <!-- Regulatory rating icon, audio format, year, and genres -->
                   <Panel Padding="0,0,0,5">
                     <Layout>
                       <FlowLayout Orientation="Horizontal" ItemAlignment="Center"/>
                     </Layout>                    
                     <Children>
                       <c:VideoRating Value="[VideoItem.RegulatoryRating]" Padding="0,0,10,0"/>
+                      <Graphic Name="AudioIcon" MaintainAspectRatio="true" MinimumSize="0,29" MaximumSize="0,29" Margins="0,0,10,0"/>
                       <Text Content="[VideoItem.FirstAiringYear]" Color="White" WordWrap="true" Font="font://styles:Synopsis.Font"/>
                       <Text Content="|" Color="White" WordWrap="true" Font="font://styles:Synopsis.Font"/>
                       <Text Content="[VideoItem.Genres]" Color="White" WordWrap="true" Font="font://styles:Synopsis.Font"/>

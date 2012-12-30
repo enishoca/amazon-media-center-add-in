@@ -12,7 +12,8 @@ namespace AmazonMCEAddin
 
     public enum AudioFormatType
     {
-        Stereo
+        Stereo,
+        AC3
     }
 
     public class Format
@@ -78,8 +79,11 @@ namespace AmazonMCEAddin
             {
                 switch (audioFormat)
                 {
-                    case "STEREO":
-                        audioFormatType = AudioFormatType.Stereo;
+                    //case "STEREO":
+                    //    audioFormatType = AudioFormatType.Stereo;
+                    //    break;
+                    case "AC_3_5_1":
+                        audioFormatType = AudioFormatType.AC3;
                         break;
                 }
             }
