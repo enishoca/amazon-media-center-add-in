@@ -247,9 +247,19 @@ namespace AmazonMCEAddin
                         }
                         break;
                     case "TV Channels":
-                        string channel = Name.Replace(' ', '_').ToLower();
-                        return new Image("http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_" + channel + ".jpg");
-                        //return new Image("http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/prime_tvchannels_" + channel + ".jpg");
+                        switch (Name)
+                        {
+                            case "Nickelodeon/Nick Jr.":
+                                return new Image("http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_nickelodeon.jpg");
+                            case "Travel Channel":
+                                return new Image("http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_travel.jpg");
+                            case "USA Network":
+                                return new Image("http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_usa.jpg");
+                            default:
+                                string channel = Name.Replace(' ', '_').ToLower();
+                                //return new Image("http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/prime_tvchannels_" + channel + ".jpg");
+                                return new Image("http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_" + channel + ".jpg");
+                        }
                 }
 
                 return new Image("http://g-ecx.images-amazon.com/images/G/01/AIV/ps3/v1.2.1-1mtsp/assets/home/empty-library.png");

@@ -23,9 +23,9 @@ namespace AmazonMCEAddin
         private Image coverArtSmall;
         private string coverArtLargeUri;
         private Image coverArtLarge;
-        private SubscriptionOffer subscriptionOffer;
-        private PurchaseOffer purchaseOffer;
-        private RentalOffer rentalOffer;
+        private SubscriptionOffer subscriptionOffer = new SubscriptionOffer();
+        private PurchaseOffer purchaseOffer = new PurchaseOffer();
+        private RentalOffer rentalOffer = new RentalOffer();
         private SeasonPurchaseOffer seasonPurchaseOffer;
         private SeasonRentalOffer seasonRentalOffer;
         private TvPassOffer tvPassOffer;
@@ -147,5 +147,11 @@ namespace AmazonMCEAddin
         public bool HasMobileEncode { get { return hasMobileEncode; } }
 
         public bool HasMobileTrailerEncode { get { return hasMobileTrailerEncode; } }
+
+        public bool SubscriptionAvailable { get { return subscriptionOffer.Asin != null; } }
+
+        public bool PurchaseAvailable { get { return purchaseOffer.Asin != null; } }
+
+        public bool RentalAvailable { get { return rentalOffer.Asin != null; } }
     }
 }

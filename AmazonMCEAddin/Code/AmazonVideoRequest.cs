@@ -67,6 +67,7 @@ namespace AmazonMCEAddin
         'catalog/GetStreamingUrls'
         'catalog/GetStreamingTrailerUrls'
         'catalog/GetContentUrls'
+        'catalog/GetSubtitleUrls'
 
         'library/GetLibrary'
         'library/Purchase'
@@ -79,6 +80,8 @@ namespace AmazonMCEAddin
 
         'usage/UpdateStream'
         'usage/ReportLogEvent'
+        'usage/ReportAppLoadEvent'
+        'usage/ReportStartStreamEvent'
         'usage/ReportEvent'
         'usage/GetServerConfig'
          * */

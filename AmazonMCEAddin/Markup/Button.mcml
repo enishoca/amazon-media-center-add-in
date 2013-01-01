@@ -1,34 +1,38 @@
 <Mcml xmlns="http://schemas.microsoft.com/2008/mcml"
       xmlns:cor="assembly://MSCorLib/System"
-     xmlns:styles="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/Styles">
+      xmlns:styles="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/Styles">
 
   <UI Name="Button">
-
     <Properties>
       <ICommand Name="Model" ICommand="$Required"/>
       <cor:String Name="Text" String="Button Text"/>
+      <cor:Boolean Name="ShowPlay" Boolean="false"/>
       <Size Name="ButtonMinimumSize" Size="250,0"/>
       <Size Name="ButtonMaximumSize" Size="250,0"/>
     </Properties>
+
     <Locals>
       <ClickHandler Name="Clicker"/>
     </Locals>
+
     <Rules>
       <Binding Source="[Model]" Target="[Clicker.Command]"/>
-
       <Default Target="[Input.KeyInteractive]" Value="true"/>
       <Condition Source="[Input.KeyFocus]" SourceValue="true">
         <Actions>
-          <Set Target="[Background.Content]" Value="color://styles:Highlight"/>
+          <Set Target="[Background.Content]" Value="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/button-highlighted"/>
+          <Set Target="[PlayIcon.Content]" Value="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/play-highlighted"/>
         </Actions>
       </Condition>
     </Rules>
+
     <Content>
-      <ColorFill Name="Background" Content="color://styles:Button.Background" Padding="10,10,10,10" MinimumSize="[ButtonMinimumSize]" MaximumSize="[ButtonMaximumSize]">
-            <Children>
-              <Text Name="TextLabel" Content="[Text]" Color="color://styles:Button.Text" Font="font://styles:Button.Text"/>
-            </Children>
-      </ColorFill>
+      <Graphic Name="Background" Layout="HorizontalFlow" Padding="10,10,10,10" MinimumSize="[ButtonMinimumSize]" MaximumSize="[ButtonMaximumSize]" Content="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/button-gray">
+        <Children>
+          <Graphic Name="PlayIcon" Visible="[ShowPlay]" Content="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/play-gray"/>
+          <Text Name="TextLabel" Content="[Text]" Color="color://styles:Button.Text" Font="font://styles:Button.Text"/>
+        </Children>
+      </Graphic>
     </Content>
   </UI>
 </Mcml>

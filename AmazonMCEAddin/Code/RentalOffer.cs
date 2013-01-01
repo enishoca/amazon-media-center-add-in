@@ -14,6 +14,10 @@ namespace AmazonMCEAddin
         private RentalExpiryTerm rentalExpiryTermFromPurchase;
         private RentalExpiryTerm rentalExpiryTermFromStart;
 
+        public RentalOffer()
+        {
+        }
+
         public RentalOffer(JObject node)
             : base(node)
         {

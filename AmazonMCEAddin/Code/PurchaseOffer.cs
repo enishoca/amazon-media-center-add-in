@@ -14,6 +14,10 @@ namespace AmazonMCEAddin
         private Price price;
         private string purchaseButtonText;
 
+        public PurchaseOffer()
+        {
+        }
+
         public PurchaseOffer(JObject node)
             : base(node)
         {

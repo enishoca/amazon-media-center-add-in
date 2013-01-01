@@ -46,6 +46,7 @@ namespace AmazonMCEAddin
         private string m_contentType;
         private string m_ChildTitleQuery;
         private VideoItems m_ChildTitleItems;
+        private bool m_trailerAvailable;
 
         private string m_ItemQuery;
         private int m_ItemIndex;
@@ -115,6 +116,7 @@ namespace AmazonMCEAddin
             amazonRating.Rating = (float)node["amazonRating"]["rating"];
             starsRatingImage = (amazonRating.Rating % 1 == 0) ? starsFullImage : starsHalfImage;
             m_RegulatoryRating = (string)node["regulatoryRating"];
+            m_trailerAvailable = (bool)node["trailerAvailable"];
             m_contentType = (string)node["contentType"];
             JObject runtime = (JObject)node["runtime"];
             m_runtime = "";
@@ -177,7 +179,7 @@ namespace AmazonMCEAddin
 
         public void processDetailData(JObject node)
         {
-            //Debug.Print(node.ToString());
+            Debug.Print(node.ToString());
 
             Format sdFormat = null;
             Format hdFormat = null;
@@ -277,6 +279,8 @@ namespace AmazonMCEAddin
 
         public String FirstAiringDate { get { return (m_firstAiringDate.Equals(DateTime.MinValue)) ? "" : m_firstAiringDate.ToString("MMMM d, yyyy"); } }
 
+        public bool TrailerAvailable { get { return m_trailerAvailable && !Format.SubscriptionAvailable; } }
+
         public String ContentType { get { return m_contentType; } }
 
         //This is used in mcml to get back to the application from the current video item
@@ -294,6 +298,13 @@ namespace AmazonMCEAddin
         //This navigates to the actual video viewer.
         //TODO: Move this into Application, and place the stub here to call it from Application.
         public void LaunchVideoViewer()
+        {
+            string flashVars = AmazonVideoRequest.getFlashVars(m_ASIN);
+            string htmlexpath = Application.Current.viewerPath + "?ASIN=" + m_ASIN + flashVars;
+            Application.Current.MediaCenterEnvironment.NavigateToPage(PageId.ExtensibilityUrl, htmlexpath);
+        }
+
+        public void LaunchTrailerViewer()
         {
             string flashVars = AmazonVideoRequest.getFlashVars(m_ASIN);
             string htmlexpath = Application.Current.viewerPath + "?ASIN=" + m_ASIN + flashVars;

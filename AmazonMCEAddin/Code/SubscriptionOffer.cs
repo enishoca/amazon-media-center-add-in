@@ -9,6 +9,10 @@ namespace AmazonMCEAddin
         private bool buyable;
         private OfferType offerType;
 
+        public SubscriptionOffer()
+        {
+        }
+
         public SubscriptionOffer(JObject node)
         {
             asin = (string)node["asin"];
