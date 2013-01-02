@@ -304,13 +304,6 @@ namespace AmazonMCEAddin
             Application.Current.MediaCenterEnvironment.NavigateToPage(PageId.ExtensibilityUrl, htmlexpath);
         }
 
-        public void LaunchTrailerViewer()
-        {
-            string flashVars = AmazonVideoRequest.getFlashVars(m_ASIN);
-            string htmlexpath = Application.Current.viewerPath + "?ASIN=" + m_ASIN + flashVars;
-            Application.Current.MediaCenterEnvironment.NavigateToPage(PageId.ExtensibilityUrl, htmlexpath);
-        }
-
         //This navigates to the relevant next step if this item is selected in VideoGallery.mcml
         //It generally just goes to VideoDetails unless it is a season.
         public void ViewDetails()

@@ -184,6 +184,7 @@
     <Content Include="Images\RATED_NC-17.png" />
     <Content Include="Images\RATED_PG-13.png" />
     <Content Include="Images\amazon-instant-video.png" />
+    <Content Include="Images\spinner.png" />
     <Content Include="Images\stars-full.png" />
     <Content Include="Images\stars-half.png" />
     <Content Include="Images\TV_14.png" />
