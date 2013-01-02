@@ -312,6 +312,16 @@ namespace AmazonMCEAddin {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap prime_button_panel {
+            get {
+                object obj = ResourceManager.GetObject("prime-button-panel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap rated_g {
             get {
                 object obj = ResourceManager.GetObject("rated_g", resourceCulture);

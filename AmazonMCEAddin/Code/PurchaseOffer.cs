@@ -12,13 +12,13 @@ namespace AmazonMCEAddin
     public class PurchaseOffer : SubscriptionOffer
     {
         private Price price;
-        private string purchaseButtonText;
+        protected string purchaseButtonText;
 
         public PurchaseOffer()
         {
         }
 
-        public PurchaseOffer(JObject node)
+        public PurchaseOffer(JObject node, bool isHD = false)
             : base(node)
         {
             if (node["price"] != null)
@@ -27,7 +27,9 @@ namespace AmazonMCEAddin
                 price.valueLong = (float)node["price"]["valueLong"];
                 price.valueFormatted = (string)node["price"]["valueFormatted"];
             }
-            purchaseButtonText = (string)node["purchaseButtonText"];
+            //purchaseButtonText = (string)node["purchaseButtonText"];
+            purchaseButtonText = isHD ? "Buy HD " : "Buy ";
+            purchaseButtonText += Price.valueFormatted;
         }
 
         public Price Price { get { return price; } }

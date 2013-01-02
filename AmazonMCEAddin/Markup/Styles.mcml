@@ -35,7 +35,7 @@
   <Color Name="Highlight" Color="247,167,0"/>
 
   <!-- Fonts -->
-  <Font Name="Button.Text" Font="Calibri,20"/>
+  <Font Name="Button.Text" Font="Helvetica,18"/>
   <Font Name="Text.Footer.Line1" Font="Calibri Bold,20"/>
   <Font Name="Text.Footer.Line2" Font="Calibri Bold,16"/>
 

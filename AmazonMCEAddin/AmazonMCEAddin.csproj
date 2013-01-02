@@ -176,6 +176,7 @@
     <Content Include="Images\button-gray.png" />
     <Content Include="Images\play-highlighted.png" />
     <Content Include="Images\play-gray.png" />
+    <Content Include="Images\prime-button-panel.png" />
     <Content Include="Images\RATED_G.png" />
     <Content Include="Images\RATED_NR.png" />
     <Content Include="Images\RATED_R.png" />

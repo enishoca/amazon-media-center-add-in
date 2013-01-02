@@ -127,7 +127,7 @@
                   <Panel Padding="0,0,0,5">
                     <Layout>
                       <FlowLayout Orientation="Horizontal" ItemAlignment="Center"/>
-                    </Layout>                    
+                    </Layout>
                     <Children>
                       <c:VideoRating Value="[VideoItem.RegulatoryRating]" Padding="0,0,10,0"/>
                       <Graphic Name="AudioIcon" MaintainAspectRatio="true" MinimumSize="0,29" MaximumSize="0,29" Margins="0,0,10,0"/>
@@ -188,9 +188,25 @@
                   <AnchorLayoutInput Horizontal="Far" Vertical="Near"/>
                 </LayoutInput>
                 <Children>
-                  <c:Button Visible="[VideoItem.Format.SubscriptionAvailable]" Name="PlayButton" Text="Watch Now" Model="[ViewVideo]" ShowPlay="true" Padding="0,0,0,10"/>
-                  <c:Button Visible="[VideoItem.Format.RentalAvailable]" Text="[VideoItem.Format.RentalOffer.PurchaseButtonText]" Model="[ViewVideo]" ShowPlay="false" Padding="0,0,0,10"/>
-                  <c:Button Visible="[VideoItem.Format.PurchaseAvailable]" Text="[VideoItem.Format.PurchaseOffer.PurchaseButtonText]" Model="[ViewVideo]" ShowPlay="false" Padding="0,0,0,10"/>
+                  <Graphic Visible="[VideoItem.Format.SubscriptionAvailable]" Name="PrimePanel" MaintainAspectRatio="true" MaximumSize="256,134" Content="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/prime-button-panel">
+                    <Layout>
+                      <DockLayout SizeToChildren="false"/>
+                    </Layout>
+                    <Children>
+                      <Text Content="This title is included with Amazon Prime at no extra cost" HorizontalAlignment="Center" Color="White" Font="Helvetica,12" WordWrap="true" Margins="5,0,5,10">
+                        <LayoutInput>
+                          <DockLayoutInput Alignment="Center"/>
+                        </LayoutInput>
+                      </Text>
+                      <c:Button Name="PlayButton" Text="Watch Now" Model="[ViewVideo]" ShowPlay="true" Padding="0,0,0,5">
+                        <LayoutInput>
+                          <DockLayoutInput Alignment="Far"/>
+                        </LayoutInput>
+                      </c:Button>
+                    </Children>
+                  </Graphic>
+                  <c:Button Visible="[VideoItem.Format.RentalAvailable]" Text="[VideoItem.Format.RentalOffer.PurchaseButtonText]" Model="[ViewVideo]" ShowPlay="false" ButtonMaximumSize="300,43" ButtonMinimumSize="300,43" Padding="0,0,0,10"/>
+                  <c:Button Visible="[VideoItem.Format.PurchaseAvailable]" Text="[VideoItem.Format.PurchaseOffer.PurchaseButtonText]" Model="[ViewVideo]" ShowPlay="false" ButtonMaximumSize="300,43" ButtonMinimumSize="300,43" Padding="0,0,0,10"/>
                 </Children>
               </Panel>
 

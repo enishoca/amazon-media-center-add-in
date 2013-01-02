@@ -7,8 +7,8 @@
       <ICommand Name="Model" ICommand="$Required"/>
       <cor:String Name="Text" String="Button Text"/>
       <cor:Boolean Name="ShowPlay" Boolean="false"/>
-      <Size Name="ButtonMinimumSize" Size="250,0"/>
-      <Size Name="ButtonMaximumSize" Size="250,0"/>
+      <Size Name="ButtonMinimumSize" Size="250,43"/>
+      <Size Name="ButtonMaximumSize" Size="250,43"/>
     </Properties>
 
     <Locals>
@@ -27,10 +27,18 @@
     </Rules>
 
     <Content>
-      <Graphic Name="Background" Layout="HorizontalFlow" Padding="10,10,10,10" MinimumSize="[ButtonMinimumSize]" MaximumSize="[ButtonMaximumSize]" Content="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/button-gray">
+      <Graphic Name="Background" Layout="Dock" Padding="10,5,10,5" MinimumSize="[ButtonMinimumSize]" MaximumSize="[ButtonMaximumSize]" Content="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/button-gray">
         <Children>
-          <Graphic Name="PlayIcon" Visible="[ShowPlay]" Content="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/play-gray"/>
-          <Text Name="TextLabel" Content="[Text]" Color="color://styles:Button.Text" Font="font://styles:Button.Text"/>
+          <Graphic Name="PlayIcon" Visible="[ShowPlay]" MaintainAspectRatio="true" Content="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/play-gray">
+            <LayoutInput>
+              <DockLayoutInput Position="Left"/>
+            </LayoutInput>
+          </Graphic>
+          <Text Name="TextLabel" Content="[Text]" Color="color://styles:Button.Text" Font="font://styles:Button.Text">
+            <LayoutInput>
+              <DockLayoutInput Alignment="Center"/>
+            </LayoutInput>
+          </Text>
         </Children>
       </Graphic>
     </Content>

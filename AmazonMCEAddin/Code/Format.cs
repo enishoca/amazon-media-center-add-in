@@ -58,10 +58,10 @@ namespace AmazonMCEAddin
                         subscriptionOffer = new SubscriptionOffer(offer);
                         break;
                     case "PURCHASE":
-                        purchaseOffer = new PurchaseOffer(offer);
+                        purchaseOffer = new PurchaseOffer(offer, videoFormatType == VideoFormatType.HD);
                         break;
                     case "RENTAL":
-                        rentalOffer = new RentalOffer(offer);
+                        rentalOffer = new RentalOffer(offer, videoFormatType == VideoFormatType.HD);
                         break;
                     case "SEASON_PURCHASE":
                         seasonPurchaseOffer = new SeasonPurchaseOffer(offer);
@@ -150,8 +150,8 @@ namespace AmazonMCEAddin
 
         public bool SubscriptionAvailable { get { return subscriptionOffer.Asin != null; } }
 
-        public bool PurchaseAvailable { get { return purchaseOffer.Asin != null; } }
+        public bool PurchaseAvailable { get { return !SubscriptionAvailable && purchaseOffer.Asin != null; } }
 
-        public bool RentalAvailable { get { return rentalOffer.Asin != null; } }
+        public bool RentalAvailable { get { return !SubscriptionAvailable && rentalOffer.Asin != null; } }
     }
 }
