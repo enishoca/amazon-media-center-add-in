@@ -18,8 +18,12 @@ namespace AmazonMCEAddin
 
             Category cat_home = new Category("Home", "", cat_root, 0);
             cat_root.List.Add(cat_home);
-            Category cat_prime = new Category("Prime Instant Video", "", cat_root, 1);
-            cat_root.List.Add(cat_prime);
+            Category cat_prime = null;
+            if (Resources.PrimeOnly.Equals("false"))
+            {
+                cat_prime = new Category("Prime Instant Video", "", cat_root, 1);
+                cat_root.List.Add(cat_prime);
+            }
             Category cat_movies = new Category("Movies", "", cat_root, 2);
             cat_root.List.Add(cat_movies);
             Category cat_tv = new Category("TV Shows", "", cat_root, 3);
@@ -52,14 +56,19 @@ namespace AmazonMCEAddin
             */
             cat_home.bindListToChoice();
 
+            int subCategoryIndex = 2;
             // Load 'Prime Instant Video' root category
-            recurse(categories["message"]["body"]["categories"][1]["categories"][1], cat_prime);
+            if (Resources.PrimeOnly.Equals("false"))
+            {
+                subCategoryIndex = 1;
+                recurse(categories["message"]["body"]["categories"][1]["categories"][subCategoryIndex], cat_prime);
+            }
 
             // Load 'Movies' root category
-            recurse(categories["message"]["body"]["categories"][2]["categories"][1], cat_movies);
+            recurse(categories["message"]["body"]["categories"][2]["categories"][subCategoryIndex], cat_movies);
 
             // Load 'TV Shows' root category
-            recurse(categories["message"]["body"]["categories"][3]["categories"][1], cat_tv);
+            recurse(categories["message"]["body"]["categories"][3]["categories"][subCategoryIndex], cat_tv);
             return cat_root;
         }
 

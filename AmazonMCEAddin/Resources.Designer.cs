@@ -320,6 +320,15 @@ namespace AmazonMCEAddin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to true.
+        /// </summary>
+        internal static string PrimeOnly {
+            get {
+                return ResourceManager.GetString("PrimeOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap rated_g {
