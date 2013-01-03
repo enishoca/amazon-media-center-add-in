@@ -41,6 +41,8 @@ namespace AmazonMCEAddin
         private string m_StarringCast;
         private string m_StudioOrNetwork;
         private string m_runtime;
+        private Format sdFormat;
+        private Format hdFormat;
         private Format selectedFormat;
         private DateTime m_firstAiringDate;
         private string m_contentType;
@@ -87,13 +89,11 @@ namespace AmazonMCEAddin
             //Debug.Print(node.ToString());
 
             m_Command = new Command();
-            //try to use HD unless no HD available.
-            Format sdFormat = null;
-            Format hdFormat = null;
             //set up default sizes for images
             Size movie_size = new Size(188, 250);
             Size tv_size = new Size(334, 250);
-            
+
+            //try to use HD unless no HD available.
             //not all titles have HD, so we loop through available options and pick HD if we can.
             foreach (JObject format in node["formats"])
             {
@@ -179,10 +179,8 @@ namespace AmazonMCEAddin
 
         public void processDetailData(JObject node)
         {
-            Debug.Print(node.ToString());
+            //Debug.Print(node.ToString());
 
-            Format sdFormat = null;
-            Format hdFormat = null;
             foreach (JObject format in node["formats"])
             {
                 switch ((string)format["videoFormatType"])
@@ -242,6 +240,10 @@ namespace AmazonMCEAddin
         public String Title { get { return m_Title; } }
 
         public Format Format { get { return selectedFormat; } }
+
+        public Format HDFormat { get { return hdFormat; } }
+
+        public Format SDFormat { get { return sdFormat; } }
 
         public Image Image { get { return m_Image; } set { m_Image = value; FirePropertyChanged("Image"); } }
 

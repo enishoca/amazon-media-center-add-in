@@ -205,8 +205,10 @@
                       </c:Button>
                     </Children>
                   </Graphic>
-                  <c:Button Visible="[VideoItem.Format.RentalAvailable]" Text="[VideoItem.Format.RentalOffer.PurchaseButtonText]" Model="[ViewVideo]" ShowPlay="false" ButtonMaximumSize="300,43" ButtonMinimumSize="300,43" Padding="0,0,0,10"/>
-                  <c:Button Visible="[VideoItem.Format.PurchaseAvailable]" Text="[VideoItem.Format.PurchaseOffer.PurchaseButtonText]" Model="[ViewVideo]" ShowPlay="false" ButtonMaximumSize="300,43" ButtonMinimumSize="300,43" Padding="0,0,0,10"/>
+                  <c:Button Visible="[VideoItem.SDFormat.RentalAvailable]" Text="[VideoItem.SDFormat.RentalOffer.PurchaseButtonText]" Model="[ViewVideo]" ShowPlay="false" ButtonMaximumSize="300,43" ButtonMinimumSize="300,43" Padding="0,0,0,10"/>
+                  <c:Button Visible="[VideoItem.HDFormat.RentalAvailable]" Text="[VideoItem.HDFormat.RentalOffer.PurchaseButtonText]" Model="[ViewVideo]" ShowPlay="false" ButtonMaximumSize="300,43" ButtonMinimumSize="300,43" Padding="0,0,0,10"/>
+                  <c:Button Visible="[VideoItem.SDFormat.PurchaseAvailable]" Text="[VideoItem.SDFormat.PurchaseOffer.PurchaseButtonText]" Model="[ViewVideo]" ShowPlay="false" ButtonMaximumSize="300,43" ButtonMinimumSize="300,43" Padding="0,0,0,10"/>
+                  <c:Button Visible="[VideoItem.HDFormat.PurchaseAvailable]" Text="[VideoItem.HDFormat.PurchaseOffer.PurchaseButtonText]" Model="[ViewVideo]" ShowPlay="false" ButtonMaximumSize="300,43" ButtonMinimumSize="300,43" Padding="0,0,0,10"/>
                 </Children>
               </Panel>
 

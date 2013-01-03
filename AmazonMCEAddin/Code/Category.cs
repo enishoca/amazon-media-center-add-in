@@ -247,6 +247,9 @@ namespace AmazonMCEAddin
                         }
                         break;
                     case "TV Channels":
+                        //http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_amc.jpg
+                        //http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_hbo.jpg
+                        //http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_starz.jpg
                         switch (Name)
                         {
                             case "Nickelodeon/Nick Jr.":
