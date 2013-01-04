@@ -253,4 +253,199 @@
   <data name="stars_half" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>images\stars-half.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="button-gray" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>images\button-gray.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="button-highlighted" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>images\button-highlighted.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="play-gray" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>images\play-gray.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="play-highlighted" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>images\play-highlighted.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ac3-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>images\ac3-icon.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="prime-button-panel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>images\prime-button-panel.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="spinner" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>images\spinner.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Movies_Popular_Movies" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_popular.jpg</value>
+  </data>
+  <data name="PrimeOnly" xml:space="preserve">
+    <value>true</value>
+  </data>
+  <data name="Home_Your_Watchlist" xml:space="preserve">
+    <value>http://g-ecx.images-amazon.com/images/G/01/AIV/ps3/v1.2.1-1mtsp/assets/home/empty-library.png</value>
+  </data>
+  <data name="Movies_All_Genres" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres.jpg</value>
+  </data>
+  <data name="Movies_All_Genres_Drama" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_drama.jpg</value>
+  </data>
+  <data name="Movies_All_Genres_Horror" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_horror.jpg</value>
+  </data>
+  <data name="Movies_All_Genres_International" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_international.jpg</value>
+  </data>
+  <data name="Movies_All_Genres_Kids_And_Family" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_kids.jpg</value>
+  </data>
+  <data name="Movies_All_Genres_SciFi_And_Fantasy" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_scifi.jpg</value>
+  </data>
+  <data name="Movies_Editors_Picks" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_editorspicks.jpg</value>
+  </data>
+  <data name="Movies_Editors_Picks_From_Page_to_Screen" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_editorspicks_page_to_screen.jpg</value>
+  </data>
+  <data name="Movies_Editors_Picks_History_Repeats_Itself" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_editorspicks_history.jpg</value>
+  </data>
+  <data name="Movies_For_The_Kids" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_kids.jpg</value>
+  </data>
+  <data name="Movie_Genres_Drama" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_drama.jpg</value>
+  </data>
+  <data name="Movie_Genres_Horror" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_horror.jpg</value>
+  </data>
+  <data name="Movie_Genres_International" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_international.jpg</value>
+  </data>
+  <data name="Movie_Genres_Kids_And_Family" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_kids.jpg</value>
+  </data>
+  <data name="Movie_Genres_Romance" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_romance.jpg</value>
+  </data>
+  <data name="Movie_Genres_SciFi_And_Fantasy" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_scifi.jpg</value>
+  </data>
+  <data name="Prime_Instant_Video_Movie_Genres" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres.jpg</value>
+  </data>
+  <data name="Prime_Instant_Video_Popular_Movies" xml:space="preserve">
+    <value>http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/movies_top_prime.jpg</value>
+  </data>
+  <data name="Prime_Instant_Video_Popular_TV_Shows" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/prime_popular.jpg</value>
+  </data>
+  <data name="Prime_Instant_Video_TV_Genres" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres.jpg</value>
+  </data>
+  <data name="TV_Genres_Action_And_Adventure" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_action.jpg</value>
+  </data>
+  <data name="TV_Genres_Animation" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_animation.jpg</value>
+  </data>
+  <data name="TV_Genres_Comedy" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_comedy.jpg</value>
+  </data>
+  <data name="TV_Genres_Drama" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_drama.jpg</value>
+  </data>
+  <data name="TV_Genres_Kids_And_Family" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_kids.jpg</value>
+  </data>
+  <data name="TV_Genres_SciFi_And_Fantasy" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_scifi.jpg</value>
+  </data>
+  <data name="TV_Shows_All_Genres" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres.jpg</value>
+  </data>
+  <data name="TV_Shows_All_Genres_Action_And_Adventure" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_action.jpg</value>
+  </data>
+  <data name="TV_Shows_All_Genres_Animation" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_animation.jpg</value>
+  </data>
+  <data name="TV_Shows_All_Genres_Comedy" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_comedy.jpg</value>
+  </data>
+  <data name="TV_Shows_All_Genres_Drama" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_drama.jpg</value>
+  </data>
+  <data name="TV_Shows_All_Genres_Kids_And_Family" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_kids.jpg</value>
+  </data>
+  <data name="TV_Shows_All_Genres_SciFi_And_Fantasy" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_scifi.jpg</value>
+  </data>
+  <data name="TV_Shows_Editors_Picks" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_editorspicks.jpg</value>
+  </data>
+  <data name="TV_Shows_Editors_Picks_British_Invasion" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_editorspicks_british_invasion.jpg</value>
+  </data>
+  <data name="TV_Shows_For_The_Kids" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_kids.jpg</value>
+  </data>
+  <data name="TV_Shows_Popular_TV_Shows" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_popular.jpg</value>
+  </data>
+  <data name="TV_Shows_TV_Channels" xml:space="preserve">
+    <value>http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/prime_tvchannels.jpg</value>
+  </data>
+  <data name="TV_Shows_TV_Channels_ABC" xml:space="preserve">
+    <value>http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_abc.jpg</value>
+  </data>
+  <data name="TV_Shows_TV_Channels_AMC" xml:space="preserve">
+    <value>http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_amc.jpg</value>
+  </data>
+  <data name="TV_Shows_TV_Channels_BBC" xml:space="preserve">
+    <value>http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_bbc.jpg</value>
+  </data>
+  <data name="TV_Shows_TV_Channels_CBS" xml:space="preserve">
+    <value>http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_cbs.jpg</value>
+  </data>
+  <data name="TV_Shows_TV_Channels_Comedy_Central" xml:space="preserve">
+    <value>http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_comedy_central.jpg</value>
+  </data>
+  <data name="TV_Shows_TV_Channels_Discovery" xml:space="preserve">
+    <value>http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_discovery.jpg</value>
+  </data>
+  <data name="TV_Shows_TV_Channels_Fox" xml:space="preserve">
+    <value>http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_fox.jpg</value>
+  </data>
+  <data name="TV_Shows_TV_Channels_HBO" xml:space="preserve">
+    <value>http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_hbo.jpg</value>
+  </data>
+  <data name="TV_Shows_TV_Channels_MTV" xml:space="preserve">
+    <value>http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_mtv.jpg</value>
+  </data>
+  <data name="TV_Shows_TV_Channels_NBC" xml:space="preserve">
+    <value>http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_nbc.jpg</value>
+  </data>
+  <data name="TV_Shows_TV_Channels_Nickelodeon" xml:space="preserve">
+    <value>http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_nickelodeon.jpg</value>
+  </data>
+  <data name="TV_Shows_TV_Channels_PBS" xml:space="preserve">
+    <value>http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_pbs.jpg</value>
+  </data>
+  <data name="TV_Shows_TV_Channels_Showtime" xml:space="preserve">
+    <value>http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_showtime.jpg</value>
+  </data>
+  <data name="TV_Shows_TV_Channels_Starz" xml:space="preserve">
+    <value>http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_starz.jpg</value>
+  </data>
+  <data name="TV_Shows_TV_Channels_Travel_Channel" xml:space="preserve">
+    <value>http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_travel.jpg</value>
+  </data>
+  <data name="TV_Shows_TV_Channels_Travel_Channel_Nickelodeon_Nick_Jr" xml:space="preserve">
+    <value>http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_nickelodeon.jpg</value>
+  </data>
+  <data name="TV_Shows_TV_Channels_USA_Network" xml:space="preserve">
+    <value>http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_usa.jpg</value>
+  </data>
 </root>

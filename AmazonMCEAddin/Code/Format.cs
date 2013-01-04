@@ -12,7 +12,8 @@ namespace AmazonMCEAddin
 
     public enum AudioFormatType
     {
-        Stereo
+        Stereo,
+        AC3
     }
 
     public class Format
@@ -22,9 +23,9 @@ namespace AmazonMCEAddin
         private Image coverArtSmall;
         private string coverArtLargeUri;
         private Image coverArtLarge;
-        private SubscriptionOffer subscriptionOffer;
-        private PurchaseOffer purchaseOffer;
-        private RentalOffer rentalOffer;
+        private SubscriptionOffer subscriptionOffer = new SubscriptionOffer();
+        private PurchaseOffer purchaseOffer = new PurchaseOffer();
+        private RentalOffer rentalOffer = new RentalOffer();
         private SeasonPurchaseOffer seasonPurchaseOffer;
         private SeasonRentalOffer seasonRentalOffer;
         private TvPassOffer tvPassOffer;
@@ -34,6 +35,10 @@ namespace AmazonMCEAddin
         private bool hasTrailerEncode;
         private bool hasMobileEncode;
         private bool hasMobileTrailerEncode;
+
+        public Format()
+        {
+        }
 
         public Format(JObject node)
         {
@@ -57,10 +62,10 @@ namespace AmazonMCEAddin
                         subscriptionOffer = new SubscriptionOffer(offer);
                         break;
                     case "PURCHASE":
-                        purchaseOffer = new PurchaseOffer(offer);
+                        purchaseOffer = new PurchaseOffer(offer, videoFormatType == VideoFormatType.HD);
                         break;
                     case "RENTAL":
-                        rentalOffer = new RentalOffer(offer);
+                        rentalOffer = new RentalOffer(offer, videoFormatType == VideoFormatType.HD);
                         break;
                     case "SEASON_PURCHASE":
                         seasonPurchaseOffer = new SeasonPurchaseOffer(offer);
@@ -78,8 +83,11 @@ namespace AmazonMCEAddin
             {
                 switch (audioFormat)
                 {
-                    case "STEREO":
-                        audioFormatType = AudioFormatType.Stereo;
+                    //case "STEREO":
+                    //    audioFormatType = AudioFormatType.Stereo;
+                    //    break;
+                    case "AC_3_5_1":
+                        audioFormatType = AudioFormatType.AC3;
                         break;
                 }
             }
@@ -143,5 +151,11 @@ namespace AmazonMCEAddin
         public bool HasMobileEncode { get { return hasMobileEncode; } }
 
         public bool HasMobileTrailerEncode { get { return hasMobileTrailerEncode; } }
+
+        public bool SubscriptionAvailable { get { return subscriptionOffer.Asin != null; } }
+
+        public bool PurchaseAvailable { get { return !SubscriptionAvailable && purchaseOffer.Asin != null; } }
+
+        public bool RentalAvailable { get { return !SubscriptionAvailable && rentalOffer.Asin != null; } }
     }
 }

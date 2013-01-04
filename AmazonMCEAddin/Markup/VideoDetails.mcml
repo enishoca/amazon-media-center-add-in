@@ -38,6 +38,8 @@
           <FormatTransformer Format=" ({0})"/>
         </Transformer>
       </Binding>
+      <Condition Source="[VideoItem.Format.AudioFormatType.ToString]" SourceValue="AC3"
+                 Target="[AudioIcon.Content]" Value="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/ac3-icon"/>
     </Rules>
 
     <Content>
@@ -87,7 +89,7 @@
           -->
 
           <!-- Body of video details: display movie cover image, metadata, and play button -->
-          <Panel Padding="15,15,15,15">
+          <Panel Padding="15,70,15,15">
             <LayoutInput>
               <DockLayoutInput Position="Top" Alignment="Near"/>
             </LayoutInput>
@@ -103,9 +105,11 @@
 
               <Panel Layout="VerticalFlow" Padding="30,0,30,0">
                 <LayoutInput>
-                  <AnchorLayoutInput Horizontal="Near" Vertical="Near" Left="VideoImage,.75" Right="PlayButton,0"/>
+                  <AnchorLayoutInput Horizontal="Near" Vertical="Near" Left="VideoImage,.75" Right="ButtonPanel,0"/>
                 </LayoutInput>
                 <Children>
+                  <!-- Watch Trailer and Add/Remove to Watchlist buttons -->
+                  <c:Button Name="TrailerButton" Visible="[VideoItem.TrailerAvailable]" Text="Watch Trailer" Model="[ViewVideo]" ShowPlay="true"/>
 
                   <!-- Amazon rating and review count -->
                   <Panel Layout="HorizontalFlow">
@@ -119,13 +123,14 @@
                     </Children>
                   </Panel>
 
-                  <!-- Regulatory rating icon, year, and genres -->
+                  <!-- Regulatory rating icon, audio format, year, and genres -->
                   <Panel Padding="0,0,0,5">
                     <Layout>
                       <FlowLayout Orientation="Horizontal" ItemAlignment="Center"/>
-                    </Layout>                    
+                    </Layout>
                     <Children>
                       <c:VideoRating Value="[VideoItem.RegulatoryRating]" Padding="0,0,10,0"/>
+                      <Graphic Name="AudioIcon" MaintainAspectRatio="true" MinimumSize="0,29" MaximumSize="0,29" Margins="0,0,10,0"/>
                       <Text Content="[VideoItem.FirstAiringYear]" Color="White" WordWrap="true" Font="font://styles:Synopsis.Font"/>
                       <Text Content="|" Color="White" WordWrap="true" Font="font://styles:Synopsis.Font"/>
                       <Text Content="[VideoItem.Genres]" Color="White" WordWrap="true" Font="font://styles:Synopsis.Font"/>
@@ -178,11 +183,34 @@
               </Panel>
 
               <!-- Play button -->
-              <c:Button Visible="true" Name="PlayButton" Text="Play" Model="[ViewVideo]">
+              <Panel Name="ButtonPanel" Layout="VerticalFlow">
                 <LayoutInput>
                   <AnchorLayoutInput Horizontal="Far" Vertical="Near"/>
                 </LayoutInput>
-              </c:Button>
+                <Children>
+                  <Graphic Visible="[VideoItem.Format.SubscriptionAvailable]" Name="PrimePanel" MaintainAspectRatio="true" MaximumSize="256,134" Content="resx://AmazonMCEAddin/AmazonMCEAddin.Resources/prime-button-panel">
+                    <Layout>
+                      <DockLayout SizeToChildren="false"/>
+                    </Layout>
+                    <Children>
+                      <Text Content="This title is included with Amazon Prime at no extra cost" HorizontalAlignment="Center" Color="White" Font="Helvetica,12" WordWrap="true" Margins="5,0,5,10">
+                        <LayoutInput>
+                          <DockLayoutInput Alignment="Center"/>
+                        </LayoutInput>
+                      </Text>
+                      <c:Button Name="PlayButton" Text="Watch Now" Model="[ViewVideo]" ShowPlay="true" Padding="0,0,0,5">
+                        <LayoutInput>
+                          <DockLayoutInput Alignment="Far"/>
+                        </LayoutInput>
+                      </c:Button>
+                    </Children>
+                  </Graphic>
+                  <c:Button Visible="[VideoItem.SDFormat.RentalAvailable]" Text="[VideoItem.SDFormat.RentalOffer.PurchaseButtonText]" Model="[ViewVideo]" ShowPlay="false" ButtonMaximumSize="300,43" ButtonMinimumSize="300,43" Padding="0,0,0,10"/>
+                  <c:Button Visible="[VideoItem.HDFormat.RentalAvailable]" Text="[VideoItem.HDFormat.RentalOffer.PurchaseButtonText]" Model="[ViewVideo]" ShowPlay="false" ButtonMaximumSize="300,43" ButtonMinimumSize="300,43" Padding="0,0,0,10"/>
+                  <c:Button Visible="[VideoItem.SDFormat.PurchaseAvailable]" Text="[VideoItem.SDFormat.PurchaseOffer.PurchaseButtonText]" Model="[ViewVideo]" ShowPlay="false" ButtonMaximumSize="300,43" ButtonMinimumSize="300,43" Padding="0,0,0,10"/>
+                  <c:Button Visible="[VideoItem.HDFormat.PurchaseAvailable]" Text="[VideoItem.HDFormat.PurchaseOffer.PurchaseButtonText]" Model="[ViewVideo]" ShowPlay="false" ButtonMaximumSize="300,43" ButtonMinimumSize="300,43" Padding="0,0,0,10"/>
+                </Children>
+              </Panel>
 
             </Children>
           </Panel>

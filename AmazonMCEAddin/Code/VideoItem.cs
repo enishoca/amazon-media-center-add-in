@@ -41,11 +41,14 @@ namespace AmazonMCEAddin
         private string m_StarringCast;
         private string m_StudioOrNetwork;
         private string m_runtime;
+        private Format sdFormat = new Format();
+        private Format hdFormat = new Format();
         private Format selectedFormat;
         private DateTime m_firstAiringDate;
         private string m_contentType;
         private string m_ChildTitleQuery;
         private VideoItems m_ChildTitleItems;
+        private bool m_trailerAvailable;
 
         private string m_ItemQuery;
         private int m_ItemIndex;
@@ -86,27 +89,11 @@ namespace AmazonMCEAddin
             //Debug.Print(node.ToString());
 
             m_Command = new Command();
-            //try to use HD unless no HD available.
-            Format sdFormat = null;
-            Format hdFormat = null;
             //set up default sizes for images
             Size movie_size = new Size(188, 250);
             Size tv_size = new Size(334, 250);
-            
-            //not all titles have HD, so we loop through available options and pick HD if we can.
-            foreach (JObject format in node["formats"])
-            {
-                switch ((string)format["videoFormatType"])
-                {
-                    case "HD":
-                        hdFormat = new Format(format);
-                        break;
-                    case "SD":
-                        sdFormat = new Format(format);
-                        break;
-                }
-            }
-            selectedFormat = (hdFormat != null) ? hdFormat : sdFormat;
+
+            processDetailData(node);
 
             m_Title = (string)node["title"];
             m_Synopsis = (string)node["synopsis"];
@@ -115,6 +102,7 @@ namespace AmazonMCEAddin
             amazonRating.Rating = (float)node["amazonRating"]["rating"];
             starsRatingImage = (amazonRating.Rating % 1 == 0) ? starsFullImage : starsHalfImage;
             m_RegulatoryRating = (string)node["regulatoryRating"];
+            m_trailerAvailable = (bool)node["trailerAvailable"];
             m_contentType = (string)node["contentType"];
             JObject runtime = (JObject)node["runtime"];
             m_runtime = "";
@@ -177,7 +165,26 @@ namespace AmazonMCEAddin
 
         public void processDetailData(JObject node)
         {
-            Debug.Print(node.ToString());
+            //Debug.Print(node.ToString());
+
+            //try to use HD unless no HD available.
+            //not all titles have HD, so we loop through available options and pick HD if we can.
+            bool useHD = false;
+            foreach (JObject format in node["formats"])
+            {
+                switch ((string)format["videoFormatType"])
+                {
+                    case "HD":
+                        hdFormat = new Format(format);
+                        useHD = true;
+                        break;
+                    case "SD":
+                        sdFormat = new Format(format);
+                        break;
+                }
+            }
+            selectedFormat = useHD ? hdFormat : sdFormat;
+
             m_Genres = "";
             foreach (JValue genre in node["genres"])
             {
@@ -224,6 +231,10 @@ namespace AmazonMCEAddin
 
         public Format Format { get { return selectedFormat; } }
 
+        public Format HDFormat { get { return hdFormat; } }
+
+        public Format SDFormat { get { return sdFormat; } }
+
         public Image Image { get { return m_Image; } set { m_Image = value; FirePropertyChanged("Image"); } }
 
         //public string ImageUrl { get { return m_ImageUrl; } }
@@ -259,6 +270,8 @@ namespace AmazonMCEAddin
         public String FirstAiringYear { get { return (m_firstAiringDate.Equals(DateTime.MinValue)) ? "" : m_firstAiringDate.ToString("yyyy"); } }
 
         public String FirstAiringDate { get { return (m_firstAiringDate.Equals(DateTime.MinValue)) ? "" : m_firstAiringDate.ToString("MMMM d, yyyy"); } }
+
+        public bool TrailerAvailable { get { return m_trailerAvailable && !Format.SubscriptionAvailable; } }
 
         public String ContentType { get { return m_contentType; } }
 

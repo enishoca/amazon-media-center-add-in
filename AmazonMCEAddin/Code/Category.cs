@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using Microsoft.MediaCenter;
 using Microsoft.MediaCenter.Hosting;
@@ -36,7 +37,7 @@ namespace AmazonMCEAddin
         {
             get
             {
-                if (Parent != null)
+                if ((Parent != null) && (!Parent.ContextTitle.Equals("")))
                 {
                     return Parent.ContextTitle + " > " + Name;
                 }
@@ -110,106 +111,40 @@ namespace AmazonMCEAddin
         {
             get
             {
-                // FIXME: Ugly amount of hard-coding here.
+                Category current = this;
+                string categoryPath = current.Name;
+                current = current.Parent;
 
-                //http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/movies_top_prime.jpg
-                //http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/prime_popular.jpg
-                //http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_romance.jpg
-
-                switch (Parent.Name)
+                while (current != null && !current.Name.Equals(""))
                 {
-                    case "Movies":
-                        switch (Name)
-                        {
-                            case "Popular Movies":
-                                return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_popular.jpg");
-                            case "Editor's Picks":
-                                return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_editorspicks.jpg");
-                            case "All Genres":
-                                return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres.jpg");
-                            case "For The Kids":
-                                return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_kids.jpg");
-                        }
-                        break;
-                    case "TV":
-                        switch (Name)
-                        {
-                            case "Popular TV Shows":
-                                return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_popular.jpg");
-                            case "Editor's Picks":
-                                return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_editorspicks.jpg");
-                            case "All Genres":
-                                return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres.jpg");
-                            case "For The Kids":
-                                return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_kids.jpg");
-                            case "TV Channels":
-                                //return new Image("http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels.jpg");
-                                return new Image("http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/prime_tvchannels.jpg");
-                        }
-                        break;
-                    case "Editor's Picks":
-                        if (Parent.Parent.Name.Equals("Movies"))
-                        {
-                            switch (Name)
-                            {
-                                case "From Page to Screen":
-                                    return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_editorspicks_page_to_screen.jpg");
-                                case "History Repeats Itself":
-                                    return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_editorspicks_history.jpg");
-                            }
-                        }
-                        else
-                        {
-                            switch (Name)
-                            {
-                                case "British Invasion":
-                                    return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_editorspicks_british_invasion.jpg");
-                            }
-                        }
-                        break;
-                    case "All Genres":
-                        if (Parent.Parent.Name.Equals("Movies"))
-                        {
-                            switch (Name)
-                            {
-                                case "Drama":
-                                    return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_drama.jpg");
-                                case "Horror":
-                                    return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_horror.jpg");
-                                case "International":
-                                    return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_international.jpg");
-                                case "Kids & Family":
-                                    return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_kids.jpg");
-                                case "Sci-Fi & Fantasy":
-                                    return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_scifi.jpg");
-                            }
-                        }
-                        else
-                        {
-                            switch (Name)
-                            {
-                                case "Action & Adventure":
-                                    return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_action.jpg");
-                                case "Animation":
-                                    return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_animation.jpg");
-                                case "Comedy":
-                                    return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_comedy.jpg");
-                                case "Drama":
-                                    return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_drama.jpg");
-                                case "Kids & Family":
-                                    return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_kids.jpg");
-                                case "Sci-Fi & Fantasy":
-                                    return new Image("http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_scifi.jpg");
-                            }
-                        }
-                        break;
-                    case "TV Channels":
-                        string channel = Name.Replace(' ', '_').ToLower();
-                        return new Image("http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_" + channel + ".jpg");
-                        //return new Image("http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/prime_tvchannels_" + channel + ".jpg");
+                    categoryPath = current.Name + "_" + categoryPath;
+                    current = current.Parent;
                 }
 
-                return new Image("http://g-ecx.images-amazon.com/images/G/01/AIV/ps3/v1.2.1-1mtsp/assets/home/empty-library.png");
+                // replace ' ' with '_', remove ', replace '&' with "And", remove '-'
+                categoryPath = categoryPath.Replace(' ', '_');
+                categoryPath = categoryPath.Replace('/', '_');
+                categoryPath = categoryPath.Replace("\'", "");
+                categoryPath = categoryPath.Replace("-", "");
+                categoryPath = categoryPath.Replace(".", "");
+                categoryPath = categoryPath.Replace("&", "And");
+
+                //System.Diagnostics.Debug.Print(categoryPath);
+
+                string imageUrl = Resources.ResourceManager.GetString(categoryPath);
+
+                if (imageUrl != null)
+                {
+                    return new Image(imageUrl);
+                }
+                else
+                {
+                    //return new Image("http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels.jpg");
+                    //return new Image("http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/prime_tvchannels.jpg");
+
+                    // blank.png doesn't really exist, but will trigger the display of an X
+                    return new Image("http://g-ecx.images-amazon.com/images/G/01/AIV/ps3/v1.2.1-1mtsp/assets/home/blank.png");
+                }
             }
         }
     }
