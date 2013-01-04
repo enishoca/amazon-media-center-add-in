@@ -36,6 +36,10 @@ namespace AmazonMCEAddin
         private bool hasMobileEncode;
         private bool hasMobileTrailerEncode;
 
+        public Format()
+        {
+        }
+
         public Format(JObject node)
         {
             switch ((string)node["videoFormatType"])

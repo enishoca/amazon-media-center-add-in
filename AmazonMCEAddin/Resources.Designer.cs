@@ -904,7 +904,7 @@ namespace AmazonMCEAddin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_comedy_discovery.jpg.
+        ///   Looks up a localized string similar to http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_discovery.jpg.
         /// </summary>
         internal static string TV_Shows_TV_Channels_Discovery {
             get {
@@ -913,7 +913,7 @@ namespace AmazonMCEAddin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_comedy_fox.jpg.
+        ///   Looks up a localized string similar to http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_fox.jpg.
         /// </summary>
         internal static string TV_Shows_TV_Channels_Fox {
             get {
@@ -931,7 +931,7 @@ namespace AmazonMCEAddin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_comedy_mtv.jpg.
+        ///   Looks up a localized string similar to http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_mtv.jpg.
         /// </summary>
         internal static string TV_Shows_TV_Channels_MTV {
             get {
@@ -940,7 +940,7 @@ namespace AmazonMCEAddin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_comedy_nbc.jpg.
+        ///   Looks up a localized string similar to http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_nbc.jpg.
         /// </summary>
         internal static string TV_Shows_TV_Channels_NBC {
             get {

@@ -129,7 +129,7 @@ namespace AmazonMCEAddin
                 categoryPath = categoryPath.Replace(".", "");
                 categoryPath = categoryPath.Replace("&", "And");
 
-                System.Diagnostics.Debug.Print(categoryPath);
+                //System.Diagnostics.Debug.Print(categoryPath);
 
                 string imageUrl = Resources.ResourceManager.GetString(categoryPath);
 

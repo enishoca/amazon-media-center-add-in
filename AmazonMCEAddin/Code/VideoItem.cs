@@ -41,8 +41,8 @@ namespace AmazonMCEAddin
         private string m_StarringCast;
         private string m_StudioOrNetwork;
         private string m_runtime;
-        private Format sdFormat;
-        private Format hdFormat;
+        private Format sdFormat = new Format();
+        private Format hdFormat = new Format();
         private Format selectedFormat;
         private DateTime m_firstAiringDate;
         private string m_contentType;
@@ -93,21 +93,7 @@ namespace AmazonMCEAddin
             Size movie_size = new Size(188, 250);
             Size tv_size = new Size(334, 250);
 
-            //try to use HD unless no HD available.
-            //not all titles have HD, so we loop through available options and pick HD if we can.
-            foreach (JObject format in node["formats"])
-            {
-                switch ((string)format["videoFormatType"])
-                {
-                    case "HD":
-                        hdFormat = new Format(format);
-                        break;
-                    case "SD":
-                        sdFormat = new Format(format);
-                        break;
-                }
-            }
-            selectedFormat = (hdFormat != null) ? hdFormat : sdFormat;
+            processDetailData(node);
 
             m_Title = (string)node["title"];
             m_Synopsis = (string)node["synopsis"];
@@ -181,19 +167,23 @@ namespace AmazonMCEAddin
         {
             //Debug.Print(node.ToString());
 
+            //try to use HD unless no HD available.
+            //not all titles have HD, so we loop through available options and pick HD if we can.
+            bool useHD = false;
             foreach (JObject format in node["formats"])
             {
                 switch ((string)format["videoFormatType"])
                 {
                     case "HD":
                         hdFormat = new Format(format);
+                        useHD = true;
                         break;
                     case "SD":
                         sdFormat = new Format(format);
                         break;
                 }
             }
-            selectedFormat = (hdFormat != null) ? hdFormat : sdFormat;
+            selectedFormat = useHD ? hdFormat : sdFormat;
 
             m_Genres = "";
             foreach (JValue genre in node["genres"])
