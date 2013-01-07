@@ -91,10 +91,10 @@ namespace AmazonMCEAddin
                         break;
                 }
             }
-            hasEncode = (bool)node["hasEncode"];
-            hasTrailerEncode = (bool)node["hasTrailerEncode"];
-            hasMobileEncode = (bool)node["hasMobileEncode"];
-            hasMobileTrailerEncode = (bool)node["hasMobileTrailerEncode"];
+            hasEncode = node["hasEncode"] != null ? (bool)node["hasEncode"] : false;
+            hasTrailerEncode = node["hasTrailerEncode"] != null ? (bool)node["hasTrailerEncode"] : false;
+            hasMobileEncode = node["hasMobileEncode"] != null ? (bool)node["hasMobileEncode"] : false;
+            hasMobileTrailerEncode = node["hasMobileTrailerEncode"] != null ? (bool)node["hasMobileTrailerEncode"] : false;
         }
 
         public VideoFormatType VideoFormatType { get { return videoFormatType; } }

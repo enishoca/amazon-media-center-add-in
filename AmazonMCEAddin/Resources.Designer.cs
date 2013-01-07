@@ -243,6 +243,33 @@ namespace AmazonMCEAddin {
         /// <summary>
         ///   Looks up a localized string similar to http://g-ecx.images-amazon.com/images/G/01/AIV/ps3/v1.2.1-1mtsp/assets/home/empty-library.png.
         /// </summary>
+        internal static string Home_Recently_Watched {
+            get {
+                return ResourceManager.GetString("Home_Recently_Watched", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://g-ecx.images-amazon.com/images/G/01/AIV/ps3/v1.2.1-1mtsp/assets/home/empty-library.png.
+        /// </summary>
+        internal static string Home_Your_TV_Shows {
+            get {
+                return ResourceManager.GetString("Home_Your_TV_Shows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://g-ecx.images-amazon.com/images/G/01/AIV/ps3/v1.2.1-1mtsp/assets/home/empty-library.png.
+        /// </summary>
+        internal static string Home_Your_Video_Library {
+            get {
+                return ResourceManager.GetString("Home_Your_Video_Library", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://g-ecx.images-amazon.com/images/G/01/AIV/ps3/v1.2.1-1mtsp/assets/home/empty-library.png.
+        /// </summary>
         internal static string Home_Your_Watchlist {
             get {
                 return ResourceManager.GetString("Home_Your_Watchlist", resourceCulture);
@@ -412,6 +439,15 @@ namespace AmazonMCEAddin {
         internal static string Movies_Editors_Picks {
             get {
                 return ResourceManager.GetString("Movies_Editors_Picks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_editorspicks_around_world.jpg.
+        /// </summary>
+        internal static string Movies_Editors_Picks_Around_the_World {
+            get {
+                return ResourceManager.GetString("Movies_Editors_Picks_Around_the_World", resourceCulture);
             }
         }
         

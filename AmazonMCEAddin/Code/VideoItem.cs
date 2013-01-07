@@ -93,7 +93,7 @@ namespace AmazonMCEAddin
             Size movie_size = new Size(188, 250);
             Size tv_size = new Size(334, 250);
 
-            processDetailData(node);
+            processFormatNodes(node);
 
             m_Title = (string)node["title"];
             m_Synopsis = (string)node["synopsis"];
@@ -163,10 +163,8 @@ namespace AmazonMCEAddin
             FirePropertyChanged("Synopsis");
         }
 
-        public void processDetailData(JObject node)
+        public void processFormatNodes(JObject node)
         {
-            //Debug.Print(node.ToString());
-
             //try to use HD unless no HD available.
             //not all titles have HD, so we loop through available options and pick HD if we can.
             bool useHD = false;
@@ -184,6 +182,11 @@ namespace AmazonMCEAddin
                 }
             }
             selectedFormat = useHD ? hdFormat : sdFormat;
+        }
+
+        public void processDetailData(JObject node)
+        {
+            //Debug.Print(node.ToString());
 
             m_Genres = "";
             foreach (JValue genre in node["genres"])

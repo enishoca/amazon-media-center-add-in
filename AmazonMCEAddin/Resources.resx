@@ -448,4 +448,16 @@
   <data name="TV_Shows_TV_Channels_USA_Network" xml:space="preserve">
     <value>http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_usa.jpg</value>
   </data>
+  <data name="Home_Recently_Watched" xml:space="preserve">
+    <value>http://g-ecx.images-amazon.com/images/G/01/AIV/ps3/v1.2.1-1mtsp/assets/home/empty-library.png</value>
+  </data>
+  <data name="Home_Your_TV_Shows" xml:space="preserve">
+    <value>http://g-ecx.images-amazon.com/images/G/01/AIV/ps3/v1.2.1-1mtsp/assets/home/empty-library.png</value>
+  </data>
+  <data name="Home_Your_Video_Library" xml:space="preserve">
+    <value>http://g-ecx.images-amazon.com/images/G/01/AIV/ps3/v1.2.1-1mtsp/assets/home/empty-library.png</value>
+  </data>
+  <data name="Movies_Editors_Picks_Around_the_World" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_editorspicks_around_world.jpg</value>
+  </data>
 </root>

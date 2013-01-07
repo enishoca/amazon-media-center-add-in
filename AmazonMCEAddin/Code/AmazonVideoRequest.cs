@@ -19,8 +19,6 @@ namespace AmazonMCEAddin
 {
     class AmazonVideoRequest
     {
-        
-        
         /// <summary>
         /// requests data optionally using the amazon cookies
         /// </summary>
@@ -63,7 +61,6 @@ namespace AmazonMCEAddin
         'catalog/GetSearchSuggestions'
         'catalog/GetASINDetails'
         'catalog/GetSimilarities'
-
         'catalog/GetStreamingUrls'
         'catalog/GetStreamingTrailerUrls'
         'catalog/GetContentUrls'
@@ -82,6 +79,8 @@ namespace AmazonMCEAddin
         'usage/ReportLogEvent'
         'usage/ReportAppLoadEvent'
         'usage/ReportStartStreamEvent'
+        'usage/ReportStopStreamEvent'
+        'usage/ReportStreamingSessionEvent'
         'usage/ReportEvent'
         'usage/GetServerConfig'
          * */
@@ -93,8 +92,8 @@ namespace AmazonMCEAddin
             string format = "json";
             string parameters = "?firmware=" + firmware + "&deviceTypeID=" + deviceTypeID + "&deviceID=" + deviceID + "&format=" + format;
             return "https://atv-ext.amazon.com/cdp/" + mode + parameters;
-
         }
+
         /// <summary>
         ///Deletes the amazon cookie
         /// </summary>
@@ -102,12 +101,14 @@ namespace AmazonMCEAddin
         {
             File.Delete(cookiePath());
         }
+
         public static string generateSearchUrl(string keywords, int maxItemCount = 24, int startItem = 0)
         {
             string encodedKeywords = HttpUtility.UrlEncode(keywords);
             string parameters = "&searchString=" + encodedKeywords + "&OfferGroups=B0043YVHMY&Detailed=T&IncludeAll=T&SuppressBlackedoutEST=T&version=2&HideNum=F&NumberOfResults=" + maxItemCount + "&StartIndex=" + startItem;
             return generateUrl("catalog/Search") + parameters;
         }
+
         /// <summary>
         /// Get the full details on a specific video
         /// </summary>
@@ -120,20 +121,22 @@ namespace AmazonMCEAddin
             return getURL(url, true);
         }
 
-
         //I don't think this is used any more, but I need to check
         public static string searchPrime(string keywords, int maxItemCount = 24, int startItem = 0)
         {
             return getURL(generateSearchUrl(keywords, maxItemCount, startItem), true);
         }
+
         public static bool checkIfHaveLoginCookie()
         {
             return File.Exists(cookiePath());
         }
+
         public static string ExecuteQuery(string query)
         {
             return getURL(query, true);
         }
+
         public static string getVideoItemsWithQuery(string query, int maxItems = 24, int startItem = 0)
         {
             string url = generateUrl("catalog/Browse") + "&version=2&HideNum=F&NumberOfResults=" + maxItems + "&StartIndex=" + startItem + "&" + query;
@@ -144,22 +147,77 @@ namespace AmazonMCEAddin
         {
             return generateUrl("catalog/Browse") + "&version=2&HideNum=F&NumberOfResults=1";
         }
+
         //legacy
         public static string GenerateBrowseUrlTemplate(int maxItems = 24, int startItem = 0)
         {
             return generateUrl("catalog/Browse") + "&version=2&HideNum=F&NumberOfResults=" + maxItems + "&StartIndex=" + startItem + "&";
         }
+
         public static string getPrime(int maxItemCount, int startItem = 0)
         {
-
             string browse_parms = "&OfferGroups=B0043YVHMY&NumberOfResults=" + maxItemCount + "&StartIndex=" + startItem + "&ContentType=Movie&OrderBy=SalesRank&HighDef=F&playbackInformationRequired=false&OrderBy=SalesRank&SuppressBlackedoutEST=T&HideNum=F&Detailed=T&AID=1&IncludeNonWeb=T&version=2";
             string url = generateUrl("catalog/Browse") + browse_parms;
             return getURL(url);
         }
+
         public static string getCategories()
         {
             string browse_parms = "&version=1";
             string url = generateUrl("catalog/GetCategoryList") + browse_parms;
+            return getURL(url);
+        }
+
+        public static string getLibraryRequest()
+        {
+            // sample movie to get flashvars
+            string flashVars = getFlashVars("B007UXSPK2");
+            NameValueCollection nvCollection = HttpUtility.ParseQueryString(flashVars);
+            long posixTime = (long)((DateTime.Now - new DateTime(1970, 1, 1).ToLocalTime()).TotalSeconds * 1000);
+
+            string url = "https://atv-ps.amazon.com/cdp/library/GetLibrary";
+            url += "?version=2";
+            url += "&deviceID=" + nvCollection.Get("customer") + posixTime;
+            url += "&deviceTypeID=" + "A13Q6A55DBZB7M";
+            url += "&firmware=" + "WIN%2011,5,502,135%20ActiveX";
+            url += "&format=json";
+            url += "&customerID=" + nvCollection.Get("customer");
+            url += "&token=" + nvCollection.Get("token");
+            url += "&UBID=" + nvCollection.Get("UBID");
+            url += "&sessionID=" + nvCollection.Get("sessionID");
+            url += "&ip=" + nvCollection.Get("ip");
+            url += "&userAgent=Internet%20Explorer%209.0%20AIV_FLASH_PLAYER_CC_2_14021";
+
+            return url;
+        }
+
+        public static string getRecentPurchases()
+        {
+            // sample movie to get flashvars
+            string flashVars = getFlashVars("B007UXSPK2");
+            NameValueCollection nvCollection = HttpUtility.ParseQueryString(flashVars);
+            long posixTime = (long)((DateTime.Now - new DateTime(1970, 1, 1).ToLocalTime()).TotalSeconds * 1000);
+
+            string url = "https://atv-ps.amazon.com/cdp/library/GetRecentPurchases";
+            url += "?version=2";
+            url += "&deviceID=" + nvCollection.Get("customer") + posixTime;
+            url += "&deviceTypeID=" + "A13Q6A55DBZB7M";
+            url += "&firmware=" + "WIN%2011,5,502,135%20ActiveX";
+            url += "&format=json";
+            url += "&customerID=" + nvCollection.Get("customer");
+            url += "&token=" + nvCollection.Get("token");
+            url += "&UBID=" + nvCollection.Get("UBID");
+            url += "&sessionID=" + nvCollection.Get("sessionID");
+            url += "&ip=" + nvCollection.Get("ip");
+            url += "&userAgent=Internet%20Explorer%209.0%20AIV_FLASH_PLAYER_CC_2_14021";
+
+            return getURL(url);
+        }
+
+        public static string getServerConfig()
+        {
+            string browse_parms = "&version=1";
+            string url = generateUrl("usage/GetServerConfig") + browse_parms;
             return getURL(url);
         }
 
@@ -184,9 +242,9 @@ namespace AmazonMCEAddin
                 cats.Add(new Category((string)category["title"], (string)category["query"], null,0));
             }
             return cats;
-
         }
-        //This is passed to the viewer to use the correct session and remote ip address etc taht amazon are expecting
+
+        //This is passed to the viewer to use the correct session and remote ip address etc that amazon is expecting
         public static string getFlashVars(string ASIN)
         {
             string baseurl = "http://www.amazon.com/gp/product/";
@@ -204,6 +262,7 @@ namespace AmazonMCEAddin
             string flashvars = matches[0].ToString().Replace("'flashVars', '", "").Replace("' + new", "");
             return flashvars;
         }
+
         public static string cookiePath()
         {
             return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Resources.CookieFileName);
@@ -233,8 +292,6 @@ namespace AmazonMCEAddin
                     formatter.Serialize(s, cc);
                 return true;
             }
-
-
         }
 
         #region "helper functions"
@@ -253,8 +310,8 @@ namespace AmazonMCEAddin
 
             result = Convert.ToBase64String(hashmessage);
             return result;
-
         }
+
         private static byte[] StringToByteArray(String hex)
         {
             int NumberChars = hex.Length;
@@ -265,16 +322,15 @@ namespace AmazonMCEAddin
         }
 
         #endregion
-
     }
 
     //this is a test to see if the static nature of the above calls is interfering with getting multiple requests etc.
     class AmazonRequester
     {
-        
         public AmazonRequester()
         {
         }
+
         public string ExecuteQuery(string url, bool useCookie = true)
         {
             WebClientWithCookies client;
@@ -322,8 +378,8 @@ namespace AmazonMCEAddin
 
             result = Convert.ToBase64String(hashmessage);
             return result;
-
         }
+
         private static byte[] StringToByteArray(String hex)
         {
             int NumberChars = hex.Length;
@@ -334,7 +390,5 @@ namespace AmazonMCEAddin
         }
 
         #endregion
-
-
      }
 }
