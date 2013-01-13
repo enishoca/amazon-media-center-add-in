@@ -470,6 +470,15 @@ namespace AmazonMCEAddin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_top_prime.jpg.
+        /// </summary>
+        internal static string Movies_Editors_Picks_IMDb_Top_Rated {
+            get {
+                return ResourceManager.GetString("Movies_Editors_Picks_IMDb_Top_Rated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_kids.jpg.
         /// </summary>
         internal static string Movies_For_The_Kids {

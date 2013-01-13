@@ -460,4 +460,7 @@
   <data name="Movies_Editors_Picks_Around_the_World" xml:space="preserve">
     <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_editorspicks_around_world.jpg</value>
   </data>
+  <data name="Movies_Editors_Picks_IMDb_Top_Rated" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_top_prime.jpg</value>
+  </data>
 </root>
