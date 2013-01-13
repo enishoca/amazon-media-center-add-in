@@ -10,11 +10,13 @@
     <Properties>
       <a:VideoItem Name="VideoItem" VideoItem="$Required"/>
     </Properties>
+
     <Locals>
       <Command Name="ViewVideo"/>
       <ScrollingHandler Name="ChildTitleScrollingHandler" HandlerStage="Bubbled"/>
       <ScrollingData Name="ChildTitleScrollingData" BeginPadding="0" EndPadding="0" />
     </Locals>
+
     <Rules>
       <Default Target="[ChildTitleScrollingHandler.ScrollingData]" Value="[ChildTitleScrollingData]"/>
       <Default Target="[ChildTitleScrollingData.Repeater]" Value="[ChildTitleRepeater]"/>
@@ -22,7 +24,7 @@
     </Rules>
 
     <Content>
-      <ColorFill Content="color://styles:Background" Layout="Form">
+      <Graphic Content="image://styles:Background" Layout="Form">
         <LayoutInput>
           <FormLayoutInput Left="Parent,0" Top="Parent,0" Right="Parent,1" Bottom="Parent,1"/>
         </LayoutInput>
@@ -78,7 +80,7 @@
             </Children>
           </Panel>
         </Children>
-      </ColorFill>
+      </Graphic>
     </Content>
   </UI>
 </Mcml>

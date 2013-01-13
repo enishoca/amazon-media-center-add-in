@@ -14,25 +14,25 @@
   <Color Name="Input.Background" Color="DarkGray"/>
   <Color Name="Button.Text" Color="White"/>
 
-  <Color Name="MenuItem.Background" Color="58,58,58"/>
-  <Color Name="MenuItem.Background.Highlight" Color="58,58,58"/>
-  <Color Name="MenuItem.Background.Active" Color="247,167,0"/>
+  <Color Name="MenuItem.Background" Color="Transparent"/>
+  <Color Name="MenuItem.Background.Highlight" Color="243,162,19"/>
+  <Color Name="MenuItem.Background.Active" Color="Transparent"/>
   <Color Name="MenuItem.Text" Color="White"/>
-  <Color Name="MenuItem.Text.Highlight" Color="247,167,0"/>
-  <Color Name="MenuItem.Text.Active" Color="58,58,58"/>
+  <Color Name="MenuItem.Text.Highlight" Color="58,58,58"/>
+  <Color Name="MenuItem.Text.Active" Color="243,162,19"/>
 
   <Color Name="Background" Color="58,58,58"/>
   
   <Color Name="CategoryBox.Background" Color="58,58,58"/>
   <Color Name="CategoryBox.Background.Highlight" Color="58,58,58"/>
   <Color Name="CategoryBox.Border" Color="75,75,75"/>
-  <Color Name="CategoryBox.Border.Highlight" Color="247,167,0"/>
+  <Color Name="CategoryBox.Border.Highlight" Color="243,162,19"/>
   <Color Name="CategoryBox.Text" Color="White"/>
-  <Color Name="CategoryBox.Text.Highlight" Color="247,167,0"/>
+  <Color Name="CategoryBox.Text.Highlight" Color="243,162,19"/>
 
   <Color Name="Text.Active"   Color="255,255,255,255"/>
 
-  <Color Name="Highlight" Color="247,167,0"/>
+  <Color Name="Highlight" Color="243,162,19"/>
 
   <!-- Fonts -->
   <Font Name="Button.Text" Font="Helvetica,18"/>
