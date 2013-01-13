@@ -463,4 +463,13 @@
   <data name="Movies_Editors_Picks_IMDb_Top_Rated" xml:space="preserve">
     <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_top_prime.jpg</value>
   </data>
+  <data name="Movies_All_Genres_Action_And_Adventure" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_editorspicks_kungfu.jpg</value>
+  </data>
+  <data name="Movies_All_Genres_Animation" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_editorspicks_babysitter.jpg</value>
+  </data>
+  <data name="Movies_All_Genres_Thrillers" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_editorspicks_monsters.jpg</value>
+  </data>
 </root>

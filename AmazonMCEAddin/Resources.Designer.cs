@@ -389,6 +389,24 @@ namespace AmazonMCEAddin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_editorspicks_kungfu.jpg.
+        /// </summary>
+        internal static string Movies_All_Genres_Action_And_Adventure {
+            get {
+                return ResourceManager.GetString("Movies_All_Genres_Action_And_Adventure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_editorspicks_babysitter.jpg.
+        /// </summary>
+        internal static string Movies_All_Genres_Animation {
+            get {
+                return ResourceManager.GetString("Movies_All_Genres_Animation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_drama.jpg.
         /// </summary>
         internal static string Movies_All_Genres_Drama {
@@ -430,6 +448,15 @@ namespace AmazonMCEAddin {
         internal static string Movies_All_Genres_SciFi_And_Fantasy {
             get {
                 return ResourceManager.GetString("Movies_All_Genres_SciFi_And_Fantasy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_editorspicks_monsters.jpg.
+        /// </summary>
+        internal static string Movies_All_Genres_Thrillers {
+            get {
+                return ResourceManager.GetString("Movies_All_Genres_Thrillers", resourceCulture);
             }
         }
         
