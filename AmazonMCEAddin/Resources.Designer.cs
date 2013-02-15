@@ -243,6 +243,33 @@ namespace AmazonMCEAddin {
         /// <summary>
         ///   Looks up a localized string similar to http://g-ecx.images-amazon.com/images/G/01/AIV/ps3/v1.2.1-1mtsp/assets/home/empty-library.png.
         /// </summary>
+        internal static string Home_Recently_Watched {
+            get {
+                return ResourceManager.GetString("Home_Recently_Watched", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://g-ecx.images-amazon.com/images/G/01/AIV/ps3/v1.2.1-1mtsp/assets/home/empty-library.png.
+        /// </summary>
+        internal static string Home_Your_TV_Shows {
+            get {
+                return ResourceManager.GetString("Home_Your_TV_Shows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://g-ecx.images-amazon.com/images/G/01/AIV/ps3/v1.2.1-1mtsp/assets/home/empty-library.png.
+        /// </summary>
+        internal static string Home_Your_Video_Library {
+            get {
+                return ResourceManager.GetString("Home_Your_Video_Library", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://g-ecx.images-amazon.com/images/G/01/AIV/ps3/v1.2.1-1mtsp/assets/home/empty-library.png.
+        /// </summary>
         internal static string Home_Your_Watchlist {
             get {
                 return ResourceManager.GetString("Home_Your_Watchlist", resourceCulture);
@@ -362,6 +389,24 @@ namespace AmazonMCEAddin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_editorspicks_kungfu.jpg.
+        /// </summary>
+        internal static string Movies_All_Genres_Action_And_Adventure {
+            get {
+                return ResourceManager.GetString("Movies_All_Genres_Action_And_Adventure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_editorspicks_babysitter.jpg.
+        /// </summary>
+        internal static string Movies_All_Genres_Animation {
+            get {
+                return ResourceManager.GetString("Movies_All_Genres_Animation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_drama.jpg.
         /// </summary>
         internal static string Movies_All_Genres_Drama {
@@ -398,6 +443,24 @@ namespace AmazonMCEAddin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_horror.jpg.
+        /// </summary>
+        internal static string Movies_All_Genres_Mystery_And_Thrillers {
+            get {
+                return ResourceManager.GetString("Movies_All_Genres_Mystery_And_Thrillers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_romance.jpg.
+        /// </summary>
+        internal static string Movies_All_Genres_Romance {
+            get {
+                return ResourceManager.GetString("Movies_All_Genres_Romance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_scifi.jpg.
         /// </summary>
         internal static string Movies_All_Genres_SciFi_And_Fantasy {
@@ -407,11 +470,38 @@ namespace AmazonMCEAddin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_editorspicks_monsters.jpg.
+        /// </summary>
+        internal static string Movies_All_Genres_Thrillers {
+            get {
+                return ResourceManager.GetString("Movies_All_Genres_Thrillers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_drama.jpg.
+        /// </summary>
+        internal static string Movies_Drama {
+            get {
+                return ResourceManager.GetString("Movies_Drama", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_editorspicks.jpg.
         /// </summary>
         internal static string Movies_Editors_Picks {
             get {
                 return ResourceManager.GetString("Movies_Editors_Picks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_editorspicks_around_world.jpg.
+        /// </summary>
+        internal static string Movies_Editors_Picks_Around_the_World {
+            get {
+                return ResourceManager.GetString("Movies_Editors_Picks_Around_the_World", resourceCulture);
             }
         }
         
@@ -434,6 +524,15 @@ namespace AmazonMCEAddin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_top_prime.jpg.
+        /// </summary>
+        internal static string Movies_Editors_Picks_IMDb_Top_Rated {
+            get {
+                return ResourceManager.GetString("Movies_Editors_Picks_IMDb_Top_Rated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_kids.jpg.
         /// </summary>
         internal static string Movies_For_The_Kids {
@@ -443,11 +542,29 @@ namespace AmazonMCEAddin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_kids.jpg.
+        /// </summary>
+        internal static string Movies_Kids_And_Family {
+            get {
+                return ResourceManager.GetString("Movies_Kids_And_Family", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_popular.jpg.
         /// </summary>
         internal static string Movies_Popular_Movies {
             get {
                 return ResourceManager.GetString("Movies_Popular_Movies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_scifi.jpg.
+        /// </summary>
+        internal static string Movies_SciFi_And_Fantasy {
+            get {
+                return ResourceManager.GetString("Movies_SciFi_And_Fantasy", resourceCulture);
             }
         }
         
@@ -778,6 +895,15 @@ namespace AmazonMCEAddin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_animation.jpg.
+        /// </summary>
+        internal static string TV_Shows_All_Genres_Animation_And_Cartoons {
+            get {
+                return ResourceManager.GetString("TV_Shows_All_Genres_Animation_And_Cartoons", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_comedy.jpg.
         /// </summary>
         internal static string TV_Shows_All_Genres_Comedy {
@@ -807,9 +933,36 @@ namespace AmazonMCEAddin {
         /// <summary>
         ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_scifi.jpg.
         /// </summary>
+        internal static string TV_Shows_All_Genres_SciFi {
+            get {
+                return ResourceManager.GetString("TV_Shows_All_Genres_SciFi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_scifi.jpg.
+        /// </summary>
         internal static string TV_Shows_All_Genres_SciFi_And_Fantasy {
             get {
                 return ResourceManager.GetString("TV_Shows_All_Genres_SciFi_And_Fantasy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_comedy.jpg.
+        /// </summary>
+        internal static string TV_Shows_Comedy {
+            get {
+                return ResourceManager.GetString("TV_Shows_Comedy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_drama.jpg.
+        /// </summary>
+        internal static string TV_Shows_Drama {
+            get {
+                return ResourceManager.GetString("TV_Shows_Drama", resourceCulture);
             }
         }
         
@@ -841,11 +994,29 @@ namespace AmazonMCEAddin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_kids.jpg.
+        /// </summary>
+        internal static string TV_Shows_Kids_And_Family {
+            get {
+                return ResourceManager.GetString("TV_Shows_Kids_And_Family", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_popular.jpg.
         /// </summary>
         internal static string TV_Shows_Popular_TV_Shows {
             get {
                 return ResourceManager.GetString("TV_Shows_Popular_TV_Shows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_scifi.jpg.
+        /// </summary>
+        internal static string TV_Shows_SciFi {
+            get {
+                return ResourceManager.GetString("TV_Shows_SciFi", resourceCulture);
             }
         }
         

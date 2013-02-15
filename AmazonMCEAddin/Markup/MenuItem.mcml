@@ -34,7 +34,7 @@
           <Equality Source="[Category.Application.CurrentContext.Name]" ConditionOp="NotEquals" Value="[Category.Name]"/>
         </Conditions>
         <Actions>
-          <Set Target="[Background.Content]" Value="Transparent"/>
+          <Set Target="[Background.Content]" Value="color://styles:MenuItem.Background.Highlight"/>
           <Set Target="[TextLabel.Color]" Value="color://styles:MenuItem.Text.Highlight"/>
         </Actions>
       </Rule>
@@ -46,7 +46,7 @@
           <Equality Source="[Category.Name]" ConditionOp="Equals" Value="Sign-out"/>
         </Conditions>
         <Actions>
-          <Set Target="[Background.Content]" Value="Transparent"/>
+          <Set Target="[Background.Content]" Value="color://styles:MenuItem.Background.Highlight"/>
           <Set Target="[TextLabel.Color]" Value="color://styles:MenuItem.Text.Highlight"/>
         </Actions>
       </Rule>
@@ -90,7 +90,7 @@
     </Rules>
     
     <Content>
-      <ColorFill Name="Background" Content="Transparent" MinimumSize="75,0" Padding="10,0,10,0">
+      <ColorFill Name="Background" Content="color://styles:MenuItem.Background" MinimumSize="75,0" Padding="10,0,10,0">
         <Children>
           <Text Name="TextLabel" Content="[Category.Name]" Color="color://styles:MenuItem.Text" Font="font://styles:MenuItem" HorizontalAlignment="Center"/>
         </Children>

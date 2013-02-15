@@ -20,11 +20,11 @@
       <Default Target="[ScrollingData.Repeater]" Value="[CategoryRepeater]"/>
     </Rules>
     <Content>
-      <Scroller Orientation="Vertical" FadeSize="1" ScrollingData="[ScrollingData]">
+      <Scroller Orientation="Horizontal" FadeSize="1" ScrollingData="[ScrollingData]">
         <Children>
           <Repeater Name="CategoryRepeater" Layout="Grid" >
             <Layout>
-              <GridLayout ReferenceSize="[UnitSize]" AllowWrap="true" Spacing="2,2" />
+              <GridLayout ReferenceSize="[UnitSize]" Orientation="Vertical" AllowWrap="true" Spacing="2,2" />
             </Layout>
             <Content>
               <c:CategoryBox UnitSize="[UnitSize]" Category="[RepeatedItem!a:Category]"/>

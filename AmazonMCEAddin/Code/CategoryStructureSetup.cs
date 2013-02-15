@@ -36,24 +36,21 @@ namespace AmazonMCEAddin
             cat_root.bindListToChoice();
 
             string categoryData = AmazonVideoRequest.getCategories();
-
             JsonTextReader reader = new JsonTextReader(new StringReader(categoryData));
-
             JObject categories = JObject.Parse(categoryData);
             //System.Diagnostics.Debug.Print(categories.ToString());
+
             //int catID = 0;
 
             cat_home.hasChildren = true;
             Category watchList = new Category("Your Watchlist", "", cat_home, 0);
             cat_home.List.Add(watchList);
-            /*
-            Category yourVideoLibrary = new Category("Your Video Library", "", cat_home, 1);
+            Category yourVideoLibrary = new Category("Your Video Library", AmazonVideoRequest.getLibraryRequest(), cat_home, 1);
             cat_home.List.Add(yourVideoLibrary);
             Category recentlyWatched = new Category("Recently Watched", "", cat_home, 2);
             cat_home.List.Add(recentlyWatched);
             Category yourTvShows = new Category("Your TV Shows", "", cat_home, 3);
             cat_home.List.Add(yourTvShows);
-            */
             cat_home.bindListToChoice();
 
             int subCategoryIndex = 2;

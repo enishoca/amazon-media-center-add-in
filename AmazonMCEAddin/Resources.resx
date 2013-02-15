@@ -448,4 +448,61 @@
   <data name="TV_Shows_TV_Channels_USA_Network" xml:space="preserve">
     <value>http://g-ecx.images-amazon.com/images/G/01/digital/video/ps3/tv_tvchannels_usa.jpg</value>
   </data>
+  <data name="Home_Recently_Watched" xml:space="preserve">
+    <value>http://g-ecx.images-amazon.com/images/G/01/AIV/ps3/v1.2.1-1mtsp/assets/home/empty-library.png</value>
+  </data>
+  <data name="Home_Your_TV_Shows" xml:space="preserve">
+    <value>http://g-ecx.images-amazon.com/images/G/01/AIV/ps3/v1.2.1-1mtsp/assets/home/empty-library.png</value>
+  </data>
+  <data name="Home_Your_Video_Library" xml:space="preserve">
+    <value>http://g-ecx.images-amazon.com/images/G/01/AIV/ps3/v1.2.1-1mtsp/assets/home/empty-library.png</value>
+  </data>
+  <data name="Movies_Editors_Picks_Around_the_World" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_editorspicks_around_world.jpg</value>
+  </data>
+  <data name="Movies_Editors_Picks_IMDb_Top_Rated" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_top_prime.jpg</value>
+  </data>
+  <data name="Movies_All_Genres_Action_And_Adventure" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_editorspicks_kungfu.jpg</value>
+  </data>
+  <data name="Movies_All_Genres_Animation" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_editorspicks_babysitter.jpg</value>
+  </data>
+  <data name="Movies_All_Genres_Thrillers" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_editorspicks_monsters.jpg</value>
+  </data>
+  <data name="Movies_Drama" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_drama.jpg</value>
+  </data>
+  <data name="Movies_Kids_And_Family" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_kids.jpg</value>
+  </data>
+  <data name="Movies_SciFi_And_Fantasy" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_scifi.jpg</value>
+  </data>
+  <data name="Movies_All_Genres_Mystery_And_Thrillers" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_horror.jpg</value>
+  </data>
+  <data name="Movies_All_Genres_Romance" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/movies_genres_romance.jpg</value>
+  </data>
+  <data name="TV_Shows_All_Genres_Animation_And_Cartoons" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_animation.jpg</value>
+  </data>
+  <data name="TV_Shows_All_Genres_SciFi" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_scifi.jpg</value>
+  </data>
+  <data name="TV_Shows_Comedy" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_comedy.jpg</value>
+  </data>
+  <data name="TV_Shows_Drama" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_drama.jpg</value>
+  </data>
+  <data name="TV_Shows_Kids_And_Family" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_kids.jpg</value>
+  </data>
+  <data name="TV_Shows_SciFi" xml:space="preserve">
+    <value>http://g-ec2.images-amazon.com/images/G/01/digital/video/ps3/tv_genres_scifi.jpg</value>
+  </data>
 </root>

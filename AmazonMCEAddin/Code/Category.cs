@@ -33,6 +33,16 @@ namespace AmazonMCEAddin
             List = new ArrayListDataSet();
         }
 
+        public Category(string sName, string sQuery, Category oParent, int iIndex)
+        {
+            Name = sName;
+            mQuery = sQuery;
+            Parent = oParent;
+            Index = iIndex;
+            m_Choice = new Choice();
+            List = new ArrayListDataSet();
+        }
+
         public string ContextTitle
         {
             get
@@ -51,16 +61,6 @@ namespace AmazonMCEAddin
         public Application Application
         {
             get { return Application.Current; }
-        }
-
-        public Category(string sName, string sQuery, Category oParent, int iIndex)
-        {
-            Name = sName;
-            mQuery = sQuery;
-            Parent = oParent;
-            Index = iIndex;
-            m_Choice = new Choice();
-            List = new ArrayListDataSet();
         }
 
         //REVIEW:  This can potentially be removed
