@@ -7,4 +7,4 @@ Unfortunately Marc has closed source the project and his changes are not availab
 
 The purpose of this repository is to keep Gareth's original open source code accessible, 
 
-Good and simple MCE addin examples are few, and this is a great example of makinng an simple hhml based addin
+Good and simple MCE addin examples are few, and this is a great example of makinng an simple html based addin
